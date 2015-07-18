@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>第 17 頁 | 问水的博客</title>
+  <title>第 17 页 | 问水的博客</title>
   <meta name="author" content="问水">
   
   
@@ -62,28 +62,40 @@ var _hmt = _hmt || [];
     <header>
       
         <div class="icon"></div>
-        <time datetime="2014-10-22T09:44:02.000Z"><a href="/2014/10/22/Storage/">2014-10-22</a></time>
+        <time datetime="2014-10-23T06:50:50.000Z"><a href="/2014/10/23/视区相关单位用法/">2014-10-23</a></time>
       
       
   
-    <h1 class="title"><a href="/2014/10/22/Storage/">Storage</a></h1>
+    <h1 class="title"><a href="/2014/10/23/视区相关单位用法/">视区相关单位vh,vm,vmin,vmax用法</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h2 id="概述">概述</h2><p>DOM存储是一套在Web Applications 1.0 规范中首次引入的与存储相关的特性的总称, 现在已经分离出来,单独发展成为独立的W3C Web存储规范. DOM存储被设计为用来提供一个更大存储量,更安全,更便捷的存储方法,从而可以代替掉将一些不需要让服务器知道的信息存储到cookies里的这种传统方法.该特性在Firefox 2 和 Safari 4中首次引入。</p>
-<h2 id="参考">参考</h2><p>以下所提到的对象都是全局对象，作为 window 对象 的属性存在。这意味着可以以 sessionStorage 或者 window.sessionStorage 的形式访问这些对象。(这点很重要，因为可以使用iframe来存储、访问除了直接包含在页面的数据之外的附加数据。)</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意：需要时刻注意的一点是，所有数据在被保存到下面将要介绍的任何一个存储器之前，都将通过它的 .toString 方法被转换成字符串。所以一个普通对象将会被存储为 <span class="string">"[object Object]"</span>，而不是对象本身或者它的 <span class="built_in">JSON</span> 形式。使用浏览器自身提供的 <span class="built_in">JSON</span> 解析和序列化方法来存取对象是比较好的，也是比较常见的方法。</span><br></pre></td></tr></table></figure>
-<h2 id="sessionStorage">sessionStorage</h2><p>sessionStorage 是个全局对象，它维护着在页面会话(page session)期间有效的存储空间。只要浏览器开着，页面会话周期就会一直持续。当页面重新载入(reload)或者被恢复(restores)时，页面会话也是一直存在的。每在新标签或者新窗口中打开一个新页面，都会初始化一个新的会话。</p>
-<h3 id="例子">例子</h3><p>自动保存一个文本域中的内容，如果浏览器被意外刷新，则恢复该文本域中的内容，所以不会丢失任何输入的数据。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 获取到我们要循环保存的文本域</span><br><span class="line"> var field = document.getElementById(<span class="string">"field"</span>);</span><br><span class="line"> // 查看是否有一个自动保存的值</span><br><span class="line"> // (只在浏览器被意外刷新时)</span><br><span class="line"> <span class="keyword">if</span> ( sessionStorage.getItem(<span class="string">"autosave"</span>)) &#123;</span><br><span class="line">    // 恢复文本域中的内容</span><br><span class="line">    field.value = sessionStorage.getItem(<span class="string">"autosave"</span>);</span><br><span class="line"> &#125;</span><br><span class="line"> // 每隔一秒检查文本域中的内容</span><br><span class="line"> <span class="built_in">set</span>Interval(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    // 并将文本域的值保存到session storage对象中</span><br><span class="line">    sessionStorage.setItem(<span class="string">"autosave"</span>, field.value);</span><br><span class="line"> &#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
-<p>具体可见demo<br><a href="https://github.com/backToNature/Storage" target="_blank" rel="external">源码仓库</a></p>
-<h2 id="localStorage">localStorage</h2><p>localStorage 方法存储的数据没有时间限制。第二天、第二周或下一年之后，数据依然可用。</p>
-<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意：当浏览器进入私人模式(<span class="keyword">private</span> browsing mode，Google Chrome 上对应的应该是叫隐身模式)的时候，会创建一个新的、临时的、空的数据库，用以存储本地数据(<span class="built_in">local</span> storage <span class="built_in">data</span>)。当浏览器关闭时，里面的所有数据都将被丢弃。</span><br></pre></td></tr></table></figure>
-<h3 id="兼容性">兼容性</h3><p><img src="http://img5.tuchuang.org/uploads/2014/10/Snip20141022_2.png" alt=""><br>如果要兼容不支持它的浏览器得话，可以在你编写的 JavaScript 代码的首部插入下面这段代码。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!window.localStorage) &#123;</span><br><span class="line">  Object.defineProperty(window, <span class="string">"localStorage"</span>, new (<span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">    var aKeys = [], oStorage = &#123;&#125;;</span><br><span class="line">    Object.defineProperty(oStorage, <span class="string">"getItem"</span>, &#123;</span><br><span class="line">      value: <span class="keyword">function</span> (sKey) &#123; <span class="built_in">return</span> sKey ? this[sKey] : null; &#125;,</span><br><span class="line">      writable: <span class="literal">false</span>,</span><br><span class="line">      configurable: <span class="literal">false</span>,</span><br><span class="line">      enumerable: <span class="literal">false</span></span><br><span class="line">    &#125;);</span><br><span class="line">    Object.defineProperty(oStorage, <span class="string">"key"</span>, &#123;</span><br><span class="line">      value: <span class="keyword">function</span> (nKeyId) &#123; <span class="built_in">return</span> aKeys[nKeyId]; &#125;,</span><br><span class="line">      writable: <span class="literal">false</span>,</span><br><span class="line">      configurable: <span class="literal">false</span>,</span><br><span class="line">      enumerable: <span class="literal">false</span></span><br><span class="line">    &#125;);</span><br><span class="line">    Object.defineProperty(oStorage, <span class="string">"setItem"</span>, &#123;</span><br><span class="line">      value: <span class="keyword">function</span> (sKey, sValue) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!sKey) &#123; <span class="built_in">return</span>; &#125;</span><br><span class="line">        document.cookie = escape(sKey) + <span class="string">"="</span> + escape(sValue) + <span class="string">"; path=/"</span>;</span><br><span class="line">      &#125;,</span><br><span class="line">      writable: <span class="literal">false</span>,</span><br><span class="line">      configurable: <span class="literal">false</span>,</span><br><span class="line">      enumerable: <span class="literal">false</span></span><br><span class="line">    &#125;);</span><br><span class="line">    Object.defineProperty(oStorage, <span class="string">"length"</span>, &#123;</span><br><span class="line">      get: <span class="function"><span class="title">function</span></span> () &#123; <span class="built_in">return</span> aKeys.length; &#125;,</span><br><span class="line">      configurable: <span class="literal">false</span>,</span><br><span class="line">      enumerable: <span class="literal">false</span></span><br><span class="line">    &#125;);</span><br><span class="line">    Object.defineProperty(oStorage, <span class="string">"removeItem"</span>, &#123;</span><br><span class="line">      value: <span class="keyword">function</span> (sKey) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!sKey) &#123; <span class="built_in">return</span>; &#125;</span><br><span class="line">        var sExpDate = new Date();</span><br><span class="line">        sExpDate.setDate(sExpDate.getDate() - <span class="number">1</span>);</span><br><span class="line">        document.cookie = escape(sKey) + <span class="string">"=; expires="</span> + sExpDate.toGMTString() + <span class="string">"; path=/"</span>;</span><br><span class="line">      &#125;,</span><br><span class="line">      writable: <span class="literal">false</span>,</span><br><span class="line">      configurable: <span class="literal">false</span>,</span><br><span class="line">      enumerable: <span class="literal">false</span></span><br><span class="line">    &#125;);</span><br><span class="line">    this.get = <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">      var iThisIndx;</span><br><span class="line">      <span class="keyword">for</span> (var sKey <span class="keyword">in</span> oStorage) &#123;</span><br><span class="line">        iThisIndx = aKeys.indexOf(sKey);</span><br><span class="line">        <span class="keyword">if</span> (iThisIndx === -<span class="number">1</span>) &#123; oStorage.setItem(sKey, oStorage[sKey]); &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123; aKeys.splice(iThisIndx, <span class="number">1</span>); &#125;</span><br><span class="line">        delete oStorage[sKey];</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">for</span> (aKeys; aKeys.length &gt; <span class="number">0</span>; aKeys.splice(<span class="number">0</span>, <span class="number">1</span>)) &#123; oStorage.removeItem(aKeys[<span class="number">0</span>]); &#125;</span><br><span class="line">      <span class="keyword">for</span> (var iCouple, iKey, iCouplId = <span class="number">0</span>, aCouples = document.cookie.split(/\s*;\s*/); iCouplId &lt; aCouples.length; iCouplId++) &#123;</span><br><span class="line">        iCouple = aCouples[iCouplId].split(/\s*=\s*/);</span><br><span class="line">        <span class="keyword">if</span> (iCouple.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">          oStorage[iKey = unescape(iCouple[<span class="number">0</span>])] = unescape(iCouple[<span class="number">1</span>]);</span><br><span class="line">          aKeys.push(iKey);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">return</span> oStorage;</span><br><span class="line">    &#125;;</span><br><span class="line">    this.configurable = <span class="literal">false</span>;</span><br><span class="line">    this.enumerable = <span class="literal">true</span>;</span><br><span class="line">  &#125;)());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>兼容思想是使用的cookie，虽然cookie有大小限制，但是大多数场景下不会使用cookie存储太多数据，所以还是可以使用以上方法。</p>
+        <h3 id="概述">概述</h3><p>相对于视口的高度和宽度。视口被均分为100单位的vh或者vm。</p>
+<h3 id="先来看看这几种单位的简介">先来看看这几种单位的简介</h3><ul>
+<li>1vm: 占视口宽度的1%。</li>
+<li>1vh: 占视口高度的1%。</li>
+<li>1vmin: 1vm或者1vh,取决与哪个更小。</li>
+<li>1vmax: 1vm或者1vh,取决于哪个更大。</li>
+</ul>
+<h3 id="兼容性">兼容性</h3><p><img src="http://img2.tuchuang.org/uploads/2014/10/Snip20141023_1.png" alt=""></p>
+<h3 id="视口到底是个什么概念？">视口到底是个什么概念？</h3><p>是浏览器内部宽度大小(window.innerWidth)吗？是整个浏览器的宽度大小(window.outerWidth)吗？还是显示器的宽度大小(screen.width)吗？</p>
+<ul>
+<li>让我们看一个<a href="http://codepen.io/backToNature/pen/sGwjJ" target="_blank" rel="external">demo</a></li>
+</ul>
+<p>显然，不是浏览器外部的宽度，计算值也是不匹配的。那么到底是什么意思呢？</p>
+<p>经过反复论证，视口是指<strong>浏览器可视区域大小</strong>，不包括浏览器的工具栏部分等。</p>
+<h3 id="使用场景">使用场景</h3><p>1.当作占位空间 </p>
+<ul>
+<li>目前使用到这个单位的场景不多，但是不久前遇到了一个问题就是通过这单位实现的。<ul>
+<li>图示: <img src="http://img3.picbed.org/uploads/2014/10/Snip20141023_3.png" alt=""></li>
+<li>用户在点击上面的类目的时候，肯定不希望页面有太大的抖动，但事实上，点击“宝宝衣服”后，出现下图场景:</li>
+<li>图示: <img src="http://img3.tuchuang.org/uploads/2014/10/Snip20141023_6.png" alt=""></li>
+</ul>
+</li>
+<li>解决方法: 对商品容器设置min-height: 100vh(试过设置min-height: 100%不行)之后，由于容器有了占位符，就不会因为在商品渲染之前容器高度太小而返回顶部了。</li>
+</ul>
 
       
     </div>
@@ -103,29 +115,31 @@ var _hmt = _hmt || [];
 
 <nav id="pagination">
   
-    <a href="/page/16/" class="alignleft prev">上一頁</a>
+    <a href="/page/16/" class="alignleft prev">上一页</a>
   
   
-    <a href="/page/18/" class="alignright next">下一頁</a>
+    <a href="/page/18/" class="alignright next">下一页</a>
   
   <div class="clearfix"></div>
 </nav></div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="search" name="q" results="0" placeholder="搜索">
     <input type="hidden" name="q" value="site:yoursite.com">
   </form>
 </div>
 
   
 <div class="widget tag">
-  <h3 class="title">分類</h3>
+  <h3 class="title">分类</h3>
   <ul class="entry">
   
     <li><a href="/categories/git/">git</a><small>1</small></li>
   
     <li><a href="/categories/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/categories/node/">node</a><small>1</small></li>
   
     <li><a href="/categories/web前端/">web前端</a><small>13</small></li>
   

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>第 16 頁 | 问水的博客</title>
+  <title>第 16 页 | 问水的博客</title>
   <meta name="author" content="问水">
   
   
@@ -62,40 +62,38 @@ var _hmt = _hmt || [];
     <header>
       
         <div class="icon"></div>
-        <time datetime="2014-10-23T06:50:50.000Z"><a href="/2014/10/23/视区相关单位用法/">2014-10-23</a></time>
+        <time datetime="2014-10-25T16:45:26.000Z"><a href="/2014/10/26/float与absolute的比较/">2014-10-26</a></time>
       
       
   
-    <h1 class="title"><a href="/2014/10/23/视区相关单位用法/">视区相关单位vh,vm,vmin,vmax用法</a></h1>
+    <h1 class="title"><a href="/2014/10/26/float与absolute的比较/">float与absolute的比较</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h3 id="概述">概述</h3><p>相对于视口的高度和宽度。视口被均分为100单位的vh或者vm。</p>
-<h3 id="先来看看这几种单位的简介">先来看看这几种单位的简介</h3><ul>
-<li>1vm: 占视口宽度的1%。</li>
-<li>1vh: 占视口高度的1%。</li>
-<li>1vmin: 1vm或者1vh,取决与哪个更小。</li>
-<li>1vmax: 1vm或者1vh,取决于哪个更大。</li>
-</ul>
-<h3 id="兼容性">兼容性</h3><p><img src="http://img2.tuchuang.org/uploads/2014/10/Snip20141023_1.png" alt=""></p>
-<h3 id="视口到底是个什么概念？">视口到底是个什么概念？</h3><p>是浏览器内部宽度大小(window.innerWidth)吗？是整个浏览器的宽度大小(window.outerWidth)吗？还是显示器的宽度大小(screen.width)吗？</p>
+        <h2 id="概述">概述</h2><ol>
+<li><p><strong><em>position:absolute</em></strong></p>
+<p> 生成绝对定位的元素，脱离了文本流（即在文档中已经不占据位置），相对于 static 定位以外的第一个父元素进行定位。元素的位置通过 “left”, “top”, “right” 以及 “bottom” 属性进行规定。</p>
 <ul>
-<li>让我们看一个<a href="http://codepen.io/backToNature/pen/sGwjJ" target="_blank" rel="external">demo</a></li>
-</ul>
-<p>显然，不是浏览器外部的宽度，计算值也是不匹配的。那么到底是什么意思呢？</p>
-<p>经过反复论证，视口是指<strong>浏览器可视区域大小</strong>，不包括浏览器的工具栏部分等。</p>
-<h3 id="使用场景">使用场景</h3><p>1.当作占位空间 </p>
-<ul>
-<li>目前使用到这个单位的场景不多，但是不久前遇到了一个问题就是通过这单位实现的。<ul>
-<li>图示: <img src="http://img3.picbed.org/uploads/2014/10/Snip20141023_3.png" alt=""></li>
-<li>用户在点击上面的类目的时候，肯定不希望页面有太大的抖动，但事实上，点击“宝宝衣服”后，出现下图场景:</li>
-<li>图示: <img src="http://img3.tuchuang.org/uploads/2014/10/Snip20141023_6.png" alt=""></li>
+<li>若父元素不是定位元素:<br>  <img src="http://files.jb51.net/file_images/article/201212/2012121517093058.jpg" alt=""></li>
+<li>若父元素设置了定位:<br>  <img src="http://files.jb51.net/file_images/article/201212/2012121517093059.jpg" alt=""></li>
 </ul>
 </li>
-<li>解决方法: 对商品容器设置min-height: 100vh(试过设置min-height: 100%不行)之后，由于容器有了占位符，就不会因为在商品渲染之前容器高度太小而返回顶部了。</li>
-</ul>
+<li><p><strong><em>float: left或者right</em></strong></p>
+<p> 浮动的框可以向左或向右移动，直到它的外边缘碰到包含框或另一个浮动框的边框为止。由于浮动框不在文档的普通流中，所以文档的普通流中的块框表现得就像浮动框不存在一样。</p>
+<p> 请看下图，当把框 1 向右浮动时，它脱离文档流并且向右移动，直到它的右边缘碰到包含框的右边缘：<br> <img src="http://www.w3school.com.cn/i/ct_css_positioning_floating_right_example.gif" alt=""></p>
+<p> 再请看下图，当框 1 向左浮动时，它脱离文档流并且向左移动，直到它的左边缘碰到包含框的左边缘。因为它不再处于文档流中，所以它不占据空间，实际上覆盖住了框 2，使框 2 从视图中消失。<br>如果把所有三个框都向左移动，那么框 1 向左浮动直到碰到包含框，另外两个框向左浮动直到碰到前一个浮动框。<br> <img src="http://www.w3school.com.cn/i/ct_css_positioning_floating_left_example.gif" alt=""></p>
+<p> 如下图所示，如果包含框太窄，无法容纳水平排列的三个浮动元素，那么其它浮动块向下移动，直到有足够的空间。如果浮动元素的高度不同，那么当它们向下移动时可能被其它浮动元素“卡住”：<br> <img src="http://www.w3school.com.cn/i/ct_css_positioning_floating_left_example_2.gif" alt=""></p>
+</li>
+</ol>
+<h2 id="比较">比较</h2><ol>
+<li><p>如果重合了谁在上面？</p>
+ <figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* style */</span></span><br><span class="line"><span class="keyword">div</span> &#123;</span><br><span class="line">	width: <span class="number">100</span>px;</span><br><span class="line">      	height: <span class="number">100</span>px;</span><br><span class="line">   &#125;</span><br><span class="line"><span class="comment">/* style */</span></span><br><span class="line">&lt;<span class="keyword">div</span> style=<span class="string">"background: red;float:left;"</span>&gt;&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;<span class="keyword">div</span> style=<span class="string">"background: blue;position: absolute;"</span>&gt;&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>运行上述代码后，蓝色div在最外层，float层被覆盖了，难道是因为顺序问题？替换两个div的位置之后，依然是蓝色div在上面，所以absolute流明显高于float层。</p>
+<p><strong><em>注意:float元素没法通过设置z-index指来使元素高于absolute。因为z-index只对position值为relative,absolute,fixed的元素生效。</em></strong></p>
 
       
     </div>
@@ -115,29 +113,31 @@ var _hmt = _hmt || [];
 
 <nav id="pagination">
   
-    <a href="/page/15/" class="alignleft prev">上一頁</a>
+    <a href="/page/15/" class="alignleft prev">上一页</a>
   
   
-    <a href="/page/17/" class="alignright next">下一頁</a>
+    <a href="/page/17/" class="alignright next">下一页</a>
   
   <div class="clearfix"></div>
 </nav></div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="search" name="q" results="0" placeholder="搜索">
     <input type="hidden" name="q" value="site:yoursite.com">
   </form>
 </div>
 
   
 <div class="widget tag">
-  <h3 class="title">分類</h3>
+  <h3 class="title">分类</h3>
   <ul class="entry">
   
     <li><a href="/categories/git/">git</a><small>1</small></li>
   
     <li><a href="/categories/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/categories/node/">node</a><small>1</small></li>
   
     <li><a href="/categories/web前端/">web前端</a><small>13</small></li>
   

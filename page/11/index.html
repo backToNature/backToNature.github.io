@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>第 11 頁 | 问水的博客</title>
+  <title>第 11 页 | 问水的博客</title>
   <meta name="author" content="问水">
   
   
@@ -62,70 +62,26 @@ var _hmt = _hmt || [];
     <header>
       
         <div class="icon"></div>
-        <time datetime="2014-11-03T09:31:40.000Z"><a href="/2014/11/03/meta详解二-视图篇/">2014-11-03</a></time>
+        <time datetime="2014-11-04T08:47:33.000Z"><a href="/2014/11/04/cookieless-domain/">2014-11-04</a></time>
       
       
   
-    <h1 class="title"><a href="/2014/11/03/meta详解二-视图篇/">meta详解二(视图篇)</a></h1>
+    <h1 class="title"><a href="/2014/11/04/cookieless-domain/">cookieless domain</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h2 id="概述">概述</h2><p>手机浏览器是把页面放在一个虚拟的“窗口”（viewport）中，通常这个虚拟的“窗口”（viewport）比屏幕宽，这样就不用把每个网页挤到很小的窗口中（这样会破坏没有针对手机浏览器优化的网页的布局），用户可以通过平移和缩放来看网页的不同部分。移动版的 Safari 浏览器最新引进了 viewport 这个 meta tag，让网页开发者来控制 viewport 的大小和缩放，其他手机浏览器也基本支持。</p>
-<h2 id="Viewport_基础">Viewport 基础</h2><p>一个常用的针对移动网页优化过的页面的 viewport meta 标签大致如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">”viewport”</span> <span class="attribute">content</span>=<span class="value">”width=device-width,</span> <span class="attribute">initial-scale</span>=<span class="value">1,</span> <span class="attribute">maximum-scale</span>=<span class="value">1″</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>width：控制 viewport 的大小，可以指定的一个值，如果 600，或者特殊的值，如 device-width 为设备的宽度（单位为缩放为 100% 时的 CSS 的像素）。</li>
-<li>height：和 width 相对应，指定高度。</li>
-<li>initial-scale：初始缩放比例，也即是当页面第一次 load 的时候缩放比例。</li>
-<li>maximum-scale：允许用户缩放到的最大比例。</li>
-<li>minimum-scale：允许用户缩放到的最小比例。</li>
-<li>user-scalable：用户是否可以手动缩放</li>
-</ul>
-<h2 id="苹果移动设备的一些适配">苹果移动设备的一些适配</h2><p>设置了viewport前后的一些对比:</p>
-<p><img src="http://www.iinterest.net/wp-content/uploads/2011/01/toosmall.jpg" alt=""></p>
-<h3 id="1-_apple-mobile-web-app-capable">1. apple-mobile-web-app-capable</h3><p>使webapp以全屏模式运行。</p>
-<p>语法如下:</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"apple-mobile-web-app-capable"</span> <span class="variable">content=</span><span class="string">"yes"</span>&gt;</span><br></pre></td></tr></table></figure>
-<p>讨论: 如果content被设置为yes时， Web应用程序就会运行在全屏模式,否则就不是。这个行为是使用Safari浏览器来显示网页内容。您也可以使用window.navigator.standalone只读布尔属性来让你的网页是否显示在全屏模式。</p>
-<p>如图：导航和工具栏已经没有了</p>
-<p><img src="http://www.iinterest.net/wp-content/uploads/2011/01/webapp5.jpg" alt=""></p>
-<h3 id="2-_apple-mobile-web-app-status-bar-style">2. apple-mobile-web-app-status-bar-style</h3><p>系统状态栏是 iOS 顶部显示运营商、WIFI、时间的部分，它无法隐藏，但可以设置灰、黑两种风格，设置代码如下：</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"apple-mobile-web-app-status-bar-style"</span> <span class="variable">content=</span><span class="string">"grey"</span> /&gt;</span><br><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"apple-mobile-web-app-status-bar-style"</span> <span class="variable">content=</span><span class="string">"black"</span> /&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="3-_format-detection">3. format-detection</h3><p>屏蔽iPhone下的拨号链接:<br>iPhone 下会自动将连串数字转换为拨号超链接，如果没特别的需要还是将这个功能屏蔽为好：</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"format-detection"</span> <span class="variable">content=</span><span class="string">"telephone=no"</span>/&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="4-_apple-touch-icon">4. apple-touch-icon</h3><p>设置主屏幕(Spring Board)启动图标：<br>Safari 浏览器有一个“添加到主屏幕”的功能，用户可以像保存书签一样把一个网站添加到主屏幕，下次用户直接点击主屏幕上的图标就能进入网站。</p>
-<p><img src="http://www.iinterest.net/wp-content/uploads/2011/01/webapp2.jpg" alt=""></p>
-<p>这个功能不仅方便用户快速访问我们的网站，而且也使我们的 WebApp 更像一个原生应用，设置代码：</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link <span class="variable">rel=</span><span class="string">"apple-touch-icon"</span> <span class="variable">href=</span><span class="string">"icon.png"</span> /&gt;</span><br></pre></td></tr></table></figure>
-<p>iOS 系统会自动将图标生成具有高光、圆角和阴影效果：<br><img src="http://www.iinterest.net/wp-content/uploads/2011/01/webapp3.jpg" alt=""></p>
-<p>如果你不想要系统自动生成的效果，可以增加rel=”apple-touch-icon-precomposed”属性：</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link <span class="variable">rel=</span><span class="string">"apple-touch-icon-precomposed"</span> <span class="variable">href=</span><span class="string">"icon.png"</span> /&gt;</span><br></pre></td></tr></table></figure>
-<p>因为 iOS 分辨率，所以 icon.png 图片的尺寸也各不相同，我们可以通过sizes属性来分别定义，iOS 系统会自动获取向匹配的图片：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--默认为 57x57 像素--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon"</span> <span class="attribute">href</span>=<span class="value">"touch-icon-iphone.png"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!--iPad 1 72x72 像素--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon"</span> <span class="attribute">sizes</span>=<span class="value">"72x72"</span> <span class="attribute">href</span>=<span class="value">"touch-icon-ipad.png"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!--iPhone 4 114x114 像素--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon"</span> <span class="attribute">sizes</span>=<span class="value">"114x114"</span> <span class="attribute">href</span>=<span class="value">"touch-icon-iphone4.png"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="5-_apple-touch-startup-image">5. apple-touch-startup-image</h3><p>启动画面设置：当用户点击主屏图标打开 WebApp 时，系统会展示启动画面，在未设置情况下系统会默认显示该网站的首页截图，当然这个体验不是很好，所以我们需要通过以下代码来自定义启动画面。</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link <span class="variable">rel=</span><span class="string">"apple-touch-startup-image"</span> <span class="variable">href=</span><span class="string">"Startup.png"</span> /&gt;</span><br></pre></td></tr></table></figure>
-<p>与启图标类似，根据 iOS 设备的分辨率，其启动画面的图片尺寸也各不相同：</p>
-<ul>
-<li>iPhone 3GS(及以前机型)：320×460 像素</li>
-<li>iPhone 4、4S：640×920 像素</li>
-<li>iPhone 5：1096×640 像素</li>
-<li>iPhone 6：1334×750 像素</li>
-<li>iPhone 6 plus：1920x1080 像素</li>
-<li>iPad 1,2,mini：1024x768 像素</li>
-<li>iPad 3,4,air,air2,mini2 2048x1536 像素</li>
-<li><a href="http://www.canbike.org/CSSpixels/" target="_blank" rel="external">常用设备分辨率查询</a></li>
-</ul>
-<p style="color:red;font-weight:bloder;">注意:如果图片尺寸不对将无法显示。</p>
-
-<p>如果想让一个 WebApp 在 iPhone 和 iPad 中同时具有启动画面，我们可以借助 Javascript 脚本来完成，通过判断设备navigator.userAgent信息，来更改href的值指向对应的图片路径：</p>
-<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//jQuery</span></span><br><span class="line">var ua = navigator.userAgent.toLowerCase<span class="params">()</span>;</span><br><span class="line"><span class="keyword">if</span> <span class="params">(ua.match<span class="params">(/iPad/i)</span>==<span class="string">"ipad"</span>)</span> &#123;</span><br><span class="line">   $<span class="params">(<span class="string">"link[rel=apple-touch-startup-image]"</span>)</span>.attr<span class="params">(<span class="string">"href"</span>,<span class="string">"images/startup_ipad.png"</span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong><em>ps:<a href="https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html" target="_blank" rel="external">苹果官方资料</a></em></strong></p>
-<h2 id="参考资料">参考资料</h2><p>MDN开发者博客上的资料:<a href="https://developer.mozilla.org/zh-CN/docs/Mobile/Viewport_meta_tag" target="_blank" rel="external">viewport使用教程</a></p>
-<p>Apple 开发者站上面有<a href="https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html" target="_blank" rel="external">viewport 详细的描述</a>。</p>
-<p>quirksmode.org 有详细的<a href="http://www.quirksmode.org/mobile/viewports2.html" target="_blank" rel="external">viewport在各个手机浏览器不同之处介绍</a>。</p>
-
+        <h2 id="概述">概述</h2><p>什么是cookieless domain?虽然名字中带有cookie,其实完全可以不使用cookie。这只是一种将网页中静态的文本，图片等的域名和主域名相区别开的方法。</p>
+<p>主域名难免会使用到cookie,如果所有的资源(js,css,img等)都是来自于主域名,那么这些资源也会携带主域名的cookie。这样其实增加了很多不必要的流量,要知道性能都是从细节上优化的。cookie相信大家都十分熟悉了，不了解的可以去谷歌，百度一下，这里就不多做讲解了。</p>
+<h2 id="如何启用cookieless_domain?">如何启用cookieless domain?</h2><p>申请一个新的旁路域名,将你的外部资源与主域名分开。然后再将这个旁路域名禁用cookie，这样也就最大程度少节省了字节。</p>
+<h2 id="上图">上图</h2><p>如下是天猫域下的cookie,可以清楚地看到www.tmall.com</p>
+<p><img src="http://ww2.sinaimg.cn/large/005yyi5Jjw1elz3i6lka5j30mu08it9u.jpg" alt=""></p>
+<p>让我们再看这个页面的js,css,img等外部资源</p>
+<p><img src="http://ww4.sinaimg.cn/large/005yyi5Jjw1elz3i5s5mij30pa0d8gns.jpg" alt=""></p>
+<p><img src="http://ww4.sinaimg.cn/large/005yyi5Jjw1elz3i642ctj30o80cemz3.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/005yyi5Jjw1elz3i6t0umj30rk0c040g.jpg" alt=""></p>
+<h3 id="如图，所有的外部资源都不是主域名的。其实这样做的目的并不仅仅是cookieless_domain优化，后续我们再持续探讨。">如图，所有的外部资源都不是主域名的。其实这样做的目的并不仅仅是cookieless domain优化，后续我们再持续探讨。</h3>
       
     </div>
     <footer>
@@ -144,29 +100,31 @@ var _hmt = _hmt || [];
 
 <nav id="pagination">
   
-    <a href="/page/10/" class="alignleft prev">上一頁</a>
+    <a href="/page/10/" class="alignleft prev">上一页</a>
   
   
-    <a href="/page/12/" class="alignright next">下一頁</a>
+    <a href="/page/12/" class="alignright next">下一页</a>
   
   <div class="clearfix"></div>
 </nav></div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="search" name="q" results="0" placeholder="搜索">
     <input type="hidden" name="q" value="site:yoursite.com">
   </form>
 </div>
 
   
 <div class="widget tag">
-  <h3 class="title">分類</h3>
+  <h3 class="title">分类</h3>
   <ul class="entry">
   
     <li><a href="/categories/git/">git</a><small>1</small></li>
   
     <li><a href="/categories/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/categories/node/">node</a><small>1</small></li>
   
     <li><a href="/categories/web前端/">web前端</a><small>13</small></li>
   

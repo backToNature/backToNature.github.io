@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>第 4 頁 | 问水的博客</title>
+  <title>第 4 页 | 问水的博客</title>
   <meta name="author" content="问水">
   
   
@@ -62,54 +62,71 @@ var _hmt = _hmt || [];
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-01-05T01:45:26.000Z"><a href="/2015/01/05/iframe跨域通信/">2015-01-05</a></time>
+        <time datetime="2015-01-15T01:45:26.000Z"><a href="/2015/01/15/迟到的中文WebFont/">2015-01-15</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/01/05/iframe跨域通信/">iframe跨域通信方案</a></h1>
+    <h1 class="title"><a href="/2015/01/15/迟到的中文WebFont/">迟到的中文WebFont</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h2 id="概述">概述</h2><p>JavaScript出于安全方面的考虑，不允许跨域调用其他页面的对象。但在安全限制的同时也给注入iframe或是ajax应用上带来了不少麻烦。这里把涉及到跨域的一些问题简单地整理一下：</p>
-<p>首先什么是跨域，简单地理解就是因为JavaScript同源策略的限制，a.com 域名下的js无法操作b.com或是c.a.com域名下的对象。更详细的说明可以看下表：</p>
-<p><img src="http://targetkiller.net/wp-content/uploads/2014/02/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7-2014-02-23-%E4%B8%8A%E5%8D%885.03.37-1024x577.png" alt=""></p>
-<p>对于主域相同子域不同的通信方法这里不一一列举了，这里主要讲解一下跨主域的通信问题。</p>
-<h2 id="postMessage方法">postMessage方法</h2><p>window.postMessage 是一个用于安全的使用跨源通信的方法。通常，不同页面上的脚本只在这种情况下被允许互相访问，当且仅当执行它们的页面所处的位置使用相同的协议（通常都是 http）、相同的端口（http默认使用80端口）和相同的主机（两个页面的 document.domain 的值相同）。 在正确使用的情况下，window.postMessage 提供了一个受控的机制来安全地绕过这一限制。</p>
-<h3 id="兼容性">兼容性</h3><p><a href="http://caniuse.com/#search=postMessage" target="_blank" rel="external">http://caniuse.com/#search=postMessage</a></p>
-<h3 id="具体用法">具体用法</h3><ul>
-<li>发送消息：destination.postMessage(message, targetOrigin);<ul>
-<li>destination: 目标窗口</li>
-<li>message:发送的消息</li>
-<li>targetOrigin: 定义发送消息的范围</li>
-</ul>
-</li>
-<li>监听接受消息：window.addEventListener(‘message’,callback,false);</li>
-</ul>
-<h3 id="已知问题">已知问题</h3><ol>
-<li>部分版本IE8/9浏览器只支持iframe通信，不支持tabs之间通信。</li>
-<li>IE8/9不能传输对象，只能传输string。</li>
+        <h2 id="概述">概述</h2><p>三年前，有一个设计师面试一位 Web 前端工程师，其中有一段这样的对话：</p>
+<p>“如果设计师希望用图片实现某个字体样式，而从技术的角度来说这样不合理，但设计师非常坚持，这时候你怎么办？”</p>
+<p>“我会给设计师讲解工程上面临的问题，争取他理解。例如：如果文本使用图片，以腾讯站点的访问量来说，这里会需要消耗大量的服务器资源，至少需要增加 XXX 台服务器，带宽流量消耗 XXX 万……”。</p>
+<p>这是一段真实的面试场景，而我就是那位被面试者。这些年 Web 前端技术在迅猛的发展，这样的问题已经有了解决方案——WebFont，如果再回到当年面试的场景，我想我会给出更好的答案。</p>
+<p>WebFont 技术可以让网页使用在线字体，而无需使用图片，从而有机会解决开头设计师提到的问题。它通过 CSS 的 @font -face 语句引入在线字体，使用 CSS 选择器指定运用字体的文本。在国外，WebFont 已经非常流行了，大量的网站使用了 WebFont 技术，而业界大佬 Google 也顺势推出的免费 WebFont 云托管服务，这一切甚至带动了国外字体制作行业的高速发展。</p>
+<h4 id="WebFont_的优势">WebFont 的优势</h4><p>相对图片，WebFont 有如下优势：</p>
+<ol>
+<li>支持选中、复制</li>
+<li>支持 Ctrl+F 查找</li>
+<li>对搜索引擎友好</li>
+<li>支持工具翻译</li>
+<li>支持无障碍访问，支持朗读</li>
+<li>字体是矢量图形，支持矢量缩放，自动适配高清屏</li>
+<li>文本修改方便</li>
+<li>字形可以重复利用，节省网络资源</li>
 </ol>
-<h3 id="参考资料">参考资料</h3><ul>
-<li>mozlia官方文档：<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window.postMessage" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/API/Window.postMessage</a></li>
-<li>IE官方文档:<a href="https://status.modern.ie/postmessage" target="_blank" rel="external">https://status.modern.ie/postmessage</a></li>
-<li>webplatform文档:<a href="https://docs.webplatform.org/wiki/apis/web-messaging/MessagePort/postMessage" target="_blank" rel="external">https://docs.webplatform.org/wiki/apis/web-messaging/MessagePort/postMessage</a></li>
-<li>HTML5官方文档:<a href="https://html.spec.whatwg.org/multipage/comms.html#web-messaging" target="_blank" rel="external">https://html.spec.whatwg.org/multipage/comms.html#web-messaging</a></li>
-</ul>
-<h2 id="window-navigator(适用于ie6/7)">window.navigator(适用于ie6/7)</h2><p>ie6/7有个漏洞,父窗口与所有的iframe共享window.navigator对象，可以利用这个漏洞，由于ie6/7不支持postMessage,所以可以利用这个漏洞对ie6/7做兼容跨域通信支持。</p>
-<h3 id="具体用法-1">具体用法</h3><p><img src="http://ww2.sinaimg.cn/large/005yyi5Jjw1enyem8ddw7j30my0pcdkb.jpg" alt=""></p>
-<p>途中A过程和B过程都是初始化监听事件，类似于onmessage事件。只不过实现方法不一样而已。</p>
-<p>按执行顺序来描述的话，如下：</p>
+<h4 id="中文_WebFont_的困境">中文 WebFont 的困境</h4><p>既然 WebFont 有如此多优势，为何中文站点依然很少采用？这里主要是三个“中国特色”造成的：</p>
+<h4 id="1、中文字体体积">1、中文字体体积</h4><p>英文只有 26 个字母，一套字体不过几十 KB；而汉字却有数万个，导致字体文件通常有好几 MB 大小，文件体积比英文字体大数百倍，按照中国网络环境的现状，用于实际项目中显然不现实。</p>
+<h4 id="2、浏览器类型">2、浏览器类型</h4><p>国内浏览器市场异常繁荣，从 IE6 到各种壳的浏览器，他们对字体格式的支持也不一样，字体格式转换相当繁琐。</p>
+<h4 id="3、操作系统">3、操作系统</h4><p>相当长的时期内，Windows XP 操作系统是国内的主流，而 XP 系统对字体渲染表现差劲，设计师难以接受 WebFont 的表现，而宁愿使用图片。不过随着 XP 系统市场份额急剧下降以及移动设备的崛起，这个问题已经变得不再那么重要了。</p>
+<p>总结：中文 WebFont 首要解决的问题是压缩与转码。</p>
+<h2 id="现有的中文_WebFont_解决方案">现有的中文 WebFont 解决方案</h2><h4 id="1、本地制作">1、本地制作</h4><p>通过字体制作工具来删除没有使用的字符，即制作精简版字体，这也是我之前实践过的方案。</p>
+<p><img src="https://cloud.githubusercontent.com/assets/1791748/5517779/54576582-8939-11e4-9213-abab9427e094.jpg" alt=""></p>
+<h4 id="2、字体云服务">2、字体云服务</h4><p>国内目前有两家公司提供中文 WebFont 云托管服务，他们能够压缩与转码字体：</p>
 <ul>
-<li>B: 父窗口向window.navigator添加一个监听函数，并打上父窗口的戳。</li>
-<li>A: 子窗口向window.navigator添加一个监听函数，并打上子窗口的戳。</li>
+<li><a href="http://www.youziku.com" target="_blank" rel="external">http://www.youziku.com</a>（有字库)</li>
+<li><a href="http://www.youziku.com" target="_blank" rel="external">http://cn.justfont.com</a>（就是字）</li>
 </ul>
+<h4 id="现有方案的问题">现有方案的问题</h4><p>在实践中，通过工具制作精简版字体异常繁琐，它需要仔细核对字符，修改非常麻烦，效率低下且容易遗漏字符而导致出错 第三方云服务最大的问题是无法保证稳定性，能否支撑海量用户访问还是个问号，至少目前这两家中文 WebFont 平台中还没有大型商业站点的案例，大多都是一些小型个人或企业网站在使用 本地自动化 WebFont 压缩设想</p>
+<p>出于性能以及可控性的考虑，我们排除了第三方云服务方案，尝试设计本地自动化方案。和小伙伴讨论的过程中，我们想到了之前有同事做过自动化切图的工具，原理是用脚本操作 Photoshop，那么我们是否同样可以编写脚本让字体工具自动化的操作呢？理论上 OK，值得我们去尝试。</p>
+<p>字体压缩关键在于删除不必要的字符，我们可以指定一个配置文件来指定字体以及其所使用的字符，然后操作字体工具精简字体即可。</p>
+<p>前面提到，如果手工配置字体所使用的字符可能会有遗漏的风险，并且每次页面修改都需要同步修改配置文件，这里能否实现自动化配置？</p>
+<p>灵感总是在不经意间出现，我们将目光又朝向了 CSS，因为 CSS 本身就一个完整的配置文件：它的 @font -face 语句记录着字体名称与文件路径，选择器记录着字体使用范围，而 CSS 选择器又与 HTML 文档相对应，HTML 文档又可以使用选择器来查找节点与文本。</p>
+<h4 id="字蛛（Font-Spider）诞生">字蛛（Font-Spider）诞生</h4><p>为了实现上述设想，我们需要拥有这三个小伙伴：</p>
 <ul>
-<li>C: 父窗口执行post的时候，调用原先子窗口添加在navigator里的监听函数，并将要传输的数据作为函数参数传入。</li>
-<li>D: 子窗口执行post的时候，调用原先父窗口添加在navigator里的监听函数，并将要传输的数据作为函数参数传入。</li>
+<li>分析模块：负责收集字体与字体使用的字符</li>
+<li>压缩模块：负责删除字体中没有使用的字符实现压缩</li>
+<li>转码模块：负责将字体转换成跨浏览器使用的格式</li>
 </ul>
-<h3 id="注意：子窗口和父窗口要找到对方的监听函数必须得事先知道对方在添加监听函数的时候打上的戳"><strong><em>注意：子窗口和父窗口要找到对方的监听函数必须得事先知道对方在添加监听函数的时候打上的戳</em></strong></h3>
+<p>借助开源的力量，工具被迅速的实现出来，非常感谢以下开源项目的帮助：</p>
+<ul>
+<li>css.js：它能将 CSS 解析成语法树，并且能够较好的容错适应各种 hack 语法</li>
+<li>jsdom：它能够在 NodeJS 中实现 W3C DOM API，使得我可以使用</li>
+<li>document.querySelectorAll() 方法输入 CSS 选择器来查找 HTML 节点上的文本</li>
+<li>font-optimizer：这是一个使用 Perl 编写的字体优化工具</li>
+<li>ttf2eot、ttf2woff、ttf2svg：是它们完成了跨浏览器字体格式转码的工作</li>
+</ul>
+<h4 id="成果">成果</h4><p><img src="https://cloud.githubusercontent.com/assets/1791748/5517774/e8b32654-8938-11e4-9d5a-ec32f988dd6c.jpg" alt=""></p>
+<p>指定 HTML 文件路径就可以自动化的压缩与转码字体，过程中完全无需人工干预，可以方便的集成在前端发布系统中。</p>
+<h4 id="开源">开源</h4><p>不断的完善后，我们将工具命名为——字蛛（Font-Spider），并回馈给开源社区，希望它能够为中文 WebFont 的发展出一份力，让更多的中文站点可以使用精美的字体。套用一句话结束本文：技术会迟到，但从不会缺席。</p>
+<ul>
+<li>字蛛官网：<a href="http://font-spider.org" target="_blank" rel="external">http://font-spider.org</a></li>
+<li>项目贡献者：糖饼(@aui ) fufu kdd</li>
+</ul>
+<h3 id="转载自http://www-f2e-im/t/860#reply1_F2E前端社区">转载自<a href="http://www.f2e.im/t/860#reply1" target="_blank" rel="external">http://www.f2e.im/t/860#reply1</a> F2E前端社区</h3>
       
     </div>
     <footer>
@@ -128,29 +145,31 @@ var _hmt = _hmt || [];
 
 <nav id="pagination">
   
-    <a href="/page/3/" class="alignleft prev">上一頁</a>
+    <a href="/page/3/" class="alignleft prev">上一页</a>
   
   
-    <a href="/page/5/" class="alignright next">下一頁</a>
+    <a href="/page/5/" class="alignright next">下一页</a>
   
   <div class="clearfix"></div>
 </nav></div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="search" name="q" results="0" placeholder="搜索">
     <input type="hidden" name="q" value="site:yoursite.com">
   </form>
 </div>
 
   
 <div class="widget tag">
-  <h3 class="title">分類</h3>
+  <h3 class="title">分类</h3>
   <ul class="entry">
   
     <li><a href="/categories/git/">git</a><small>1</small></li>
   
     <li><a href="/categories/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/categories/node/">node</a><small>1</small></li>
   
     <li><a href="/categories/web前端/">web前端</a><small>13</small></li>
   

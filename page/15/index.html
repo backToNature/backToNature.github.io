@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>第 15 頁 | 问水的博客</title>
+  <title>第 15 页 | 问水的博客</title>
   <meta name="author" content="问水">
   
   
@@ -62,38 +62,43 @@ var _hmt = _hmt || [];
     <header>
       
         <div class="icon"></div>
-        <time datetime="2014-10-25T16:45:26.000Z"><a href="/2014/10/26/float与absolute的比较/">2014-10-26</a></time>
+        <time datetime="2014-10-28T07:38:55.000Z"><a href="/2014/10/28/css中after和before的奇妙用法/">2014-10-28</a></time>
       
       
   
-    <h1 class="title"><a href="/2014/10/26/float与absolute的比较/">float与absolute的比较</a></h1>
+    <h1 class="title"><a href="/2014/10/28/css中after和before的奇妙用法/">css中after和before的奇妙用法</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h2 id="概述">概述</h2><ol>
-<li><p><strong><em>position:absolute</em></strong></p>
-<p> 生成绝对定位的元素，脱离了文本流（即在文档中已经不占据位置），相对于 static 定位以外的第一个父元素进行定位。元素的位置通过 “left”, “top”, “right” 以及 “bottom” 属性进行规定。</p>
+        <h2 id="概述">概述</h2><p>css有两个不太常用的伪类 :before 和 :after，它们的功能可不是我们所想象地那么简单。如果利用好这两个属性，一样可以写出非常酷炫的效果，这样不仅仅只是利用了这两种伪类，也提升了页面性能(这样可以减少图片请求)。</p>
+<p>酷炫demo:</p>
+<p><img src="http://img1.cheny.org/dimblog/2013/10/6cc221614774e78add77d4e7a1171f591.gif" alt=""></p>
+<h2 id="基本语法">基本语法</h2><p>在了解进阶的应用之前，先来了解一下语法规则－<a href="http://www.w3school.com.cn/css/css_pseudo_elements.asp" target="_blank" rel="external">w3c链接</a>。平常仅仅需要将这两个伪元素用于添加一些自定义字符时，只需使用伪类使用的单冒号写法，以保证浏览器的兼容性：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">h1</span><span class="pseudo">:before</span> <span class="rules">&#123;   &#125;</span></span><br></pre></td></tr></table></figure>
+<p>不过，在 CSS3 中为了区别伪元素和伪类为伪元素使用了双冒号，因此如果使用了 display 或者 width 等属性时使得显示脱离了原本元素后，建议按照标准双写。过于老的浏览器可能会存在支持问题，不过伪元素大多是配合 CSS3 使用，就无所谓向下兼容了：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">p</span><span class="pseudo">::after</span> &#123; &#125;</span><br></pre></td></tr></table></figure>
+<p>这两个伪类下特有的属性 content ，用于在 CSS 渲染中向元素逻辑上的头部或尾部添加内容。注意这些添加不会改变文档内容，不会出现在 DOM 中，不可复制，仅仅是在 CSS 渲染层加入。比较有用的是以下几个值：</p>
 <ul>
-<li>若父元素不是定位元素:<br>  <img src="http://files.jb51.net/file_images/article/201212/2012121517093058.jpg" alt=""></li>
-<li>若父元素设置了定位:<br>  <img src="http://files.jb51.net/file_images/article/201212/2012121517093059.jpg" alt=""></li>
+<li><strong><em>[String]</em></strong> - 使用引号包括一段字符串，将会向元素内容中添加字符串。示例：</li>
 </ul>
-</li>
-<li><p><strong><em>float: left或者right</em></strong></p>
-<p> 浮动的框可以向左或向右移动，直到它的外边缘碰到包含框或另一个浮动框的边框为止。由于浮动框不在文档的普通流中，所以文档的普通流中的块框表现得就像浮动框不存在一样。</p>
-<p> 请看下图，当把框 1 向右浮动时，它脱离文档流并且向右移动，直到它的右边缘碰到包含框的右边缘：<br> <img src="http://www.w3school.com.cn/i/ct_css_positioning_floating_right_example.gif" alt=""></p>
-<p> 再请看下图，当框 1 向左浮动时，它脱离文档流并且向左移动，直到它的左边缘碰到包含框的左边缘。因为它不再处于文档流中，所以它不占据空间，实际上覆盖住了框 2，使框 2 从视图中消失。<br>如果把所有三个框都向左移动，那么框 1 向左浮动直到碰到包含框，另外两个框向左浮动直到碰到前一个浮动框。<br> <img src="http://www.w3school.com.cn/i/ct_css_positioning_floating_left_example.gif" alt=""></p>
-<p> 如下图所示，如果包含框太窄，无法容纳水平排列的三个浮动元素，那么其它浮动块向下移动，直到有足够的空间。如果浮动元素的高度不同，那么当它们向下移动时可能被其它浮动元素“卡住”：<br> <img src="http://www.w3school.com.cn/i/ct_css_positioning_floating_left_example_2.gif" alt=""></p>
-</li>
-</ol>
-<h2 id="比较">比较</h2><ol>
-<li><p>如果重合了谁在上面？</p>
- <figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* style */</span></span><br><span class="line"><span class="keyword">div</span> &#123;</span><br><span class="line">	width: <span class="number">100</span>px;</span><br><span class="line">      	height: <span class="number">100</span>px;</span><br><span class="line">   &#125;</span><br><span class="line"><span class="comment">/* style */</span></span><br><span class="line">&lt;<span class="keyword">div</span> style=<span class="string">"background: red;float:left;"</span>&gt;&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;<span class="keyword">div</span> style=<span class="string">"background: blue;position: absolute;"</span>&gt;&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>运行上述代码后，蓝色div在最外层，float层被覆盖了，难道是因为顺序问题？替换两个div的位置之后，依然是蓝色div在上面，所以absolute流明显高于float层。</p>
-<p><strong><em>注意:float元素没法通过设置z-index指来使元素高于absolute。因为z-index只对position值为relative,absolute,fixed的元素生效。</em></strong></p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">a</span><span class="pseudo">:after</span> &#123; <span class="attribute">content</span>: <span class="string">"↗"</span>; &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong><em>attr()</em></strong> – 调用当前元素的属性，可以方便的比如将图片的 Alt 提示文字或者链接的 Href 地址显示出来。示例：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="rule"><span class="attribute">a</span>:<span class="value">after &#123; content:<span class="string">"("</span> <span class="function">attr</span>(href) <span class="string">")"</span></span></span>; &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong><em>url() / uri()</em></strong> – 用于引用媒体文件。示例：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">h1</span><span class="pseudo">::before</span> <span class="rules">&#123; <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="function">url</span>(logo.png)</span></span>; &#125;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong><em>counter()</em></strong> –  调用计数器，可以不使用列表元素实现序号功能。具体请参见 counter-increment 和 counter-reset 属性的用法。示例：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">h2</span><span class="pseudo">:before</span> <span class="rules">&#123; <span class="rule"><span class="attribute">counter-increment</span>:<span class="value"> chapter</span></span>; <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">"Chapter "</span> <span class="function">counter</span>(chapter) <span class="string">". "</span> &#125;</span></span></span></span><br></pre></td></tr></table></figure>
+<h2 id="进阶技巧">进阶技巧</h2><p>清除浮动是一个时常会遇到的问题，不少人的解决办法是添加一个空的 div 应用 clear:both; 属性。现在，无需增加没有意义的元素，仅需要以下样式即可在元素尾部自动清除浮动：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.clear-fix</span> &#123; *<span class="attribute">overflow</span>: hidden; *<span class="attribute">zoom</span>: <span class="number">1</span>; &#125;  </span><br><span class="line"><span class="class">.clear-fix</span><span class="pseudo">:after</span> &#123; <span class="attribute">display</span>: table; <span class="attribute">content</span>: <span class="string">""</span>; <span class="attribute">width</span>: <span class="number">0</span>; <span class="attribute">clear</span>: both; &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用示例">使用示例</h2><p>首先可以看一下这个<a href="http://tympanus.net/Development/CreativeLinkEffects/" target="_blank" rel="external">网站</a>上所有的酷炫特效都用到了:after与:before。</p>
 
       
     </div>
@@ -113,29 +118,31 @@ var _hmt = _hmt || [];
 
 <nav id="pagination">
   
-    <a href="/page/14/" class="alignleft prev">上一頁</a>
+    <a href="/page/14/" class="alignleft prev">上一页</a>
   
   
-    <a href="/page/16/" class="alignright next">下一頁</a>
+    <a href="/page/16/" class="alignright next">下一页</a>
   
   <div class="clearfix"></div>
 </nav></div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="search" name="q" results="0" placeholder="搜索">
     <input type="hidden" name="q" value="site:yoursite.com">
   </form>
 </div>
 
   
 <div class="widget tag">
-  <h3 class="title">分類</h3>
+  <h3 class="title">分类</h3>
   <ul class="entry">
   
     <li><a href="/categories/git/">git</a><small>1</small></li>
   
     <li><a href="/categories/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/categories/node/">node</a><small>1</small></li>
   
     <li><a href="/categories/web前端/">web前端</a><small>13</small></li>
   

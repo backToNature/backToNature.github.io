@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>第 6 頁 | 问水的博客</title>
+  <title>第 6 页 | 问水的博客</title>
   <meta name="author" content="问水">
   
   
@@ -62,37 +62,32 @@ var _hmt = _hmt || [];
     <header>
       
         <div class="icon"></div>
-        <time datetime="2014-12-24T09:20:55.000Z"><a href="/2014/12/24/scriptTags/">2014-12-24</a></time>
+        <time datetime="2015-01-04T09:45:26.000Z"><a href="/2015/01/04/git暂存区/">2015-01-04</a></time>
       
       
   
-    <h1 class="title"><a href="/2014/12/24/scriptTags/">script标签小记</a></h1>
+    <h1 class="title"><a href="/2015/01/04/git暂存区/">git暂存区</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h2 id="概述">概述</h2><p>使用script标签的方式有两种，内嵌和外<br>引。并且两种方式不能混用，混用的情况下只会加载src里的外部脚本。并且在不设置任何属性下，所有的脚本都会同步顺序地加载执行。</p>
-<h2 id="script元素的属性">script元素的属性</h2><ul>
-<li>asyns: 可选。</li>
-<li>defer: 可选。</li>
-<li>src: 可选。</li>
-<li>type: 可选。</li>
-<li>其余省略</li>
-</ul>
-<h2 id="defer（延迟脚本）">defer（延迟脚本）</h2><p>表示脚本可以延迟到文档完全被解析和显示之后再执行。<strong><em>只对外部脚本有效</em></strong>，并且ie7及其以上也支持这个属性。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">head</span> <span class="attribute">lang</span>=<span class="value">"en"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">title</span>&gt;</span><span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"example1.js"</span> <span class="attribute">defer</span>=<span class="value">"defer"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"example2.js"</span> <span class="attribute">defer</span>=<span class="value">"defer"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>这个例子中，虽然把脚本放在了head中，但是这两个脚本将会在整个页面加载完成后才会执行，而且不一定会顺序执行。</p>
-<p><strong><em>在 IE6 IE7 IE8 中，当使用 innerHTML 方法插入脚本时，SCRIPT 元素必须设置 defer 属性。不然没法执行脚本</em></strong></p>
-<p>支持的浏览器有IE,firefox,Safari,Chrome，具体支持方式还有待测试。</p>
-<h2 id="asyns（异步脚本）">asyns（异步脚本）</h2><p>同样与defer类似，asyns也只适用于外部脚本，并告诉浏览器立即下载文件。与defer不同的是，本asyns标记的脚本不会按顺序执行(defer还可能按顺序执行)。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">head</span> <span class="attribute">lang</span>=<span class="value">"en"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">title</span>&gt;</span><span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"example1.js"</span> <span class="attribute">async</span>=<span class="value">"async"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"example2.js"</span> <span class="attribute">async</span>=<span class="value">"async"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>异步脚本基本和页面同时开始加载，并且是并发加载的，所以上面两个脚本不会等到页面加载之后才会加载。</p>
-<p>支持的浏览器有: firefox,Safari,Chrome。</p>
-<h2 id="动态加载脚本">动态加载脚本</h2><p>很多时候，我们会需要动态加载一些脚本。下面是我总结的一些方法。</p>
-<h4 id="方法一">方法一</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadScript</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">"script"</span>);</span><br><span class="line">    script.src = url;</span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(script);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="方法二(字符串传递)">方法二(字符串传递)</h4><p>有时候我们需要把从第三方拿到的脚本字符串在页面执行，可以使用如下方式创建。</p>
-<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadScriptString</span><span class="params">(str)</span> &#123;</span></span><br><span class="line">    var script = document.createElement<span class="params">(<span class="string">"script"</span>)</span>;</span><br><span class="line">    try&#123;</span><br><span class="line">        <span class="comment">// Safari3不支持text属性</span></span><br><span class="line">        script.appendChild<span class="params">(document.createTextNode<span class="params">(str)</span>)</span>;</span><br><span class="line">    &#125; catch<span class="params">(e)</span>&#123;</span><br><span class="line">        <span class="comment">// 为了兼容IE，IE不允许访问script对象的子节点。</span></span><br><span class="line">        script.<span class="built_in">text</span> = <span class="built_in">str</span>;</span><br><span class="line">    &#125; </span><br><span class="line">    document.body.appendChild<span class="params">(script)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="理解Git暂存区">理解Git暂存区</h2><p>暂存区，又被称为(stage或者index)。在我们的仓库里有个.git目录(是个隐藏目录)，我们可以对这个文件做一个实验。</p>
+<ol>
+<li><p>首先我们先随便修改我们仓库里的一个文件a.txt，再执行git status,然后再执行ls -l .git/index。</p>
+ <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">$ <span class="keyword">ls</span> -<span class="keyword">l</span> .git/<span class="literal">index</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这时我们可以看到index文件的修改时间为当前时间，然后执行git checkout命令(撤销刚才的修改)</p>
+ <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout <span class="comment">-- a.txt</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>再次执行git status命令，然后再执行ls -l .git/index。</p>
+ <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">$ <span class="keyword">ls</span> -<span class="keyword">l</span> .git/<span class="literal">index</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这时候我们看到时间戳又变了！</p>
+<p>这个试验说明当执行git status命令(或者git diff命令)的时候，先依据.git/index文件中记录的时间戳，长度等信息判断工作区文件是否改变，如果工作区文件的时间戳改变了，说明文件内容也很可能改变，这时候就需要打开文件，读取文件的内容，与更改前的原始文件作比较。如果没有改变，则将该文件新的时间戳记录到.git/index文件中。</p>
+<p>文件.git/index实际上是一个包含文件索引的目录树，像是一个虚拟的空间，再这个虚拟空间的目录树中，记录了文件名和文件的状态信息(时间戳文件长度等)。文件的内容确并没有存储在里面，而是保存在git对象库.git/objects目录中，我们可以用如下的图来描述这么一个关系。</p>
+<p><img src="http://ww3.sinaimg.cn/large/005yyi5Jjw1enxnczsoh7j30lj0arabs.jpg" alt=""></p>
 
       
     </div>
@@ -112,29 +107,31 @@ var _hmt = _hmt || [];
 
 <nav id="pagination">
   
-    <a href="/page/5/" class="alignleft prev">上一頁</a>
+    <a href="/page/5/" class="alignleft prev">上一页</a>
   
   
-    <a href="/page/7/" class="alignright next">下一頁</a>
+    <a href="/page/7/" class="alignright next">下一页</a>
   
   <div class="clearfix"></div>
 </nav></div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="search" name="q" results="0" placeholder="搜索">
     <input type="hidden" name="q" value="site:yoursite.com">
   </form>
 </div>
 
   
 <div class="widget tag">
-  <h3 class="title">分類</h3>
+  <h3 class="title">分类</h3>
   <ul class="entry">
   
     <li><a href="/categories/git/">git</a><small>1</small></li>
   
     <li><a href="/categories/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/categories/node/">node</a><small>1</small></li>
   
     <li><a href="/categories/web前端/">web前端</a><small>13</small></li>
   

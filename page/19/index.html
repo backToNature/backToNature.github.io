@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>第 19 頁 | 问水的博客</title>
+  <title>第 19 页 | 问水的博客</title>
   <meta name="author" content="问水">
   
   
@@ -62,151 +62,70 @@ var _hmt = _hmt || [];
     <header>
       
         <div class="icon"></div>
-        <time datetime="2014-10-08T09:55:24.000Z"><a href="/2014/10/08/mac_s linux comands/">2014-10-08</a></time>
+        <time datetime="2014-10-20T16:48:39.000Z"><a href="/2014/10/21/前端零基础入门/">2014-10-21</a></time>
       
       
   
-    <h1 class="title"><a href="/2014/10/08/mac_s linux comands/">Mac下常用linux命令解析</a></h1>
+    <h1 class="title"><a href="/2014/10/21/前端零基础入门/">前端零基础入门</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h3 id="linux命令格式">linux命令格式</h3><p>linux命令列通常由好⼏几个字符串组成, 中间⽤用空格键分<br>开。如下所⽰: </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">command</span> options arguments(或parameters)</span><br></pre></td></tr></table></figure>
-<p>命令 选项 参数<br>例如:<br>rm -rf /home/ols3</p>
-<h3 id="通配符基础">通配符基础</h3><p>通配符 又称多义符。在描述⽂文件时,有时在⽂文件名部分⽤用到 ⼀一些通配符,以加强命令的功能。在Linux系统中有以下基本 的通配符:</p>
-<pre><code>?:表⽰示该位置可以是⼀一个任意的单个字符。
-*:表⽰示该位置可以是若⼲干个任意字符。
-方括号[charset]:可替代charset集中的任何单个字符 
-下⾯对方括号通配符进行一些说明。例如:
-[<span class="link_reference">cChH</span>]:<span class="link_url">表⽰在⽂件的该位置中可出现任意单个的c或h字符的⼤小写形式。</span>
-</code></pre><p>另外,通配符集还能描述介于字符对之间的所有字符。如“[a- z]”就可以代 替任意⼩小写字母,⽽而[a-zA-Z]则可替代任意字母。 注意可替代的字符包括a到z和A到Z字符对之间的所有字符。</p>
-<h3 id="Mac常用linux命令介绍">Mac常用linux命令介绍</h3><table>
-<thead>
-<tr>
-<th>命令</th>
-<th style="text-align:center">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ls</td>
-<td style="text-align:center">显示指定工作目录下的内容</td>
-</tr>
-<tr>
-<td>cd</td>
-<td style="text-align:center">变幻工作目录</td>
-</tr>
-<tr>
-<td>pwd</td>
-<td style="text-align:center">显示当前活动目录的绝对路径</td>
-</tr>
-<tr>
-<td>clear</td>
-<td style="text-align:center">清屏命令</td>
-</tr>
-<tr>
-<td>mkdir</td>
-<td style="text-align:center">创建新目录</td>
-</tr>
-<tr>
-<td>redir</td>
-<td style="text-align:center">删除空目录</td>
-</tr>
-<tr>
-<td>rm</td>
-<td style="text-align:center">删除文档和目录</td>
-</tr>
-<tr>
-<td>touch</td>
-<td style="text-align:center">创建一个空白文件</td>
-</tr>
-<tr>
-<td>cp</td>
-<td style="text-align:center">复制文件或者目录</td>
-</tr>
-<tr>
-<td>mv</td>
-<td style="text-align:center">移动目录或给文件改名</td>
-</tr>
-<tr>
-<td>chmod</td>
-<td style="text-align:center">修改文件或目录的权限</td>
-</tr>
-<tr>
-<td>chown</td>
-<td style="text-align:center">修改文件或者目录所属的用户</td>
-</tr>
-<tr>
-<td>chgrp</td>
-<td style="text-align:center">修改文件或目录所属的工作组</td>
-</tr>
-<tr>
-<td>find</td>
-<td style="text-align:center">在指定的路径下搜索指定的文件</td>
-</tr>
-<tr>
-<td>grep</td>
-<td style="text-align:center">过滤，查找文件中的内容</td>
-</tr>
-<tr>
-<td>kill</td>
-<td style="text-align:center">杀死指定进程</td>
-</tr>
-<tr>
-<td>killall</td>
-<td style="text-align:center">杀死所有进程</td>
-</tr>
-<tr>
-<td>tar</td>
-<td style="text-align:center">用于打包和解包某个目录和文件</td>
-</tr>
-<tr>
-<td>gzip</td>
-<td style="text-align:center">用于压缩某个文件和目录,gunzip解压缩</td>
-</tr>
-<tr>
-<td>bzip2</td>
-<td style="text-align:center">用于压缩某个文件和目录,bunzip2解压缩</td>
-</tr>
-</tbody>
-</table>
-<h3 id="ls命令常用参数">ls命令常用参数</h3><table>
-<thead>
-<tr>
-<th>参数</th>
-<th style="text-align:center">功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-a</td>
-<td style="text-align:center">列出目录下的所有文件，包括以 . 开头的隐含文件</td>
-</tr>
-<tr>
-<td>-l</td>
-<td style="text-align:center">除了文件名之外，还将文件的权限、所有者、文件大小等信息详细列出来。</td>
-</tr>
-<tr>
-<td>-h</td>
-<td style="text-align:center">以容易理解的格式列出文件大小 (例如 1K 234M 2G)</td>
-</tr>
-<tr>
-<td>-t</td>
-<td style="text-align:center">以文件修改时间排序</td>
-</tr>
-<tr>
-<td>-u</td>
-<td style="text-align:center">配合 -lt:显示访问时间而且依访问时间排序配合 -l:显示访问时间但根据名称排序。否则：根据访问时间排序</td>
-</tr>
-</tbody>
-</table>
-<h3 id="一些使用方法：">一些使用方法：</h3><h4 id="1-_列出/home/peidachang文件夹下的所有文件和目录的详细资料">1. 列出/home/peidachang文件夹下的所有文件和目录的详细资料</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ls <span class="operator">-l</span> -R /home/peidachang</span><br></pre></td></tr></table></figure>
-<p>若当前目录已经在home下，同样的作用这样也可以实现，如下:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ls <span class="operator">-l</span> -R peidachang</span><br></pre></td></tr></table></figure>
-<h4 id="2-_列出当前目录中所有以“t”开头的目录的详细内容，可以使用如下命令：">2. 列出当前目录中所有以“t”开头的目录的详细内容，可以使用如下命令：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ls <span class="operator">-l</span> t*</span><br></pre></td></tr></table></figure>
-<h4 id="3-_只列出文件下的子目录">3. 只列出文件下的子目录</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ls -F /opt/soft |grep /$</span><br></pre></td></tr></table></figure>
+        <h2 id="前言">前言</h2><p>首先，任何技术实际都是从零基础开始的，不管是直接学习还是通过相近经历转行。所以不需要因零基础担心。</p>
+<p>其次，一定要做好准备：一项技术的学习，意味着你各方面资源不同程度的消耗——时间、工具、资金，甚至融入相关交流圈子的准备。在这个准备过程中，最好是带有一个强硬的规划：“我要在一个月内达到能够实现XXX的水平”或者“我一定要在2周内把XXX项目完成”。如果没有这个规划，一般人都会越来越懒惰。</p>
+<p>然后，选准一个或多个老师。这个老师，可以是一个页面，一本书，也可以是一个真实的人。</p>
+<h2 id="学习内容">学习内容</h2><p>主要有<strong>html,css,js</strong>入门得话推荐先到<a href="http://www.w3school.com.cn/" target="_blank" rel="external">w3school</a>学习上面的教程，上面的教程大多都有demo示例，通过这种方式也可以增加兴趣。新手进入后可以从下图红色的入口去先学习:<br><img src="http://img2.picbed.org/uploads/2014/10/Snip20141024_1.png" alt=""></p>
+<h2 id="推荐书籍">推荐书籍</h2><ol>
+<li>入门<ul>
+<li>html就通过<a href="http://www.w3school.com.cn/html/index.asp" target="_blank" rel="external">w3school-HTML教程</a>来学习</li>
+<li><a href="http://yanhaijing.com/basejs/" target="_blank" rel="external">js简易教程</a></li>
+<li><a href="http://baike.baidu.com/view/2506513.htm?fr=aladdin" target="_blank" rel="external">《css权威指南》</a></li>
+<li><a href="http://baike.baidu.com/view/5688263.htm?fr=aladdin" target="_blank" rel="external">《JavaScript DOM编程艺术》</a></li>
+</ul>
+</li>
+<li>进阶<ul>
+<li><a href="http://baike.baidu.com/view/1935786.htm?fr=aladdin" target="_blank" rel="external">《Javascript权威指南》(简称犀牛书)</a>或者<a href="http://www.amazon.cn/mn/detailApp?asin=B00CBBJS5Y&amp;tag=baiduiclickcn-23&amp;ref=pz_ic_db_j_5bkindle202" target="_blank" rel="external">《JavaScript高级程序设计》(简称红书)</a></li>
+<li><a href="http://baike.baidu.com/view/4720389.htm?fr=aladdin" target="_blank" rel="external">《高性能JavaScript》</a></li>
+<li><a href="http://baike.baidu.com/view/11262652.htm?fr=aladdin" target="_blank" rel="external">《编写可维护的JavaScript》</a></li>
+<li><a href="http://baike.baidu.com/view/3782729.htm?fr=aladdin" target="_blank" rel="external">《JavaScript语言精粹》</a></li>
+<li><a href="http://baike.baidu.com/view/2533650.htm?fr=aladdin" target="_blank" rel="external">《JavaScript设计模式》</a></li>
+</ul>
+</li>
+<li>html5/css3<ul>
+<li><a href="http://www.w3school.com.cn/html5/index.asp" target="_blank" rel="external">w3c</a></li>
+<li><a href="http://html5demos.com/" target="_blank" rel="external">HTML 5 Demos and Examples</a></li>
+<li><a href="https://simpl.info/" target="_blank" rel="external">h5-example</a></li>
+<li><a href="http://slides.html5rocks.com/" target="_blank" rel="external">酷炫学习h5网站</a></li>
+</ul>
+</li>
+<li>es6<ul>
+<li><a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">ECMAScript 6入门</a></li>
+</ul>
+</li>
+<li>github<ul>
+<li><a href="http://rogerdudler.github.io/git-guide/index.zh.html" target="_blank" rel="external">git - 简明指南</a></li>
+<li><a href="http://pcottle.github.io/learnGitBranching/" target="_blank" rel="external">玩游戏闯关学习git</a></li>
+<li><a href="http://item.jd.com/10697183.html" target="_blank" rel="external">书籍-git权威指南</a></li>
+</ul>
+</li>
+<li><a href="http://www.cnblogs.com/pigtail/p/3336317.html" target="_blank" rel="external">详细书单</a></li>
+</ol>
+<h2 id="推荐编辑软件">推荐编辑软件</h2><ol>
+<li>Dreamweaver<ul>
+<li>Adobe Dreamweaver，简称“DW”，中文名称”梦想编织者”，是美国MACROMEDIA公司开发的集网页制作和管理网站于一身的所见即所得网页编辑器，DW是第一套针对专业网页设计师特别发展的视觉化网页开发工具，利用它可以轻而易举地制作出跨越平台限制和跨越浏览器限制的充满动感的网页。</li>
+</ul>
+</li>
+<li>Notepad++<ul>
+<li>Notepad++是一套非常有特色的自由软件的纯文字编辑器(许可证:GPL)，有完整的中文化接口及支持多国语言编写的功能(UTF8 技术)。它的功能比 Windows 中的 Notepad(记事本)强大，除了可以用来制作一般的纯文字说明文件，也十分适合当作编写电脑程序的编辑器。Notepad++ 不仅有语法高亮度显示，也有语法折叠功能，并且支持宏以及扩充基本功能的外挂模组。</li>
+</ul>
+</li>
+<li>Sublime<ul>
+<li>Sublime Text具有漂亮的用户界面和强大的功能，例如代码缩略图，Python的插件，代码段等。还可自定义键绑定，菜单和工具栏。Sublime Text 的主要功能包括：拼写检查，书签，完整的 Python API ， Goto 功能，即时项目切换，多选择，多窗口等等。[1] Sublime Text 是一个跨平台的编辑器，同时支持Windows、Linux、Mac OS X等操作系统</li>
+</ul>
+</li>
+</ol>
+<h2 id="强烈推荐">强烈推荐</h2><p>git作为最近炙手可热的版本管理工具，作为前端工程师，这玩意儿不会用是不行的，强烈推荐学习git，并通过github记录自己的学习代码和历程。</p>
 
       
     </div>
@@ -226,29 +145,31 @@ var _hmt = _hmt || [];
 
 <nav id="pagination">
   
-    <a href="/page/18/" class="alignleft prev">上一頁</a>
+    <a href="/page/18/" class="alignleft prev">上一页</a>
   
   
-    <a href="/page/20/" class="alignright next">下一頁</a>
+    <a href="/page/20/" class="alignright next">下一页</a>
   
   <div class="clearfix"></div>
 </nav></div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="search" name="q" results="0" placeholder="搜索">
     <input type="hidden" name="q" value="site:yoursite.com">
   </form>
 </div>
 
   
 <div class="widget tag">
-  <h3 class="title">分類</h3>
+  <h3 class="title">分类</h3>
   <ul class="entry">
   
     <li><a href="/categories/git/">git</a><small>1</small></li>
   
     <li><a href="/categories/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/categories/node/">node</a><small>1</small></li>
   
     <li><a href="/categories/web前端/">web前端</a><small>13</small></li>
   

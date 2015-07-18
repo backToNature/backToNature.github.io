@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>第 13 頁 | 问水的博客</title>
+  <title>第 13 页 | 问水的博客</title>
   <meta name="author" content="问水">
   
   
@@ -62,38 +62,103 @@ var _hmt = _hmt || [];
     <header>
       
         <div class="icon"></div>
-        <time datetime="2014-10-28T16:03:29.000Z"><a href="/2014/10/29/图像格式详解/">2014-10-29</a></time>
+        <time datetime="2014-11-03T06:25:55.000Z"><a href="/2014/11/03/meta详解/">2014-11-03</a></time>
       
       
   
-    <h1 class="title"><a href="/2014/10/29/图像格式详解/">web常用图像格式详解</a></h1>
+    <h1 class="title"><a href="/2014/11/03/meta详解/">meta详解一（基础篇）</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h2 id="前言">前言</h2><p>在介绍常用的图片格式之前我们先来了解一下图像的一些基本知识,我们眼睛所能识别的图像到底有啥高深的东西在里面呢？</p>
-<p><img src="http://img.web07.cn/uploads/Png/c110110/1294622042D0-163D.png" alt=""></p>
-<h2 id="基础知识简介">基础知识简介</h2><p><strong><em>色深</em></strong>（Color Depth）亦可称为色位深度，是用 bit 数来表示数码影像色彩数目的单位。bit 是计算机计算的二进制单位（或位），即计算机中可以处理的最基本数据或讯息。色深用 2 的幂指数来表示，bit 数愈高，色深值便愈高，影像所能表现的色彩也愈多。</p>
-<p>1 bit 的影像即 2 的 1 次方 (= 2) ，只能表现黑与白两种颜色。2 bit 的影像，则是 2 的平方 (= 4)，可以表现 4 种颜色，所以除了黑白之外，还可以表现它们之间的两种灰调。而 3 bit 的影像，就是 2 的 3 次方 (= 8)，表示在一幅黑白或灰阶的照片中，可以表现出包括黑白在内的 8 种色彩。</p>
-<p>根据以上计算方法， 24 bit 的影像即可显示 16,777,216 种色彩，十分接近肉眼所能分辨的颜色，所以被称为真色彩 (True color)。而且，24 bit 色深已成为现时彩色扫描仪的最基本要求，最高的更已达至 36 bit 或 48 bit 。</p>
-<p><strong><em>位图图像（bitmap）</em></strong>, 亦称为点阵图像或绘制图像，是由称作像素（图片元素）的单个点组成的。这些点可以进行不同的排列和染色以构成图样。当放大位图时，可以看见赖以构成整个图像的无数单个方块。扩大位图尺寸的效果是增大单个像素，从而使线条和形状显得参差不齐。然而，如果从稍远的位置观看它，位图图像的颜色和形状又显得是连续的。常用的位图处理软件是Photoshop。</p>
-<p><strong><em>灰度图像</em></strong>：一幅完整的图像，是由红色、绿色、蓝色三个通道组成的。红色、绿色、蓝色三个通道的缩览图都是以灰度显示的。用不同的灰度色阶来表示“ 红，绿，蓝”在图像中的比重。通道中的纯白，代表了该色光在此处为最高亮度，亮度级别是255。<br>通道是整个Photoshop显示图像的基础。色彩的变动，实际上就是间接在对通道灰度图进行调整。通道是Photoshop处理图像的核心部分，所有的色彩调整工具都是围绕在这个核心周围使用的。<br>在计算机领域中，这类图像通常显示为从最暗黑色到最亮的白色的灰度，尽管理论上这个采样可以任何颜色的不同深浅，甚至可以是不同亮度上的不同颜色。灰度图像与黑白图像不同，在计算机图像领域中黑白图像只有黑色与白色两种颜色；灰度图像在黑色与白色之间还有许多级的颜色深度。但是，在数字图像领域之外，“黑白图像”也表示“灰度图像”，例如灰度的照片通常叫做“黑白照片”。在一些关于数字图像的文章中单色图像等同于灰度图像，在另外一些文章中又等同于黑白图像。</p>
-<p><strong><em>α通道(Alpha Channel)</em></strong>在电脑图形中，每个象素都包含三个色彩信息通道—红、绿、蓝，在24位的图形中，每个通道又包含了8位色彩深度。如果图形卡具有32位总线，附加的8位信号就被用来保存不可见的透明度信号以方便处理用，这就是Alpha通道。白色的alpha象素用于定义不透明的彩色象素，而黑色的alpha象素用于定义透明象素，黑白之间的灰阶用来定义半透明象素。 (在24位真彩色的基础上，增加了8位的Alpha数值来描述物体的透明程度)　</p>
-<p>因此，Alpha通道,除RGB或CMYK以外的8位的通道,使用Alpha通道可使图像由不透明渐变到透明。</p>
-<h2 id="web常用格式">web常用格式</h2><h3 id="Jpg/Jpeg">Jpg/Jpeg</h3><p><strong><em>Jpg/Jpeg(Joint Photographic Expert Group)</em></strong> 是一种有损压缩图像格式，是24位的图像文件格式。通过损失极少的分辨率，可以将图像所需存储量减少至原大小的10%。由于其高效的压缩效率和标准化要求，目前已广泛用于彩色传真、静止图像、电话会议、印刷及新闻图片的传送上。但那些被删除的资料无法在解压时还原，所以<em> .jpg/</em>.jpeg文件并不适合放大观看，输出成印刷品时品质也会受到影响。不过，普通用户不必担心，因为<em>.jpg/</em>.jpeg的压缩算法十分先进，它对图形图像的损失影响不是很大，一幅16M（24位）的<em>.jpg/</em>.jpeg图像看上去与照片没有多大差别，非专业人士甚至无法分辨。同样一幅画面，用<em>.jpg/</em>.jpeg格式储存的文件是其他类型图形文件的1/10～1/20。一般情况下，<em>.jpg/</em>.jpeg文件只有几十KB，而色彩数最高可达到24位，所以它被广泛运用在Internet上，以节约宝贵的网络传输资源。同样，为了在一张光盘上储存更多的图形图像，CD出版商也乐意采用jpg/jpeg格式。</p>
-<p><img src="http://wenwen.soso.com/p/20110214/20110214210327-1089809260.jpg" alt=""></p>
-<p>如同上面这张色彩鲜艳的图片其实才21.8 KB大。</p>
-<p><strong><em>注意：jpg/Jpeg不支持任何形式的透明度，而且压缩损失掉的清晰度无法还原。</em></strong></p>
-<h3 id="GIF">GIF</h3><p><strong><em>GIF(Graphics Interchange Format)</em></strong>它采用无损压缩技术，只要图像不多于256色，则可既减少文件的大小，又保持成像的质量。然而，256色的限制大大局限了GIF文件的应用范围，如彩色相机等。另一方面，在高彩图片上有着不俗表现的JPG格式却在简单的折线上效果难以差强人意。因此GIF格式普遍适用于图表，按钮等等只需少量颜色的图像（如黑白照片）。</p>
-<p><img src="http://bq.caihong.com/meinv_new/7FC3FB3B116DAE84CBE894B937249A62.GIF" alt=""></p>
-<p>gif可以支持动态图，如同上面那位美眉在干嘛我其实一直不清楚。。。</p>
-<p><strong><em>注意: gif图像只支持1位的透明度，即要么完全透明，要么完全不透明。并且可以支持动态图片</em></strong></p>
-<h3 id="png">png</h3><p><strong><em>PNG(Portable Network Graphic Format，PNG)</em></strong>，是一种位图文件(bitmap file)存储格式，读成“ping”。PNG用来存储灰度图像时，灰度图像的深度可多到16位，存储彩色图像时，彩色图像的深度可多到48位，并且还可存储多到16位的α通道数据。PNG使用从LZ77派生的无损数据压缩算法，一般应用于JAVA程序中，或网页或S60程序中是因为它压缩比高，生成文件容量小。特性有：无损压缩，<strong><em>索引彩色模式</em></strong>,更优化的网络传输显示,支持透明效果。</p>
-<p>PNG格式有8位、24位、32位三种形式，其中8位PNG支持两种不同的透明形式（索引透明和alpha透明），24位PNG不支持透明，32位PNG在24位基础上增加了8位透明通道，因此可展现256级透明程度。</p>
-<p><img src="http://www.kutx.cn/xiaotupian/icons/png/200712/20071206230031404.png" alt=""></p>
-<p>上面这张图其实是一个矩形的图，其他部分都是透明的。</p>
-<h3 id="WEBP">WEBP</h3><p><strong><em>WebP</em></strong>格式，谷歌（google）开发的一种旨在加快图片加载速度的图片格式。图片压缩体积大约只有JPEG的2/3，并能节省大量的服务器带宽资源和数据空间。Facebook Ebay等知名网站已经开始测试并使用WebP格式。</p>
+        <h2 id="概述">概述</h2><p>META标签是HTML语言HEAD区的一个辅助性标签，它位于HTML文档头部的HEAD标记和TITLE标记之间，它提供用户不可见的信息。meta标签通常用来为搜索引擎robots定义页面主题，或者是定义用户浏览器上的cookie；它可以用于鉴别作者，设定页面格式，标注内容提要和关键字；还可以设置页面使其可以根据你定义的时间间隔刷新自己,以及设置RASC内容等级，等等。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">属性</th>
+<th style="text-align:center">值</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">content(必须)</td>
+<td style="text-align:center">用户自定义</td>
+<td style="text-align:center">定义与 http-equiv 或 name 属性相关的元信息</td>
+</tr>
+<tr>
+<td style="text-align:center">http-equiv</td>
+<td style="text-align:center">content-type<br>expires<br>refresh<br>set-cookie</td>
+<td style="text-align:center">把 content 属性关联到 HTTP 头部。</td>
+</tr>
+<tr>
+<td style="text-align:center">scheme</td>
+<td style="text-align:center">用户自定义</td>
+<td style="text-align:center">定义用于翻译 content 属性值的格式。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="详细介绍">详细介绍</h2><h3 id="HTTP-EQUIV">HTTP-EQUIV</h3><p>HTTP-EQUIV类似于HTTP的头部协议，它回应给浏览器一些有用的信息，以帮助正确和精确地显示网页内容。常用的HTTP-EQUIV类型有：</p>
+<h4 id="1-_Content-Type和Content-Language_(显示字符集的设定)"><strong><em>1. Content-Type和Content-Language (显示字符集的设定)</em></strong></h4><p>说明:设定页面使用的字符集，用以说明主页制作所使用的文字已经语言，浏览器会根据此来调用相应的字符集显示page内容。<br>用法: </p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Meta <span class="variable">http-equiv=</span><span class="string">"Content-Type"</span> <span class="variable">Content=</span><span class="string">"text/html; Charset=gb2312"</span>&gt;</span><br><span class="line">&lt;Meta <span class="variable">http-equiv=</span><span class="string">"Content-Language"</span> <span class="variable">Content=</span><span class="string">"zh-CN"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>　　 　　<br>注意：　该META标签定义了HTML页面所使用的字符集为GB2132，就是国标汉字码。如果将其中的“charset=GB2312”替换成“BIG5”，则该页面所用的字符集就是繁体中文Big5码。当你浏览一些国外的站点时，IE浏览器会提示你要正确显示该页面需要下载xx语支持。这个功能就是通过读取HTML页面META标签的Content-Type属性而得知需要使用哪种字符集显示该页面的。如果系统里没有装相应的字符集，则IE就提示下载。其他的语言也对应不同的charset，比如日文的字符集是“iso-2022-jp ”，韩文的是“ks_c_5601”。<br>　　　　　　<br>　　Content-Type的Content还可以是：text/xml等文档类型;<br>　　<br>　　Charset选项：ISO-8859-1(英文)、BIG5、UTF-8、SHIFT-Jis、Euc、Koi8-2、us-ascii, x-mac-roman, iso-8859-2, x-mac-ce, iso-2022-jp, x-sjis, x-euc-jp,euc-kr, iso-2022-kr, gb2312, gb_2312-80, x-euc-tw, x-cns11643-1,x-cns11643-2等字符集；Content-Language的Content还可以是：EN、FR等语言代码。
+　　
+　　</p>
+<h4 id="2-_Refresh_(刷新)"><strong><em>2. Refresh (刷新)</em></strong></h4><p>说明：让网页多长时间（秒）刷新自己，或在多长时间后让网页自动链接到其它网页。</p>
+<p>用法：<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Meta <span class="variable">http-equiv=</span><span class="string">"Refresh"</span> <span class="variable">Content=</span><span class="string">"30"</span>&gt;</span><br><span class="line">&lt;Meta <span class="variable">http-equiv=</span><span class="string">"Refresh"</span> <span class="variable">Content=</span><span class="string">"5; Url=http://www.baidu.com"</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>注意：其中的5是指停留5秒钟后自动刷新到URL网址。</p>
+<h4 id="3-_Expires_(期限)"><strong><em>3. Expires (期限)</em></strong></h4><p>说明：指定网页在缓存中的过期时间，一旦网页过期，必须到服务器上重新调阅。</p>
+<p>用法：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Meta <span class="variable">http-equiv=</span><span class="string">"Expires"</span> <span class="variable">Content=</span><span class="string">"0"</span>&gt;</span><br><span class="line">&lt;Meta <span class="variable">http-equiv=</span><span class="string">"Expires"</span> <span class="variable">Content=</span><span class="string">"Wed, 26 Feb 1997 08:21:57 GMT"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>注意：必须使用GMT的时间格式，或直接设为0(数字表示多少时间后过期)。
+　</p>
+<h4 id="4-_Pragma_(cach模式)"><strong><em>4. Pragma (cach模式)</em></strong></h4><p>说明：禁止浏览器从本地机的缓存中调阅页面内容。</p>
+<p>用法：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Meta <span class="variable">http-equiv=</span><span class="string">"Pragma"</span> <span class="variable">Content=</span><span class="string">"No-cach"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>注意：网页不保存在缓存中，每次访问都刷新页面。这样设定，访问者将无法脱机浏览</p>
+<h4 id="5-_Set-Cookie_(cookie设定)"><strong><em>5. Set-Cookie (cookie设定)</em></strong></h4><p>说明：浏览器访问某个页面时会将它存在缓存中，下次再次访问时就可从缓存中读取，以提高速度。当你希望访问者每次都刷新你广告的图标，或每次都刷新你的计数器，就要禁用缓存了。通常HTML文件没有必要禁用缓存，对于ASP等页面，就可以使用禁用缓存，因为每次看到的页面都是在服务器动态生成的，缓存就失去意义。如果网页过期，那么存盘的cookie将被删除。</p>
+<p>用法:</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Meta <span class="variable">http-equiv=</span><span class="string">"Set-Cookie"</span> <span class="variable">Content=</span><span class="string">"cookievalue=xxx; expires=Wednesday,21-Oct-98 16:14:21 GMT; path=/"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>注意：必须使用GMT的时间格式。</p>
+<h4 id="6-_Window-target_(显示窗口的设定)"><strong><em>6. Window-target (显示窗口的设定)</em></strong></h4><p>说明：强制页面在当前窗口以独立页面显示。</p>
+<p>用法：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Meta <span class="variable">http-equiv=</span><span class="string">"Window-target"</span> <span class="variable">Content=</span><span class="string">"_top"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>注意：这个属性是用来防止别人在框架里调用你的页面。Content选项：_blank、_top、_self、_parent。</p>
+<h3 id="NAME变量">NAME变量</h3><p>name是描述网页的，对应于Content（网页内容），以便于搜索引擎机器人查找、分类（目前几乎所有的搜索引擎都使用网上机器人自动查找meta值来给网页分类）。</p>
+<p>name的value值（name=””）指定所提供信息的类型。有些值是已经定义好的。例如description(说明)、keyword(关键字)、refresh(刷新)等。还可以指定其他任意值。</p>
+<h4 id="1-Keywords_(关键字)"><strong><em>1.Keywords (关键字)</em></strong></h4><p>说明：为搜索引擎提供的关键字列表</p>
+<p>用法：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Meta <span class="variable">name=</span><span class="string">"Keywords"</span> <span class="variable">Content=</span><span class="string">"关键词1,关键词2，关键词3,关键词4,..."</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>注意：各关键词间用英文逗号“,”隔开。META的通常用处是指定搜索引擎用来提高搜索质量的关键词。当数个META元素提供文档语言从属信息时，搜索引擎会使用lang特性来过滤并通过用户的语言优先参照来显示搜索结果。例如：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Meta <span class="variable">name=</span><span class="string">"Kyewords"</span> <span class="variable">Lang=</span><span class="string">"EN"</span> <span class="variable">Content=</span><span class="string">"vacation,greece,sunshine"</span>&gt;</span><br><span class="line">&lt;Meta <span class="variable">name=</span><span class="string">"Kyewords"</span> <span class="variable">Lang=</span><span class="string">"FR"</span> <span class="variable">Content=</span><span class="string">"vacances,grè:ce,soleil"</span>&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="2-_Description_(简介)"><strong><em>2. Description (简介)</em></strong></h4><p>说明：Description用来告诉搜索引擎你的网站主要内容。</p>
+<p>用法：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Meta <span class="variable">name=</span><span class="string">"Description"</span> <span class="variable">Content=</span><span class="string">"你网页的简述"</span>&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="3-_Robots_(机器人向导)"><strong><em>3. Robots (机器人向导)</em></strong></h4><p>说明：Robots用来告诉搜索机器人哪些页面需要索引，哪些页面不需要索引。Content的参数有all、none、index、noindex、follow、nofollow。默认是all。</p>
+<p>用法：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Meta <span class="variable">name=</span><span class="string">"Robots"</span> <span class="variable">Content=</span><span class="string">"All|None|Index|Noindex|Follow|Nofollow"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>注意：许多搜索引擎都通过放出robot/spider搜索来登录网站，这些robot/spider就要用到meta元素的一些特性来决定怎样登录。</p>
+<ul>
+<li>all：文件将被检索，且页面上的链接可以被查询；</li>
+<li>none：文件将不被检索，且页面上的链接不可以被查询；(和 “noindex, no follow” 起相同作用)</li>
+<li>index：文件将被检索；（让robot/spider登录）</li>
+<li>follow：页面上的链接可以被查询；</li>
+<li>noindex：文件将不被检索，但页面上的链接可以被查询；(不让robot/spider登录)</li>
+<li>nofollow：文件将不被检索，页面上的链接可以被查询。(不让robot/spider顺着此页的连接往下探找)</li>
+</ul>
+<h4 id="4-_Author_(作者),Copyright_(版权)等">4. Author (作者),Copyright (版权)等</h4><p>这个用法就不详细探讨了。。。。</p>
+<h3 id="Head中的其它一些用法">Head中的其它一些用法</h3><h4 id="1-scheme_(方案)">1.scheme (方案)</h4><p>说明：解析name的方案(一直未使用过，详细用法不明。。)</p>
+<p>用法：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">scheme=</span><span class="string">"ISBN"</span> <span class="variable">name=</span><span class="string">"identifier"</span> <span class="variable">content=</span><span class="string">"0-14-043205-1"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="2-_Link_(链接)">2. Link (链接)</h4><p>说明：链接到文件</p>
+<p>用法：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Link <span class="variable">href=</span><span class="string">"haoge.ico"</span> <span class="variable">rel=</span><span class="string">"SIcon"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>注意：很多网站如果你把它保存在收件夹中后，会发现它连带着一个小图标，如果再次点击进入之后还会发现地址栏中也有个小图标。现在只要在你的页头加上这段话，就能轻松实现这一功能。LINK 用来将目前文件与其它 URL 作连结，但不会有连结按钮，用於 HEAD 标记间。</p>
+<h4 id="3-_Base_(基链接)">3. Base (基链接)</h4><p>说明：插入网页基链接属性</p>
+<p>用法：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Base <span class="variable">href=</span><span class="string">"http://www.baidu.com/"</span> <span class="variable">target=</span><span class="string">"_blank"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>注意：你网页上的所有相对路径在链接时都将在前面加上 <strong><em><a href="http://www.baidu.com/" target="_blank" rel="external">http://www.baidu.com/</a></em></strong> 其中target=”_blank”是链接文件在新的窗口中打开，你可以做其他设置。将“_blank”改为“_parent”是链接文件将在当前窗口的父级窗口中打开；改为“_self”链接文件在当前窗口（帧）中打开；改为“_top”链接文件全屏显示。</p>
 
       
     </div>
@@ -113,29 +178,31 @@ var _hmt = _hmt || [];
 
 <nav id="pagination">
   
-    <a href="/page/12/" class="alignleft prev">上一頁</a>
+    <a href="/page/12/" class="alignleft prev">上一页</a>
   
   
-    <a href="/page/14/" class="alignright next">下一頁</a>
+    <a href="/page/14/" class="alignright next">下一页</a>
   
   <div class="clearfix"></div>
 </nav></div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="search" name="q" results="0" placeholder="搜索">
     <input type="hidden" name="q" value="site:yoursite.com">
   </form>
 </div>
 
   
 <div class="widget tag">
-  <h3 class="title">分類</h3>
+  <h3 class="title">分类</h3>
   <ul class="entry">
   
     <li><a href="/categories/git/">git</a><small>1</small></li>
   
     <li><a href="/categories/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/categories/node/">node</a><small>1</small></li>
   
     <li><a href="/categories/web前端/">web前端</a><small>13</small></li>
   

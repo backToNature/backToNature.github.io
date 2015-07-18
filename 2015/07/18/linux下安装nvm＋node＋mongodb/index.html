@@ -1,0 +1,249 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>linux下安装nvm＋node＋mongodb | 问水的博客</title>
+  <meta name="author" content="问水">
+  
+  <meta name="description" content="安装nvm（管理nodejs版本的工具）
+下载nvm:
+ $ git clone git@github.com:creationix/nvm.git ~
+
+配置终端启动时自动执行 source ~/nvm/nvm.sh,在~/.bashrc, ~/.bash_profile, ~/.profile或">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="linux下安装nvm＋node＋mongodb"/>
+  <meta property="og:site_name" content="问水的博客"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="问水的博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+  <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?b305585698a65577c37a1c283348d929";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">问水的博客</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">文章</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-07-18T10:45:26.000Z"><a href="/2015/07/18/linux下安装nvm＋node＋mongodb/">2015-07-18</a></time>
+      
+      
+  
+    <h1 class="title">linux下安装nvm＋node＋mongodb</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="安装nvm（管理nodejs版本的工具）">安装nvm（管理nodejs版本的工具）</h2><ol>
+<li><p>下载nvm:</p>
+<p> <code>$ git clone git@github.com:creationix/nvm.git ~</code></p>
+</li>
+<li><p>配置终端启动时自动执行 source ~/nvm/nvm.sh,在~/.bashrc, ~/.bash_profile, ~/.profile或者~/.zshrc文件添加如下内容</p>
+<p> source ~/nvm/nvm.sh</p>
+</li>
+<li><p>重新打开终端，输入nvm可以看到命令提示</p>
+</li>
+</ol>
+<h2 id="安装mongodb">安装mongodb</h2><ol>
+<li><p>先到<a href="https://www.mongodb.org/" target="_blank" rel="external">mongodb官网</a>下载对应系统的安装包,再通过如下命令解压安装包</p>
+ <figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>tar zxf 你的安装包文件</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>虽然mongodb不需要繁琐配置，但是我们依然放到惯例的/usr/local目录下，通过以下命令移动</p>
+ <figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>mv mongodb/* <span class="regexp">/usr/local</span><span class="regexp">/mongodb</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在/usr/local/mongdb/目录下，建立data文件夹与log文件夹，用来存数据与日志，在目录下输入以下命令</p>
+ <figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">mkdir</span> data</span><br><span class="line">$ <span class="keyword">mkdir</span> <span class="keyword">log</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在目录中的bin文件夹下建个mongodb.conf配置文件，用来配置mongodb,内容如下</p>
+ <figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">port<span class="subst">=</span><span class="number">27017</span></span><br><span class="line">dbpath<span class="subst">=</span>/usr/<span class="built_in">local</span>/mongodb/<span class="built_in">data</span><span class="subst">/</span></span><br><span class="line">logpath<span class="subst">=</span>/usr/<span class="built_in">local</span>/mongodb/<span class="keyword">log</span>/mongodb<span class="built_in">.</span><span class="keyword">log</span> </span><br><span class="line">fork <span class="subst">=</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p> fork:后台守护进程模式运行</p>
+</li>
+<li><p>启动mongodb</p>
+ <figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">$</span>  <span class="string">.</span><span class="comment">/mongod</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">config</span> <span class="comment">mongodb</span><span class="string">.</span><span class="comment">conf</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">nojournal</span></span><br></pre></td></tr></table></figure>
+<p> 成功启动如下:</p>
+ <figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">about <span class="keyword">to</span> fork child <span class="keyword">process</span>, waiting <span class="keyword">until</span> server <span class="keyword">is</span> ready <span class="keyword">for</span> connections.</span><br><span class="line">forked <span class="keyword">process</span>: <span class="number">13216</span></span><br><span class="line">child <span class="keyword">process</span> started successfully, parent exiting</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入mongo命令控制台</p>
+<p> 在bin目录中./mongo就可以进入mongo命令控制台了。想结束mongodb，可以killall mongod,或者./mongo在控制台中，use admin  ,然后db.shutdownServer()来结束mongodb服务器。直接kill -9会使mongo非正常退出，可能会造成数据损坏问题。</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/node/">node</a>
+  </div>
+
+        
+        <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
+        <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<nav id="pagination" >
+    
+    
+    <a href="/2015/04/21/百度地图开发笔记(一)/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+<section id="comment">
+
+<!--兼容版，可保证页面完全兼容-->
+<div id="SOHUCS"></div>
+<script>
+  (function(){
+    var appid = 'cyrwYj23r',
+    conf = 'prod_5ee226efc33ddcf56e81b59a7cca10e6';
+    var doc = document,
+    s = doc.createElement('script'),
+    h = doc.getElementsByTagName('head')[0] || doc.head || doc.documentElement;
+    s.type = 'text/javascript';
+    s.charset = 'utf-8';
+    s.src =  'http://assets.changyan.sohu.com/upload/changyan.js?conf='+ conf +'&appid=' + appid;
+    h.insertBefore(s,h.firstChild);
+  })()
+</script>
+
+
+  <h1 class="title">留言</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2015/07/18/linux下安装nvm＋node＋mongodb/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/categories/node/">node</a><small>1</small></li>
+  
+    <li><a href="/categories/web前端/">web前端</a><small>13</small></li>
+  
+    <li><a href="/categories/图形图像/">图形图像</a><small>1</small></li>
+  
+    <li><a href="/categories/搜索引擎/">搜索引擎</a><small>1</small></li>
+  
+    <li><a href="/categories/用户体验/">用户体验</a><small>1</small></li>
+  
+    <li><a href="/categories/系统搭建/">系统搭建</a><small>1</small></li>
+  
+    <li><a href="/categories/网络协议与dns/">网络协议与dns</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="http://backtonature.github.io/" title="问水的博客">问水</a></li>
+</ul>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 问水
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+  <a href="https://github.com/backToNature"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/c6286ade715e9bea433b4705870de482a654f78a/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png"></a>
+</body>
+</html>
