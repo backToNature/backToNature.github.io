@@ -1,0 +1,184 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 5 頁 | 问水的博客</title>
+  <meta name="author" content="问水">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="问水的博客"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="问水的博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+  <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?b305585698a65577c37a1c283348d929";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">问水的博客</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">文章</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-01-04T09:45:26.000Z"><a href="/2015/01/04/git暂存区/">2015-01-04</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/01/04/git暂存区/">git暂存区</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="理解Git暂存区">理解Git暂存区</h2><p>暂存区，又被称为(stage或者index)。在我们的仓库里有个.git目录(是个隐藏目录)，我们可以对这个文件做一个实验。</p>
+<ol>
+<li><p>首先我们先随便修改我们仓库里的一个文件a.txt，再执行git status,然后再执行ls -l .git/index。</p>
+ <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">$ <span class="keyword">ls</span> -<span class="keyword">l</span> .git/<span class="literal">index</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这时我们可以看到index文件的修改时间为当前时间，然后执行git checkout命令(撤销刚才的修改)</p>
+ <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout <span class="comment">-- a.txt</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>再次执行git status命令，然后再执行ls -l .git/index。</p>
+ <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">$ <span class="keyword">ls</span> -<span class="keyword">l</span> .git/<span class="literal">index</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这时候我们看到时间戳又变了！</p>
+<p>这个试验说明当执行git status命令(或者git diff命令)的时候，先依据.git/index文件中记录的时间戳，长度等信息判断工作区文件是否改变，如果工作区文件的时间戳改变了，说明文件内容也很可能改变，这时候就需要打开文件，读取文件的内容，与更改前的原始文件作比较。如果没有改变，则将该文件新的时间戳记录到.git/index文件中。</p>
+<p>文件.git/index实际上是一个包含文件索引的目录树，像是一个虚拟的空间，再这个虚拟空间的目录树中，记录了文件名和文件的状态信息(时间戳文件长度等)。文件的内容确并没有存储在里面，而是保存在git对象库.git/objects目录中，我们可以用如下的图来描述这么一个关系。</p>
+<p><img src="http://ww3.sinaimg.cn/large/005yyi5Jjw1enxnczsoh7j30lj0arabs.jpg" alt=""></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+<nav id="pagination">
+  
+    <a href="/page/4/" class="alignleft prev">上一頁</a>
+  
+  
+    <a href="/page/6/" class="alignright next">下一頁</a>
+  
+  <div class="clearfix"></div>
+</nav></div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分類</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/categories/web前端/">web前端</a><small>13</small></li>
+  
+    <li><a href="/categories/图形图像/">图形图像</a><small>1</small></li>
+  
+    <li><a href="/categories/搜索引擎/">搜索引擎</a><small>1</small></li>
+  
+    <li><a href="/categories/用户体验/">用户体验</a><small>1</small></li>
+  
+    <li><a href="/categories/系统搭建/">系统搭建</a><small>1</small></li>
+  
+    <li><a href="/categories/网络协议与dns/">网络协议与dns</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="http://backtonature.github.io/" title="问水的博客">问水</a></li>
+</ul>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 问水
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+  <a href="https://github.com/backToNature"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/c6286ade715e9bea433b4705870de482a654f78a/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png"></a>
+</body>
+</html>

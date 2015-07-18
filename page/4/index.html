@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 4 頁 | 问水的博客</title>
+  <meta name="author" content="问水">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="问水的博客"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="问水的博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+  <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?b305585698a65577c37a1c283348d929";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">问水的博客</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">文章</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-01-05T01:45:26.000Z"><a href="/2015/01/05/iframe跨域通信/">2015-01-05</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/01/05/iframe跨域通信/">iframe跨域通信方案</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="概述">概述</h2><p>JavaScript出于安全方面的考虑，不允许跨域调用其他页面的对象。但在安全限制的同时也给注入iframe或是ajax应用上带来了不少麻烦。这里把涉及到跨域的一些问题简单地整理一下：</p>
+<p>首先什么是跨域，简单地理解就是因为JavaScript同源策略的限制，a.com 域名下的js无法操作b.com或是c.a.com域名下的对象。更详细的说明可以看下表：</p>
+<p><img src="http://targetkiller.net/wp-content/uploads/2014/02/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7-2014-02-23-%E4%B8%8A%E5%8D%885.03.37-1024x577.png" alt=""></p>
+<p>对于主域相同子域不同的通信方法这里不一一列举了，这里主要讲解一下跨主域的通信问题。</p>
+<h2 id="postMessage方法">postMessage方法</h2><p>window.postMessage 是一个用于安全的使用跨源通信的方法。通常，不同页面上的脚本只在这种情况下被允许互相访问，当且仅当执行它们的页面所处的位置使用相同的协议（通常都是 http）、相同的端口（http默认使用80端口）和相同的主机（两个页面的 document.domain 的值相同）。 在正确使用的情况下，window.postMessage 提供了一个受控的机制来安全地绕过这一限制。</p>
+<h3 id="兼容性">兼容性</h3><p><a href="http://caniuse.com/#search=postMessage" target="_blank" rel="external">http://caniuse.com/#search=postMessage</a></p>
+<h3 id="具体用法">具体用法</h3><ul>
+<li>发送消息：destination.postMessage(message, targetOrigin);<ul>
+<li>destination: 目标窗口</li>
+<li>message:发送的消息</li>
+<li>targetOrigin: 定义发送消息的范围</li>
+</ul>
+</li>
+<li>监听接受消息：window.addEventListener(‘message’,callback,false);</li>
+</ul>
+<h3 id="已知问题">已知问题</h3><ol>
+<li>部分版本IE8/9浏览器只支持iframe通信，不支持tabs之间通信。</li>
+<li>IE8/9不能传输对象，只能传输string。</li>
+</ol>
+<h3 id="参考资料">参考资料</h3><ul>
+<li>mozlia官方文档：<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window.postMessage" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/API/Window.postMessage</a></li>
+<li>IE官方文档:<a href="https://status.modern.ie/postmessage" target="_blank" rel="external">https://status.modern.ie/postmessage</a></li>
+<li>webplatform文档:<a href="https://docs.webplatform.org/wiki/apis/web-messaging/MessagePort/postMessage" target="_blank" rel="external">https://docs.webplatform.org/wiki/apis/web-messaging/MessagePort/postMessage</a></li>
+<li>HTML5官方文档:<a href="https://html.spec.whatwg.org/multipage/comms.html#web-messaging" target="_blank" rel="external">https://html.spec.whatwg.org/multipage/comms.html#web-messaging</a></li>
+</ul>
+<h2 id="window-navigator(适用于ie6/7)">window.navigator(适用于ie6/7)</h2><p>ie6/7有个漏洞,父窗口与所有的iframe共享window.navigator对象，可以利用这个漏洞，由于ie6/7不支持postMessage,所以可以利用这个漏洞对ie6/7做兼容跨域通信支持。</p>
+<h3 id="具体用法-1">具体用法</h3><p><img src="http://ww2.sinaimg.cn/large/005yyi5Jjw1enyem8ddw7j30my0pcdkb.jpg" alt=""></p>
+<p>途中A过程和B过程都是初始化监听事件，类似于onmessage事件。只不过实现方法不一样而已。</p>
+<p>按执行顺序来描述的话，如下：</p>
+<ul>
+<li>B: 父窗口向window.navigator添加一个监听函数，并打上父窗口的戳。</li>
+<li>A: 子窗口向window.navigator添加一个监听函数，并打上子窗口的戳。</li>
+</ul>
+<ul>
+<li>C: 父窗口执行post的时候，调用原先子窗口添加在navigator里的监听函数，并将要传输的数据作为函数参数传入。</li>
+<li>D: 子窗口执行post的时候，调用原先父窗口添加在navigator里的监听函数，并将要传输的数据作为函数参数传入。</li>
+</ul>
+<h3 id="注意：子窗口和父窗口要找到对方的监听函数必须得事先知道对方在添加监听函数的时候打上的戳"><strong><em>注意：子窗口和父窗口要找到对方的监听函数必须得事先知道对方在添加监听函数的时候打上的戳</em></strong></h3>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+<nav id="pagination">
+  
+    <a href="/page/3/" class="alignleft prev">上一頁</a>
+  
+  
+    <a href="/page/5/" class="alignright next">下一頁</a>
+  
+  <div class="clearfix"></div>
+</nav></div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分類</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/categories/web前端/">web前端</a><small>13</small></li>
+  
+    <li><a href="/categories/图形图像/">图形图像</a><small>1</small></li>
+  
+    <li><a href="/categories/搜索引擎/">搜索引擎</a><small>1</small></li>
+  
+    <li><a href="/categories/用户体验/">用户体验</a><small>1</small></li>
+  
+    <li><a href="/categories/系统搭建/">系统搭建</a><small>1</small></li>
+  
+    <li><a href="/categories/网络协议与dns/">网络协议与dns</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="http://backtonature.github.io/" title="问水的博客">问水</a></li>
+</ul>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 问水
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+  <a href="https://github.com/backToNature"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/c6286ade715e9bea433b4705870de482a654f78a/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png"></a>
+</body>
+</html>

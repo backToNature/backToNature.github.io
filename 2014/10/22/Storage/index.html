@@ -1,0 +1,224 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Storage | 问水的博客</title>
+  <meta name="author" content="问水">
+  
+  <meta name="description" content="概述DOM存储是一套在Web Applications 1.0 规范中首次引入的与存储相关的特性的总称, 现在已经分离出来,单独发展成为独立的W3C Web存储规范. DOM存储被设计为用来提供一个更大存储量,更安全,更便捷的存储方法,从而可以代替掉将一些不需要让服务器知道的信息存储到cookies">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Storage"/>
+  <meta property="og:site_name" content="问水的博客"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="问水的博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+  <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?b305585698a65577c37a1c283348d929";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">问水的博客</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">文章</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-10-22T09:44:02.000Z"><a href="/2014/10/22/Storage/">2014-10-22</a></time>
+      
+      
+  
+    <h1 class="title">Storage</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="概述">概述</h2><p>DOM存储是一套在Web Applications 1.0 规范中首次引入的与存储相关的特性的总称, 现在已经分离出来,单独发展成为独立的W3C Web存储规范. DOM存储被设计为用来提供一个更大存储量,更安全,更便捷的存储方法,从而可以代替掉将一些不需要让服务器知道的信息存储到cookies里的这种传统方法.该特性在Firefox 2 和 Safari 4中首次引入。</p>
+<h2 id="参考">参考</h2><p>以下所提到的对象都是全局对象，作为 window 对象 的属性存在。这意味着可以以 sessionStorage 或者 window.sessionStorage 的形式访问这些对象。(这点很重要，因为可以使用iframe来存储、访问除了直接包含在页面的数据之外的附加数据。)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意：需要时刻注意的一点是，所有数据在被保存到下面将要介绍的任何一个存储器之前，都将通过它的 .toString 方法被转换成字符串。所以一个普通对象将会被存储为 <span class="string">"[object Object]"</span>，而不是对象本身或者它的 <span class="built_in">JSON</span> 形式。使用浏览器自身提供的 <span class="built_in">JSON</span> 解析和序列化方法来存取对象是比较好的，也是比较常见的方法。</span><br></pre></td></tr></table></figure>
+<h2 id="sessionStorage">sessionStorage</h2><p>sessionStorage 是个全局对象，它维护着在页面会话(page session)期间有效的存储空间。只要浏览器开着，页面会话周期就会一直持续。当页面重新载入(reload)或者被恢复(restores)时，页面会话也是一直存在的。每在新标签或者新窗口中打开一个新页面，都会初始化一个新的会话。</p>
+<h3 id="例子">例子</h3><p>自动保存一个文本域中的内容，如果浏览器被意外刷新，则恢复该文本域中的内容，所以不会丢失任何输入的数据。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 获取到我们要循环保存的文本域</span><br><span class="line"> var field = document.getElementById(<span class="string">"field"</span>);</span><br><span class="line"> // 查看是否有一个自动保存的值</span><br><span class="line"> // (只在浏览器被意外刷新时)</span><br><span class="line"> <span class="keyword">if</span> ( sessionStorage.getItem(<span class="string">"autosave"</span>)) &#123;</span><br><span class="line">    // 恢复文本域中的内容</span><br><span class="line">    field.value = sessionStorage.getItem(<span class="string">"autosave"</span>);</span><br><span class="line"> &#125;</span><br><span class="line"> // 每隔一秒检查文本域中的内容</span><br><span class="line"> <span class="built_in">set</span>Interval(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    // 并将文本域的值保存到session storage对象中</span><br><span class="line">    sessionStorage.setItem(<span class="string">"autosave"</span>, field.value);</span><br><span class="line"> &#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+<p>具体可见demo<br><a href="https://github.com/backToNature/Storage" target="_blank" rel="external">源码仓库</a></p>
+<h2 id="localStorage">localStorage</h2><p>localStorage 方法存储的数据没有时间限制。第二天、第二周或下一年之后，数据依然可用。</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意：当浏览器进入私人模式(<span class="keyword">private</span> browsing mode，Google Chrome 上对应的应该是叫隐身模式)的时候，会创建一个新的、临时的、空的数据库，用以存储本地数据(<span class="built_in">local</span> storage <span class="built_in">data</span>)。当浏览器关闭时，里面的所有数据都将被丢弃。</span><br></pre></td></tr></table></figure>
+<h3 id="兼容性">兼容性</h3><p><img src="http://img5.tuchuang.org/uploads/2014/10/Snip20141022_2.png" alt=""><br>如果要兼容不支持它的浏览器得话，可以在你编写的 JavaScript 代码的首部插入下面这段代码。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!window.localStorage) &#123;</span><br><span class="line">  Object.defineProperty(window, <span class="string">"localStorage"</span>, new (<span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">    var aKeys = [], oStorage = &#123;&#125;;</span><br><span class="line">    Object.defineProperty(oStorage, <span class="string">"getItem"</span>, &#123;</span><br><span class="line">      value: <span class="keyword">function</span> (sKey) &#123; <span class="built_in">return</span> sKey ? this[sKey] : null; &#125;,</span><br><span class="line">      writable: <span class="literal">false</span>,</span><br><span class="line">      configurable: <span class="literal">false</span>,</span><br><span class="line">      enumerable: <span class="literal">false</span></span><br><span class="line">    &#125;);</span><br><span class="line">    Object.defineProperty(oStorage, <span class="string">"key"</span>, &#123;</span><br><span class="line">      value: <span class="keyword">function</span> (nKeyId) &#123; <span class="built_in">return</span> aKeys[nKeyId]; &#125;,</span><br><span class="line">      writable: <span class="literal">false</span>,</span><br><span class="line">      configurable: <span class="literal">false</span>,</span><br><span class="line">      enumerable: <span class="literal">false</span></span><br><span class="line">    &#125;);</span><br><span class="line">    Object.defineProperty(oStorage, <span class="string">"setItem"</span>, &#123;</span><br><span class="line">      value: <span class="keyword">function</span> (sKey, sValue) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!sKey) &#123; <span class="built_in">return</span>; &#125;</span><br><span class="line">        document.cookie = escape(sKey) + <span class="string">"="</span> + escape(sValue) + <span class="string">"; path=/"</span>;</span><br><span class="line">      &#125;,</span><br><span class="line">      writable: <span class="literal">false</span>,</span><br><span class="line">      configurable: <span class="literal">false</span>,</span><br><span class="line">      enumerable: <span class="literal">false</span></span><br><span class="line">    &#125;);</span><br><span class="line">    Object.defineProperty(oStorage, <span class="string">"length"</span>, &#123;</span><br><span class="line">      get: <span class="function"><span class="title">function</span></span> () &#123; <span class="built_in">return</span> aKeys.length; &#125;,</span><br><span class="line">      configurable: <span class="literal">false</span>,</span><br><span class="line">      enumerable: <span class="literal">false</span></span><br><span class="line">    &#125;);</span><br><span class="line">    Object.defineProperty(oStorage, <span class="string">"removeItem"</span>, &#123;</span><br><span class="line">      value: <span class="keyword">function</span> (sKey) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!sKey) &#123; <span class="built_in">return</span>; &#125;</span><br><span class="line">        var sExpDate = new Date();</span><br><span class="line">        sExpDate.setDate(sExpDate.getDate() - <span class="number">1</span>);</span><br><span class="line">        document.cookie = escape(sKey) + <span class="string">"=; expires="</span> + sExpDate.toGMTString() + <span class="string">"; path=/"</span>;</span><br><span class="line">      &#125;,</span><br><span class="line">      writable: <span class="literal">false</span>,</span><br><span class="line">      configurable: <span class="literal">false</span>,</span><br><span class="line">      enumerable: <span class="literal">false</span></span><br><span class="line">    &#125;);</span><br><span class="line">    this.get = <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">      var iThisIndx;</span><br><span class="line">      <span class="keyword">for</span> (var sKey <span class="keyword">in</span> oStorage) &#123;</span><br><span class="line">        iThisIndx = aKeys.indexOf(sKey);</span><br><span class="line">        <span class="keyword">if</span> (iThisIndx === -<span class="number">1</span>) &#123; oStorage.setItem(sKey, oStorage[sKey]); &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123; aKeys.splice(iThisIndx, <span class="number">1</span>); &#125;</span><br><span class="line">        delete oStorage[sKey];</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">for</span> (aKeys; aKeys.length &gt; <span class="number">0</span>; aKeys.splice(<span class="number">0</span>, <span class="number">1</span>)) &#123; oStorage.removeItem(aKeys[<span class="number">0</span>]); &#125;</span><br><span class="line">      <span class="keyword">for</span> (var iCouple, iKey, iCouplId = <span class="number">0</span>, aCouples = document.cookie.split(/\s*;\s*/); iCouplId &lt; aCouples.length; iCouplId++) &#123;</span><br><span class="line">        iCouple = aCouples[iCouplId].split(/\s*=\s*/);</span><br><span class="line">        <span class="keyword">if</span> (iCouple.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">          oStorage[iKey = unescape(iCouple[<span class="number">0</span>])] = unescape(iCouple[<span class="number">1</span>]);</span><br><span class="line">          aKeys.push(iKey);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">return</span> oStorage;</span><br><span class="line">    &#125;;</span><br><span class="line">    this.configurable = <span class="literal">false</span>;</span><br><span class="line">    this.enumerable = <span class="literal">true</span>;</span><br><span class="line">  &#125;)());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>兼容思想是使用的cookie，虽然cookie有大小限制，但是大多数场景下不会使用cookie存储太多数据，所以还是可以使用以上方法。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/web前端/">web前端</a>
+  </div>
+
+        
+        <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
+        <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<nav id="pagination" >
+    
+    <a href="/2014/10/23/视区相关单位用法/" class="alignleft prev" >上一頁</a>
+    
+    
+    <a href="/2014/10/21/前端零基础入门/" class="alignright next" >下一頁</a>
+    
+    <div class="clearfix"></div>
+</nav>
+<section id="comment">
+
+<!--兼容版，可保证页面完全兼容-->
+<div id="SOHUCS"></div>
+<script>
+  (function(){
+    var appid = 'cyrwYj23r',
+    conf = 'prod_5ee226efc33ddcf56e81b59a7cca10e6';
+    var doc = document,
+    s = doc.createElement('script'),
+    h = doc.getElementsByTagName('head')[0] || doc.head || doc.documentElement;
+    s.type = 'text/javascript';
+    s.charset = 'utf-8';
+    s.src =  'http://assets.changyan.sohu.com/upload/changyan.js?conf='+ conf +'&appid=' + appid;
+    h.insertBefore(s,h.firstChild);
+  })()
+</script>
+
+
+  <h1 class="title">留言</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2014/10/22/Storage/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分類</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/categories/web前端/">web前端</a><small>13</small></li>
+  
+    <li><a href="/categories/图形图像/">图形图像</a><small>1</small></li>
+  
+    <li><a href="/categories/搜索引擎/">搜索引擎</a><small>1</small></li>
+  
+    <li><a href="/categories/用户体验/">用户体验</a><small>1</small></li>
+  
+    <li><a href="/categories/系统搭建/">系统搭建</a><small>1</small></li>
+  
+    <li><a href="/categories/网络协议与dns/">网络协议与dns</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="http://backtonature.github.io/" title="问水的博客">问水</a></li>
+</ul>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 问水
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+  <a href="https://github.com/backToNature"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/c6286ade715e9bea433b4705870de482a654f78a/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png"></a>
+</body>
+</html>
