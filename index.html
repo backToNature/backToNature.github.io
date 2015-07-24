@@ -72,7 +72,8 @@ var _hmt = _hmt || [];
     </header>
     <div class="entry">
       
-        <h2 id="安装nvm（管理nodejs版本的工具）">安装nvm（管理nodejs版本的工具）</h2><ol>
+        <h2 id="linux&amp;mac_os卸载nodejs">linux&amp;mac os卸载nodejs</h2><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">lsbom -f -<span class="keyword">l</span> -s -pf /<span class="keyword">var</span>/<span class="keyword">db</span>/receipts/org.nodejs.pkg.bom \</span><br><span class="line">| <span class="keyword">while</span> <span class="keyword">read</span> i; <span class="keyword">do</span></span><br><span class="line">  sudo <span class="keyword">rm</span> /usr/<span class="keyword">local</span>/<span class="label">$&#123;i&#125;</span></span><br><span class="line">done</span><br><span class="line">sudo <span class="keyword">rm</span> -rf /usr/<span class="keyword">local</span>/lib/node \</span><br><span class="line">     /usr/<span class="keyword">local</span>/lib/node_modules \</span><br><span class="line">     /<span class="keyword">var</span>/<span class="keyword">db</span>/receipts/org.nodejs.*</span><br></pre></td></tr></table></figure>
+<h2 id="安装nvm（管理nodejs版本的工具）">安装nvm（管理nodejs版本的工具）</h2><ol>
 <li><p>下载nvm:</p>
 <p> <code>$ git clone git@github.com:creationix/nvm.git ~</code></p>
 </li>
@@ -125,21 +126,21 @@ var _hmt = _hmt || [];
 <nav id="pagination">
   
   
-    <a href="/page/2/" class="alignright next">下一页</a>
+    <a href="/page/2/" class="alignright next">下一頁</a>
   
   <div class="clearfix"></div>
 </nav></div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="search" name="q" results="0" placeholder="搜尋">
     <input type="hidden" name="q" value="site:yoursite.com">
   </form>
 </div>
 
   
 <div class="widget tag">
-  <h3 class="title">分类</h3>
+  <h3 class="title">分類</h3>
   <ul class="entry">
   
     <li><a href="/categories/git/">git</a><small>1</small></li>
