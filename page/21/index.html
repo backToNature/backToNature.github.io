@@ -1,0 +1,182 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 21 页 | 简~~叶</title>
+  <meta name="author" content="简~~叶">
+  
+  <meta name="description" content="简~~叶&#39;s blog | javascript | html | css | IT">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="简~~叶"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="简~~叶" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+  <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?b305585698a65577c37a1c283348d929";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">简~~叶</a></h1>
+  <h2><a href="/">程序,生活,就是这么简单</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/archives">首页</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-09-29T07:55:24.000Z"><a href="/2014/09/29/css/">2014-09-29</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/09/29/css/">Mac OSX 10.9搭建nginx+mysql+php-fpm环境</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="安装homebrew">安装homebrew</h3><p>homebrew是mac下非常好用的包管理器，会自动安装相关的依赖包，将你从繁琐的软件依赖安装中解放出来。<br>安装homebrew也非常简单，只要在终端中输入11:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ruby <span class="operator">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)</span>"</span></span><br></pre></td></tr></table></figure>
+<p>homebrew的常用命令:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ brew update <span class="comment">#更新可安装包的最新信息，建议每次安装前都运行下</span></span><br><span class="line">$ brew search pkg_name <span class="comment">#搜索相关的包信息</span></span><br><span class="line">$ brew install pkg_name <span class="comment">#安装包</span></span><br></pre></td></tr></table></figure>
+<p>想了解更多地信息，请参看<a href="http://brew.sh/" target="_blank" rel="external">homebrew</a></p>
+<h3 id="安装nginx">安装nginx</h3><p>安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ brew search nginx</span><br><span class="line">$ brew install nginx</span><br></pre></td></tr></table></figure>
+<p>配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/etc/nginx/</span><br><span class="line">$ mkdir conf.d</span><br><span class="line">$ vim nginx.conf</span><br><span class="line">$ vim ./conf.d/default.conf</span><br></pre></td></tr></table></figure>
+<p>nginx.conf内容,</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">worker_processes</span>  <span class="number">1</span>;  </span><br><span class="line"> </span><br><span class="line"><span class="title">error_log</span>       /usr/local/var/log/nginx/error.log <span class="built_in">warn</span>;</span><br><span class="line"> </span><br><span class="line"><span class="title">pid</span>        /usr/local/var/run/nginx.pid;</span><br><span class="line"> </span><br><span class="line"><span class="title">events</span> &#123;</span><br><span class="line">    <span class="title">worker_connections</span>  <span class="number">256</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="title">http</span> &#123;</span><br><span class="line">    <span class="title">include</span>       mime.types;</span><br><span class="line">    <span class="title">default_type</span>  application/octet-stream;</span><br><span class="line"> </span><br><span class="line">    <span class="title">log_format</span>  main  <span class="string">'<span class="variable">$remote_addr</span> - <span class="variable">$remote_user</span> [<span class="variable">$time_local</span>] "<span class="variable">$request</span>" '</span></span><br><span class="line">                      <span class="string">'<span class="variable">$status</span> <span class="variable">$body_bytes_sent</span> "<span class="variable">$http_referer</span>" '</span></span><br><span class="line">                      <span class="string">'"<span class="variable">$http_user_agent</span>" "<span class="variable">$http_x_forwarded_for</span>"'</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="title">access_log</span>      /usr/local/var/log/nginx/access.log main;</span><br><span class="line">    <span class="title">port_in_redirect</span> <span class="built_in">off</span>;</span><br><span class="line">    <span class="title">sendfile</span>        <span class="built_in">on</span>; </span><br><span class="line">    <span class="title">keepalive_timeout</span>  <span class="number">65</span>; </span><br><span class="line"> </span><br><span class="line">    <span class="title">include</span> /usr/local/etc/nginx/conf.d/<span class="regexp">*.conf</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>default.conf文件内容,</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">server</span> &#123;</span><br><span class="line">    <span class="title">listen</span>       <span class="number">8080</span>;</span><br><span class="line">    <span class="title">server_name</span>  localhost;</span><br><span class="line"> </span><br><span class="line">    <span class="title">root</span> /Users/user_name/nginx_sites/; <span class="comment"># 该项要修改为你准备存放相关网页的路径</span></span><br><span class="line"> </span><br><span class="line">    <span class="title">location</span> / &#123; </span><br><span class="line">        <span class="title">index</span> index.php;</span><br><span class="line">        <span class="title">autoindex</span> <span class="built_in">on</span>; </span><br><span class="line">    &#125;   </span><br><span class="line"> </span><br><span class="line">    <span class="comment">#proxy the php scripts to php-fpm  </span></span><br><span class="line">    <span class="title">location</span> <span class="regexp">~ \.php$</span> &#123;</span><br><span class="line">        <span class="title">include</span> /usr/local/etc/nginx/fastcgi.conf;</span><br><span class="line">        <span class="title">fastcgi_intercept_errors</span> <span class="built_in">on</span>; </span><br><span class="line">        <span class="title">fastcgi_pass</span>   <span class="number">127.0.0.1:9000</span>; </span><br><span class="line">    &#125;   </span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="安装php-fpm">安装php-fpm</h3><p>Mac OSX 10.9的系统自带了PHP、php-fpm，省去了安装php-fpm的麻烦。<br><br>这里需要简单地修改下php-fpm的配置，否则运行php-fpm会报错。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cp /private/etc/php-fpm.conf.default /private/etc/php-fpm.conf</span><br><span class="line">$ vim /private/etc/php-fpm.conf</span><br></pre></td></tr></table></figure>
+<p>修改php-fpm.conf文件中的<code>error_log</code>项，默认该项被注释掉，这里需要去注释并且修改为<code>error_log = /usr/local/var/log/php-fpm.log</code>。如果不修改该值，运行php-fpm的时候会提示log文件输出路径不存在的错误。</p>
+<h3 id="安装mysql">安装mysql</h3><p>安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install mysql</span><br></pre></td></tr></table></figure>
+<p>常用命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mysql.server start <span class="comment">#启动mysql服务</span></span><br><span class="line">$ mysql.server stop <span class="comment">#关闭mysql服务</span></span><br></pre></td></tr></table></figure></p>
+<p>配置<br>在终端运行<code>mysql_secure_installation</code>脚本，该脚本会一步步提示你设置一系列安全性相关的参数，包括：<code>设置root密码</code>，<code>关闭匿名访问</code>，<code>不允许root用户远程访问</code>，<code>移除test数据库</code>。当然运行该脚本前记得先启动mysql服务。</p>
+<h3 id="测试nginx服务">测试nginx服务</h3><p>在之前nginx配置文件default.conf中设置的root项对应的文件夹下创建测试文件index.php:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- ~/nginx_sites/index.php --&gt;</span></span><br><span class="line"><span class="php"><span class="preprocessor">&lt;?php</span> phpinfo(); <span class="preprocessor">?&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>启动nginx服务，sudo nginx；<br><br>修改配置文件，重启nginx服务，sudo nginx -s reload <br><br>启动php服务，sudo php-fpm； <br><br>在浏览器地址栏中输入localhost:8080，如果配置正确地话，应该能看到PHP相关信息的页面。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+<nav id="pagination">
+  
+    <a href="/page/20/" class="alignleft prev">上一页</a>
+  
+  
+  <div class="clearfix"></div>
+</nav></div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/categories/node/">node</a><small>1</small></li>
+  
+    <li><a href="/categories/web前端/">web前端</a><small>13</small></li>
+  
+    <li><a href="/categories/图形图像/">图形图像</a><small>1</small></li>
+  
+    <li><a href="/categories/搜索引擎/">搜索引擎</a><small>1</small></li>
+  
+    <li><a href="/categories/用户体验/">用户体验</a><small>1</small></li>
+  
+    <li><a href="/categories/系统搭建/">系统搭建</a><small>1</small></li>
+  
+    <li><a href="/categories/网络协议与dns/">网络协议与dns</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="http://backtonature.github.io/" title="问水的博客">问水</a></li>
+</ul>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 简~~叶
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

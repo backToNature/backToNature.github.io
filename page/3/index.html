@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 3 页 | 简~~叶</title>
+  <meta name="author" content="简~~叶">
+  
+  <meta name="description" content="简~~叶&#39;s blog | javascript | html | css | IT">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="简~~叶"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="简~~叶" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+  <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?b305585698a65577c37a1c283348d929";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">简~~叶</a></h1>
+  <h2><a href="/">程序,生活,就是这么简单</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/archives">首页</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-02-12T16:13:26.000Z"><a href="/2015/02/13/Mac下安装配置phonegap副本/">2015-02-13</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/02/13/Mac下安装配置phonegap副本/">mac下安装配置phonegap</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="概述">概述</h2><p>新的phonegap用的是nodejs开发的</p>
+<p>共有以下几个步骤：</p>
+<p>安装nodejs环境、安装phonegap、安装xcode、安装android SDK</p>
+<p>安装phonegap3.0需要事先安装nodejs环境，nodejs安装非常简单。直接上nodejs官网下载一个安装包，打开安装即可，完全没有难度，我就不说了。 </p>
+<h2 id="安装phonegap">安装phonegap</h2><p>安装完nodejs后，打开Terminal命令行工具输入</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm <span class="keyword">install</span> -g phonegap</span><br></pre></td></tr></table></figure>
+<p>等待片刻即安装成功,继续安装cordova</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm <span class="keyword">install</span> -g cordova</span><br></pre></td></tr></table></figure>
+<p>在当前目录创建hello项目</p>
+<p>创建phonegap项目名字暂时就叫helloworld吧，cordova即phonegap是由于adobe收藏原phonegap后另外取的名字而已</p>
+<p>hello即项目名，com.example.hello为(id)命名空间, HelloWorld即APP名称</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cordova create hello com<span class="class">.example</span><span class="class">.hello</span> HelloWorld</span><br></pre></td></tr></table></figure>
+<p>添加要编译的平台</p>
+<p>即项目开发完后要编译出哪些平台的APP，如ios平台，android平台，Blackberry平台等，详情支持哪些平台可以参考下面的地址:</p>
+<p><a href="http://docs.phonegap.com/en/edge/guide_platforms_index.md.html#Platform%20Guides" target="_blank" rel="external">http://docs.phonegap.com/en/edge/guide_platforms_index.md.html#Platform%20Guides</a></p>
+<p>进入hello项目目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> hello</span><br></pre></td></tr></table></figure>
+<p>添加 ios平台很简单，这里就不多说了</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cordova <span class="built_in">platform</span> <span class="built_in">add</span> ios</span><br></pre></td></tr></table></figure>
+<h2 id="添加andorid平台">添加andorid平台</h2><p>先试着使用如下命令吧</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cordova <span class="built_in">platform</span> <span class="built_in">add</span> android</span><br></pre></td></tr></table></figure>
+<p>如果你没有配置andorid SDK，那铁定报错了。你需要去google下载最新的andorid SDK并添加到全局环境中</p>
+<p>下载地址(请自带梯子):<a href="http://developer.android.com/sdk/index.html#Other" target="_blank" rel="external">http://developer.android.com/sdk/index.html#Other</a></p>
+<p>下载完成后，打开tools目录下的andorid,会打开android SDK manager，用来下载和更新andorid版本，安装会花很多时间，慢慢等待吧。<br><img src="http://ww2.sinaimg.cn/large/005X4kHAjw1eow5qvycidj30go0bxaaz.jpg" alt=""></p>
+<p>这里提供一个代理服务器，下载速度还不错。<br><img src="http://ww2.sinaimg.cn/large/005yyi5Jjw1eonet3cpljj312a0rgwmi.jpg" alt=""></p>
+<p>更新完 SDK后得配置Android Virtual Device Manager也就是android虚拟机</p>
+<p>双击 tools目录下的monitor程序，monitor然后点击window菜单下的monitor打开AVD管理器如图</p>
+<p><img src="http://ww2.sinaimg.cn/large/005X3q9sjw1eow5qvf5tij30go0bijrr.jpg" alt=""><br><img src="http://ww3.sinaimg.cn/large/005X3q9sjw1eow5quy05pj30go0bx3yw.jpg" alt=""></p>
+<p>在 Terminal中输入</p>
+<figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> ~/.bash_profile</span><br></pre></td></tr></table></figure>
+<p>打开文件后输入这两行</p>
+<p>export PATH=/Users/wenshui/Development/android-sdk-macosx/platform-tools:$PATH</p>
+<p>export PATH=/Users/wenshui/Development/android-sdk-macosx/tools:$PATH</p>
+<p>具体的目录需要更改为你放置 android SDK的正确目录</p>
+<p>保存文件</p>
+<p>并在 Terminal内输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure>
+<p>此命令是刚刚的配置命令以即刻生效</p>
+<p>好了， android的所有配置完成了。</p>
+<p>接下来安装ant,请先确保homebrew已经安装了，安装一些程序时非常实用，首先请勿必更新homebrew否则安装ant命令在mac ox 10.9内是不识别的</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">brew </span>update</span><br></pre></td></tr></table></figure>
+<p>再安装 ant</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">brew </span>install ant</span><br></pre></td></tr></table></figure>
+<p>发现报错，还得安装 Command Line Tools</p>
+<p>继续运行</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ xcode-<span class="operator"><span class="keyword">select</span> –<span class="keyword">install</span></span></span><br></pre></td></tr></table></figure>
+<p>然后再运行</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">brew </span>install ant</span><br></pre></td></tr></table></figure>
+<p>之后记得给sdk目录添加权限</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>chmod <span class="number">777</span> -<span class="constant">R </span>sdk/</span><br></pre></td></tr></table></figure>
+<p>至此运行</p>
+<p>$ cordova platform add android</p>
+<p>添加 android平台就可以成功了</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+<nav id="pagination">
+  
+    <a href="/page/2/" class="alignleft prev">上一页</a>
+  
+  
+    <a href="/page/4/" class="alignright next">下一页</a>
+  
+  <div class="clearfix"></div>
+</nav></div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/categories/node/">node</a><small>1</small></li>
+  
+    <li><a href="/categories/web前端/">web前端</a><small>13</small></li>
+  
+    <li><a href="/categories/图形图像/">图形图像</a><small>1</small></li>
+  
+    <li><a href="/categories/搜索引擎/">搜索引擎</a><small>1</small></li>
+  
+    <li><a href="/categories/用户体验/">用户体验</a><small>1</small></li>
+  
+    <li><a href="/categories/系统搭建/">系统搭建</a><small>1</small></li>
+  
+    <li><a href="/categories/网络协议与dns/">网络协议与dns</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="http://backtonature.github.io/" title="问水的博客">问水</a></li>
+</ul>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 简~~叶
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
