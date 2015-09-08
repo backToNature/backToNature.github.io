@@ -122,11 +122,1405 @@ var _hmt = _hmt || [];
 
 
 
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-04-21T02:45:26.000Z"><a href="/2015/04/21/百度地图开发笔记(一)/">2015-04-21</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/04/21/百度地图开发笔记(一)/">百度地图开发笔记(一)</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="概述">概述</h2><p>百度地图JavaScript API是一套由JavaScript语言编写的应用程序接口，它能够帮助您在网站中构建功能丰富、交互性强的地图应用，包含了构建地图基本功能的各种接口，提供了诸如本地搜索、路线规划等数据服务。</p>
+<p>毕业设计内容是一个基于百度地图api开发的一个地理位置信息系统，也许以后开发地图类系统的机会不多，所以想把这次宝贵的经验纪录下来，我们从地图的一些基本功能来说明，不得不说百度地图api和google地图api十分的类似，不过经纬度的计算却是不尽相同，这个我们后面会提到，而百度地图开发者官方网站可以到<a href="http://developer.baidu.com/map/index.php?title=%E9%A6%96%E9%A1%B5" target="_blank" rel="external">这里</a>进行查看。百度提供了各种平台下的开发策略，开发者可以根据自己的需求进行选择，而我这次是实用的api 大众版,如下图所示:<br><img src="http://i1.tietuku.com/75d64acd30b29efd.png" alt=""></p>
+<h2 id="JavaScript_API功能介绍">JavaScript API功能介绍</h2><ul>
+<li>基本地图功能：展示（支持2D图、3D图、卫星图）、平移、缩放、拖拽等。</li>
+<li>地图控件展示功能：可以在地图上添加/删除鹰眼、工具条、比例尺、自定义版权、地图类型及定位控件，并可以设置各类控件的显示位置。</li>
+<li>覆盖物功能：支持在地图上添加/删除点、线、面、热区、行政区划、用户自定义覆盖物等；开源库提供富标注、标注管理器、聚合marker、自定义覆盖物等功能。</li>
+<li>工具类功能：提供经纬度坐标与屏幕坐标互转功能；开源库里提供测距、几何运算及GPS坐标/国测局坐标转百度坐标等功能。</li>
+<li>定位功能：支持IP定位及浏览器（支持html5特性浏览器）定位功能。</li>
+<li>右键菜单功能：支持在地图上添加右键菜单。</li>
+<li>鼠标交互功能：支持动态修改鼠标样式、鼠标拖拽/缩放地图及鼠标绘制等功能。</li>
+<li>图层功能：支持重设地图底图、地图上叠加实时交通图层或自定义图层功能。</li>
+<li>本地搜索功能：包括根据城市、矩形范围、圆形范围等条件进行POI搜索；且支持用户自有数据的检索。</li>
+<li>公交检索：支持起始点坐标、起始点名称、LocalSearchPoi实例三种检索条件的检索；检索结果支持便捷、* 可换乘、少步行、不乘地铁四种方案。</li>
+<li>驾车检索：支持起始点坐标、起始点名称、LocalSearchPoi实例三种检索条件的检索；返回最短时间、最短距离、避开高速的驾车导航结果；且提供计算打车费用服务。</li>
+<li>步行导航：提供步行导航方案。</li>
+<li>逆/地理编码：支持百度坐标与地址描述信息之间的转换服务。</li>
+<li>个性化数据展示功能：用户自有数据存储到LBS.云后，JavaScript API可以提供以麻点图形式展示自有数据功能。</li>
+</ul>
+<h2 id="开发之前需要做些什么">开发之前需要做些什么</h2><p>百度为了统一平台服务的配额管理，JavaScript API在新版本引入ak机制。JavaScript API v1.4及以前版本无须申请密钥（ak），自v1.5版本开始需要先申请密钥（ak），才可使用，超出ak配额部分，可以发送邮件进行申请。</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://api.<span class="built_in">map</span>.baidu.com/api?<span class="variable">v=</span><span class="number">1.4</span> //参数v表示您加载API的版本，使用JavaScript APIv1.<span class="number">4</span>及以前版本可使用此方式引用。</span><br><span class="line">http://api.<span class="built_in">map</span>.baidu.com/api?<span class="variable">v=</span><span class="number">1.5</span>&amp;<span class="variable">ak=</span>您的密钥  //使用JavaScript APIv1.<span class="number">5</span>请先申请密钥ak，按此方式引用</span><br></pre></td></tr></table></figure>
+<h4 id="兼容性">兼容性</h4><ul>
+<li>浏览器：IE 6.0+、Firefox 3.6+、Opera 9.0+、Safari 3.0+、Chrome</li>
+<li>操作系统：Windows、Mac、Linux</li>
+<li>移动平台：iPhone、Android</li>
+</ul>
+<h2 id="hello_world(开始我们的第一个地图页面)">hello world(开始我们的第一个地图页面)</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"Content-Type"</span> <span class="attribute">content</span>=<span class="value">"text/html; charset=utf-8"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"viewport"</span> <span class="attribute">content</span>=<span class="value">"initial-scale=1.0, user-scalable=no"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">style</span> <span class="attribute">type</span>=<span class="value">"text/css"</span>&gt;</span><span class="css"></span><br><span class="line">	<span class="tag">body</span>, <span class="tag">html</span>,<span class="id">#allmap</span> <span class="rules">&#123;<span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">100%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">100%</span></span></span>;<span class="rule"><span class="attribute">overflow</span>:<span class="value"> hidden</span></span>;<span class="rule"><span class="attribute">margin</span>:<span class="value"><span class="number">0</span></span></span>;<span class="rule"><span class="attribute">font-family</span>:<span class="value"><span class="string">"微软雅黑"</span></span></span>;&#125;</span></span><br><span class="line">	</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"http://api.map.baidu.com/api?v=2.0&amp;ak=您的密钥"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">title</span>&gt;</span>地图展示<span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"allmap"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="lasso"></span><br><span class="line">	<span class="comment">// 百度地图API功能</span></span><br><span class="line">	<span class="built_in">var</span> <span class="built_in">map</span> <span class="subst">=</span> <span class="literal">new</span> BMap<span class="built_in">.</span><span class="built_in">Map</span>(<span class="string">"allmap"</span>);    <span class="comment">// 创建Map实例</span></span><br><span class="line">	<span class="built_in">map</span><span class="built_in">.</span>centerAndZoom(<span class="literal">new</span> BMap<span class="built_in">.</span>Point(<span class="number">116.404</span>, <span class="number">39.915</span>), <span class="number">11</span>);  <span class="comment">// 初始化地图,设置中心点坐标和地图级别</span></span><br><span class="line">	<span class="built_in">map</span><span class="built_in">.</span>addControl(<span class="literal">new</span> BMap<span class="built_in">.</span>MapTypeControl());   <span class="comment">//添加地图类型控件</span></span><br><span class="line">	<span class="built_in">map</span><span class="built_in">.</span>setCurrentCity(<span class="string">"北京"</span>);          <span class="comment">// 设置地图显示的城市 此项是必须设置的</span></span><br><span class="line">	<span class="built_in">map</span><span class="built_in">.</span>enableScrollWheelZoom(<span class="literal">true</span>);     <span class="comment">//开启鼠标滚轮缩放</span></span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-02-12T16:13:26.000Z"><a href="/2015/02/13/Mac下安装配置phonegap副本/">2015-02-13</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/02/13/Mac下安装配置phonegap副本/">mac下安装配置phonegap</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="概述">概述</h2><p>新的phonegap用的是nodejs开发的</p>
+<p>共有以下几个步骤：</p>
+<p>安装nodejs环境、安装phonegap、安装xcode、安装android SDK</p>
+<p>安装phonegap3.0需要事先安装nodejs环境，nodejs安装非常简单。直接上nodejs官网下载一个安装包，打开安装即可，完全没有难度，我就不说了。 </p>
+<h2 id="安装phonegap">安装phonegap</h2><p>安装完nodejs后，打开Terminal命令行工具输入</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm <span class="keyword">install</span> -g phonegap</span><br></pre></td></tr></table></figure>
+<p>等待片刻即安装成功,继续安装cordova</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm <span class="keyword">install</span> -g cordova</span><br></pre></td></tr></table></figure>
+<p>在当前目录创建hello项目</p>
+<p>创建phonegap项目名字暂时就叫helloworld吧，cordova即phonegap是由于adobe收藏原phonegap后另外取的名字而已</p>
+<p>hello即项目名，com.example.hello为(id)命名空间, HelloWorld即APP名称</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cordova create hello com<span class="class">.example</span><span class="class">.hello</span> HelloWorld</span><br></pre></td></tr></table></figure>
+<p>添加要编译的平台</p>
+<p>即项目开发完后要编译出哪些平台的APP，如ios平台，android平台，Blackberry平台等，详情支持哪些平台可以参考下面的地址:</p>
+<p><a href="http://docs.phonegap.com/en/edge/guide_platforms_index.md.html#Platform%20Guides" target="_blank" rel="external">http://docs.phonegap.com/en/edge/guide_platforms_index.md.html#Platform%20Guides</a></p>
+<p>进入hello项目目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> hello</span><br></pre></td></tr></table></figure>
+<p>添加 ios平台很简单，这里就不多说了</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cordova <span class="built_in">platform</span> <span class="built_in">add</span> ios</span><br></pre></td></tr></table></figure>
+<h2 id="添加andorid平台">添加andorid平台</h2><p>先试着使用如下命令吧</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cordova <span class="built_in">platform</span> <span class="built_in">add</span> android</span><br></pre></td></tr></table></figure>
+<p>如果你没有配置andorid SDK，那铁定报错了。你需要去google下载最新的andorid SDK并添加到全局环境中</p>
+<p>下载地址(请自带梯子):<a href="http://developer.android.com/sdk/index.html#Other" target="_blank" rel="external">http://developer.android.com/sdk/index.html#Other</a></p>
+<p>下载完成后，打开tools目录下的andorid,会打开android SDK manager，用来下载和更新andorid版本，安装会花很多时间，慢慢等待吧。<br><img src="http://ww2.sinaimg.cn/large/005X4kHAjw1eow5qvycidj30go0bxaaz.jpg" alt=""></p>
+<p>这里提供一个代理服务器，下载速度还不错。<br><img src="http://ww2.sinaimg.cn/large/005yyi5Jjw1eonet3cpljj312a0rgwmi.jpg" alt=""></p>
+<p>更新完 SDK后得配置Android Virtual Device Manager也就是android虚拟机</p>
+<p>双击 tools目录下的monitor程序，monitor然后点击window菜单下的monitor打开AVD管理器如图</p>
+<p><img src="http://ww2.sinaimg.cn/large/005X3q9sjw1eow5qvf5tij30go0bijrr.jpg" alt=""><br><img src="http://ww3.sinaimg.cn/large/005X3q9sjw1eow5quy05pj30go0bx3yw.jpg" alt=""></p>
+<p>在 Terminal中输入</p>
+<figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">open</span> ~/.bash_profile</span><br></pre></td></tr></table></figure>
+<p>打开文件后输入这两行</p>
+<p>export PATH=/Users/wenshui/Development/android-sdk-macosx/platform-tools:$PATH</p>
+<p>export PATH=/Users/wenshui/Development/android-sdk-macosx/tools:$PATH</p>
+<p>具体的目录需要更改为你放置 android SDK的正确目录</p>
+<p>保存文件</p>
+<p>并在 Terminal内输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure>
+<p>此命令是刚刚的配置命令以即刻生效</p>
+<p>好了， android的所有配置完成了。</p>
+<p>接下来安装ant,请先确保homebrew已经安装了，安装一些程序时非常实用，首先请勿必更新homebrew否则安装ant命令在mac ox 10.9内是不识别的</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">brew </span>update</span><br></pre></td></tr></table></figure>
+<p>再安装 ant</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">brew </span>install ant</span><br></pre></td></tr></table></figure>
+<p>发现报错，还得安装 Command Line Tools</p>
+<p>继续运行</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ xcode-<span class="operator"><span class="keyword">select</span> –<span class="keyword">install</span></span></span><br></pre></td></tr></table></figure>
+<p>然后再运行</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">brew </span>install ant</span><br></pre></td></tr></table></figure>
+<p>之后记得给sdk目录添加权限</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>chmod <span class="number">777</span> -<span class="constant">R </span>sdk/</span><br></pre></td></tr></table></figure>
+<p>至此运行</p>
+<p>$ cordova platform add android</p>
+<p>添加 android平台就可以成功了</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-01-15T01:45:26.000Z"><a href="/2015/01/15/迟到的中文WebFont/">2015-01-15</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/01/15/迟到的中文WebFont/">迟到的中文WebFont</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="概述">概述</h2><p>三年前，有一个设计师面试一位 Web 前端工程师，其中有一段这样的对话：</p>
+<p>“如果设计师希望用图片实现某个字体样式，而从技术的角度来说这样不合理，但设计师非常坚持，这时候你怎么办？”</p>
+<p>“我会给设计师讲解工程上面临的问题，争取他理解。例如：如果文本使用图片，以腾讯站点的访问量来说，这里会需要消耗大量的服务器资源，至少需要增加 XXX 台服务器，带宽流量消耗 XXX 万……”。</p>
+<p>这是一段真实的面试场景，而我就是那位被面试者。这些年 Web 前端技术在迅猛的发展，这样的问题已经有了解决方案——WebFont，如果再回到当年面试的场景，我想我会给出更好的答案。</p>
+<p>WebFont 技术可以让网页使用在线字体，而无需使用图片，从而有机会解决开头设计师提到的问题。它通过 CSS 的 @font -face 语句引入在线字体，使用 CSS 选择器指定运用字体的文本。在国外，WebFont 已经非常流行了，大量的网站使用了 WebFont 技术，而业界大佬 Google 也顺势推出的免费 WebFont 云托管服务，这一切甚至带动了国外字体制作行业的高速发展。</p>
+<h4 id="WebFont_的优势">WebFont 的优势</h4><p>相对图片，WebFont 有如下优势：</p>
+<ol>
+<li>支持选中、复制</li>
+<li>支持 Ctrl+F 查找</li>
+<li>对搜索引擎友好</li>
+<li>支持工具翻译</li>
+<li>支持无障碍访问，支持朗读</li>
+<li>字体是矢量图形，支持矢量缩放，自动适配高清屏</li>
+<li>文本修改方便</li>
+<li>字形可以重复利用，节省网络资源</li>
+</ol>
+<h4 id="中文_WebFont_的困境">中文 WebFont 的困境</h4><p>既然 WebFont 有如此多优势，为何中文站点依然很少采用？这里主要是三个“中国特色”造成的：</p>
+<h4 id="1、中文字体体积">1、中文字体体积</h4><p>英文只有 26 个字母，一套字体不过几十 KB；而汉字却有数万个，导致字体文件通常有好几 MB 大小，文件体积比英文字体大数百倍，按照中国网络环境的现状，用于实际项目中显然不现实。</p>
+<h4 id="2、浏览器类型">2、浏览器类型</h4><p>国内浏览器市场异常繁荣，从 IE6 到各种壳的浏览器，他们对字体格式的支持也不一样，字体格式转换相当繁琐。</p>
+<h4 id="3、操作系统">3、操作系统</h4><p>相当长的时期内，Windows XP 操作系统是国内的主流，而 XP 系统对字体渲染表现差劲，设计师难以接受 WebFont 的表现，而宁愿使用图片。不过随着 XP 系统市场份额急剧下降以及移动设备的崛起，这个问题已经变得不再那么重要了。</p>
+<p>总结：中文 WebFont 首要解决的问题是压缩与转码。</p>
+<h2 id="现有的中文_WebFont_解决方案">现有的中文 WebFont 解决方案</h2><h4 id="1、本地制作">1、本地制作</h4><p>通过字体制作工具来删除没有使用的字符，即制作精简版字体，这也是我之前实践过的方案。</p>
+<p><img src="https://cloud.githubusercontent.com/assets/1791748/5517779/54576582-8939-11e4-9213-abab9427e094.jpg" alt=""></p>
+<h4 id="2、字体云服务">2、字体云服务</h4><p>国内目前有两家公司提供中文 WebFont 云托管服务，他们能够压缩与转码字体：</p>
+<ul>
+<li><a href="http://www.youziku.com" target="_blank" rel="external">http://www.youziku.com</a>（有字库)</li>
+<li><a href="http://www.youziku.com" target="_blank" rel="external">http://cn.justfont.com</a>（就是字）</li>
+</ul>
+<h4 id="现有方案的问题">现有方案的问题</h4><p>在实践中，通过工具制作精简版字体异常繁琐，它需要仔细核对字符，修改非常麻烦，效率低下且容易遗漏字符而导致出错 第三方云服务最大的问题是无法保证稳定性，能否支撑海量用户访问还是个问号，至少目前这两家中文 WebFont 平台中还没有大型商业站点的案例，大多都是一些小型个人或企业网站在使用 本地自动化 WebFont 压缩设想</p>
+<p>出于性能以及可控性的考虑，我们排除了第三方云服务方案，尝试设计本地自动化方案。和小伙伴讨论的过程中，我们想到了之前有同事做过自动化切图的工具，原理是用脚本操作 Photoshop，那么我们是否同样可以编写脚本让字体工具自动化的操作呢？理论上 OK，值得我们去尝试。</p>
+<p>字体压缩关键在于删除不必要的字符，我们可以指定一个配置文件来指定字体以及其所使用的字符，然后操作字体工具精简字体即可。</p>
+<p>前面提到，如果手工配置字体所使用的字符可能会有遗漏的风险，并且每次页面修改都需要同步修改配置文件，这里能否实现自动化配置？</p>
+<p>灵感总是在不经意间出现，我们将目光又朝向了 CSS，因为 CSS 本身就一个完整的配置文件：它的 @font -face 语句记录着字体名称与文件路径，选择器记录着字体使用范围，而 CSS 选择器又与 HTML 文档相对应，HTML 文档又可以使用选择器来查找节点与文本。</p>
+<h4 id="字蛛（Font-Spider）诞生">字蛛（Font-Spider）诞生</h4><p>为了实现上述设想，我们需要拥有这三个小伙伴：</p>
+<ul>
+<li>分析模块：负责收集字体与字体使用的字符</li>
+<li>压缩模块：负责删除字体中没有使用的字符实现压缩</li>
+<li>转码模块：负责将字体转换成跨浏览器使用的格式</li>
+</ul>
+<p>借助开源的力量，工具被迅速的实现出来，非常感谢以下开源项目的帮助：</p>
+<ul>
+<li>css.js：它能将 CSS 解析成语法树，并且能够较好的容错适应各种 hack 语法</li>
+<li>jsdom：它能够在 NodeJS 中实现 W3C DOM API，使得我可以使用</li>
+<li>document.querySelectorAll() 方法输入 CSS 选择器来查找 HTML 节点上的文本</li>
+<li>font-optimizer：这是一个使用 Perl 编写的字体优化工具</li>
+<li>ttf2eot、ttf2woff、ttf2svg：是它们完成了跨浏览器字体格式转码的工作</li>
+</ul>
+<h4 id="成果">成果</h4><p><img src="https://cloud.githubusercontent.com/assets/1791748/5517774/e8b32654-8938-11e4-9d5a-ec32f988dd6c.jpg" alt=""></p>
+<p>指定 HTML 文件路径就可以自动化的压缩与转码字体，过程中完全无需人工干预，可以方便的集成在前端发布系统中。</p>
+<h4 id="开源">开源</h4><p>不断的完善后，我们将工具命名为——字蛛（Font-Spider），并回馈给开源社区，希望它能够为中文 WebFont 的发展出一份力，让更多的中文站点可以使用精美的字体。套用一句话结束本文：技术会迟到，但从不会缺席。</p>
+<ul>
+<li>字蛛官网：<a href="http://font-spider.org" target="_blank" rel="external">http://font-spider.org</a></li>
+<li>项目贡献者：糖饼(@aui ) fufu kdd</li>
+</ul>
+<h3 id="转载自http://www-f2e-im/t/860#reply1_F2E前端社区">转载自<a href="http://www.f2e.im/t/860#reply1" target="_blank" rel="external">http://www.f2e.im/t/860#reply1</a> F2E前端社区</h3>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-01-05T01:45:26.000Z"><a href="/2015/01/05/iframe跨域通信/">2015-01-05</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/01/05/iframe跨域通信/">iframe跨域通信方案</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="概述">概述</h2><p>JavaScript出于安全方面的考虑，不允许跨域调用其他页面的对象。但在安全限制的同时也给注入iframe或是ajax应用上带来了不少麻烦。这里把涉及到跨域的一些问题简单地整理一下：</p>
+<p>首先什么是跨域，简单地理解就是因为JavaScript同源策略的限制，a.com 域名下的js无法操作b.com或是c.a.com域名下的对象。更详细的说明可以看下表：</p>
+<p><img src="http://targetkiller.net/wp-content/uploads/2014/02/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7-2014-02-23-%E4%B8%8A%E5%8D%885.03.37-1024x577.png" alt=""></p>
+<p>对于主域相同子域不同的通信方法这里不一一列举了，这里主要讲解一下跨主域的通信问题。</p>
+<h2 id="postMessage方法">postMessage方法</h2><p>window.postMessage 是一个用于安全的使用跨源通信的方法。通常，不同页面上的脚本只在这种情况下被允许互相访问，当且仅当执行它们的页面所处的位置使用相同的协议（通常都是 http）、相同的端口（http默认使用80端口）和相同的主机（两个页面的 document.domain 的值相同）。 在正确使用的情况下，window.postMessage 提供了一个受控的机制来安全地绕过这一限制。</p>
+<h3 id="兼容性">兼容性</h3><p><a href="http://caniuse.com/#search=postMessage" target="_blank" rel="external">http://caniuse.com/#search=postMessage</a></p>
+<h3 id="具体用法">具体用法</h3><ul>
+<li>发送消息：destination.postMessage(message, targetOrigin);<ul>
+<li>destination: 目标窗口</li>
+<li>message:发送的消息</li>
+<li>targetOrigin: 定义发送消息的范围</li>
+</ul>
+</li>
+<li>监听接受消息：window.addEventListener(‘message’,callback,false);</li>
+</ul>
+<h3 id="已知问题">已知问题</h3><ol>
+<li>部分版本IE8/9浏览器只支持iframe通信，不支持tabs之间通信。</li>
+<li>IE8/9不能传输对象，只能传输string。</li>
+</ol>
+<h3 id="参考资料">参考资料</h3><ul>
+<li>mozlia官方文档：<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window.postMessage" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/API/Window.postMessage</a></li>
+<li>IE官方文档:<a href="https://status.modern.ie/postmessage" target="_blank" rel="external">https://status.modern.ie/postmessage</a></li>
+<li>webplatform文档:<a href="https://docs.webplatform.org/wiki/apis/web-messaging/MessagePort/postMessage" target="_blank" rel="external">https://docs.webplatform.org/wiki/apis/web-messaging/MessagePort/postMessage</a></li>
+<li>HTML5官方文档:<a href="https://html.spec.whatwg.org/multipage/comms.html#web-messaging" target="_blank" rel="external">https://html.spec.whatwg.org/multipage/comms.html#web-messaging</a></li>
+</ul>
+<h2 id="window-navigator(适用于ie6/7)">window.navigator(适用于ie6/7)</h2><p>ie6/7有个漏洞,父窗口与所有的iframe共享window.navigator对象，可以利用这个漏洞，由于ie6/7不支持postMessage,所以可以利用这个漏洞对ie6/7做兼容跨域通信支持。</p>
+<h3 id="具体用法-1">具体用法</h3><p><img src="http://ww2.sinaimg.cn/large/005yyi5Jjw1enyem8ddw7j30my0pcdkb.jpg" alt=""></p>
+<p>途中A过程和B过程都是初始化监听事件，类似于onmessage事件。只不过实现方法不一样而已。</p>
+<p>按执行顺序来描述的话，如下：</p>
+<ul>
+<li>B: 父窗口向window.navigator添加一个监听函数，并打上父窗口的戳。</li>
+<li>A: 子窗口向window.navigator添加一个监听函数，并打上子窗口的戳。</li>
+</ul>
+<ul>
+<li>C: 父窗口执行post的时候，调用原先子窗口添加在navigator里的监听函数，并将要传输的数据作为函数参数传入。</li>
+<li>D: 子窗口执行post的时候，调用原先父窗口添加在navigator里的监听函数，并将要传输的数据作为函数参数传入。</li>
+</ul>
+<h3 id="注意：子窗口和父窗口要找到对方的监听函数必须得事先知道对方在添加监听函数的时候打上的戳"><strong><em>注意：子窗口和父窗口要找到对方的监听函数必须得事先知道对方在添加监听函数的时候打上的戳</em></strong></h3>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-01-04T09:45:26.000Z"><a href="/2015/01/04/git暂存区/">2015-01-04</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/01/04/git暂存区/">git暂存区</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="理解Git暂存区">理解Git暂存区</h2><p>暂存区，又被称为(stage或者index)。在我们的仓库里有个.git目录(是个隐藏目录)，我们可以对这个文件做一个实验。</p>
+<ol>
+<li><p>首先我们先随便修改我们仓库里的一个文件a.txt，再执行git status,然后再执行ls -l .git/index。</p>
+ <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">$ <span class="keyword">ls</span> -<span class="keyword">l</span> .git/<span class="literal">index</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这时我们可以看到index文件的修改时间为当前时间，然后执行git checkout命令(撤销刚才的修改)</p>
+ <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout <span class="comment">-- a.txt</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>再次执行git status命令，然后再执行ls -l .git/index。</p>
+ <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">$ <span class="keyword">ls</span> -<span class="keyword">l</span> .git/<span class="literal">index</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这时候我们看到时间戳又变了！</p>
+<p>这个试验说明当执行git status命令(或者git diff命令)的时候，先依据.git/index文件中记录的时间戳，长度等信息判断工作区文件是否改变，如果工作区文件的时间戳改变了，说明文件内容也很可能改变，这时候就需要打开文件，读取文件的内容，与更改前的原始文件作比较。如果没有改变，则将该文件新的时间戳记录到.git/index文件中。</p>
+<p>文件.git/index实际上是一个包含文件索引的目录树，像是一个虚拟的空间，再这个虚拟空间的目录树中，记录了文件名和文件的状态信息(时间戳文件长度等)。文件的内容确并没有存储在里面，而是保存在git对象库.git/objects目录中，我们可以用如下的图来描述这么一个关系。</p>
+<p><img src="http://ww3.sinaimg.cn/large/005yyi5Jjw1enxnczsoh7j30lj0arabs.jpg" alt=""></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-12-24T09:20:55.000Z"><a href="/2014/12/24/scriptTags/">2014-12-24</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/12/24/scriptTags/">script标签小记</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="概述">概述</h2><p>使用script标签的方式有两种，内嵌和外<br>引。并且两种方式不能混用，混用的情况下只会加载src里的外部脚本。并且在不设置任何属性下，所有的脚本都会同步顺序地加载执行。</p>
+<h2 id="script元素的属性">script元素的属性</h2><ul>
+<li>asyns: 可选。</li>
+<li>defer: 可选。</li>
+<li>src: 可选。</li>
+<li>type: 可选。</li>
+<li>其余省略</li>
+</ul>
+<h2 id="defer（延迟脚本）">defer（延迟脚本）</h2><p>表示脚本可以延迟到文档完全被解析和显示之后再执行。<strong><em>只对外部脚本有效</em></strong>，并且ie7及其以上也支持这个属性。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">head</span> <span class="attribute">lang</span>=<span class="value">"en"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">title</span>&gt;</span><span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"example1.js"</span> <span class="attribute">defer</span>=<span class="value">"defer"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"example2.js"</span> <span class="attribute">defer</span>=<span class="value">"defer"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这个例子中，虽然把脚本放在了head中，但是这两个脚本将会在整个页面加载完成后才会执行，而且不一定会顺序执行。</p>
+<p><strong><em>在 IE6 IE7 IE8 中，当使用 innerHTML 方法插入脚本时，SCRIPT 元素必须设置 defer 属性。不然没法执行脚本</em></strong></p>
+<p>支持的浏览器有IE,firefox,Safari,Chrome，具体支持方式还有待测试。</p>
+<h2 id="asyns（异步脚本）">asyns（异步脚本）</h2><p>同样与defer类似，asyns也只适用于外部脚本，并告诉浏览器立即下载文件。与defer不同的是，本asyns标记的脚本不会按顺序执行(defer还可能按顺序执行)。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">head</span> <span class="attribute">lang</span>=<span class="value">"en"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">title</span>&gt;</span><span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"example1.js"</span> <span class="attribute">async</span>=<span class="value">"async"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"example2.js"</span> <span class="attribute">async</span>=<span class="value">"async"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>异步脚本基本和页面同时开始加载，并且是并发加载的，所以上面两个脚本不会等到页面加载之后才会加载。</p>
+<p>支持的浏览器有: firefox,Safari,Chrome。</p>
+<h2 id="动态加载脚本">动态加载脚本</h2><p>很多时候，我们会需要动态加载一些脚本。下面是我总结的一些方法。</p>
+<h4 id="方法一">方法一</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadScript</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">"script"</span>);</span><br><span class="line">    script.src = url;</span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(script);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="方法二(字符串传递)">方法二(字符串传递)</h4><p>有时候我们需要把从第三方拿到的脚本字符串在页面执行，可以使用如下方式创建。</p>
+<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadScriptString</span><span class="params">(str)</span> &#123;</span></span><br><span class="line">    var script = document.createElement<span class="params">(<span class="string">"script"</span>)</span>;</span><br><span class="line">    try&#123;</span><br><span class="line">        <span class="comment">// Safari3不支持text属性</span></span><br><span class="line">        script.appendChild<span class="params">(document.createTextNode<span class="params">(str)</span>)</span>;</span><br><span class="line">    &#125; catch<span class="params">(e)</span>&#123;</span><br><span class="line">        <span class="comment">// 为了兼容IE，IE不允许访问script对象的子节点。</span></span><br><span class="line">        script.<span class="built_in">text</span> = <span class="built_in">str</span>;</span><br><span class="line">    &#125; </span><br><span class="line">    document.body.appendChild<span class="params">(script)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-12-03T09:20:55.000Z"><a href="/2014/12/03/用户体验要素/">2014-12-03</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/12/03/用户体验要素/">用户体验要素</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="概述">概述</h2><p>用户体验的整个开发流程，都是为了确保用户在你的产品上所有体验不会发生在你“明确的意图”之外。这就是说，要考虑到用户有可能采取的每一个行动的每一种可能性，并且去理解在这个过程的每一个步骤中用户的期望值。这听上去像是一个很庞大的工作，而且在某种程度上来讲也的确是。但是，我们可以把设计用户体验的工作分解成各个组成要素，以帮助我们更好地了解整个问题。</p>
+<h2 id="五个层面">五个层面</h2><p>大多数人都曾经网购过。这个过程几乎每次都差不多————打开网站，找到你要买的东西(也许使用搜索，也许是通过类目来查找)，然后登录后把邮寄地址告诉网站，然后网站则保证把这个产品送到你的地址。</p>
+<p>这一系列的体验，其实是由一套完整的决策组成的：网站的外观、如何运营、你可以在这个网站上做什么。这些决策都是彼此依赖的，并且影响到用户体验的各个方面。如果我们去掉这些体验的外壳，就可以理解这些决策是如何做出来的了。</p>
+<h3 id="表现层">表现层<img src="http://ww2.sinaimg.cn/large/005yyi5Jjw1emwqqui79qj3018018q2p.jpg" alt=""></h3><p>在表现层，你看到的是形形色色的网页，也就是它的外观。这些网页由图片和文字组成，一些图片和文字是可以点击并且执行某种功能，比如购物车图标可以引导你进入购物车页面，而有一些图片就知识展示而已。</p>
+<h3 id="框架层">框架层<img src="http://ww2.sinaimg.cn/large/005yyi5Jjw1emwqqwlgfbj3018018gld.jpg" alt=""></h3><p>表现层之下是网站的框架层：按钮、控件、照片和文本区域的位置。框架层用于优化设计布局，好让这些元素得以最大化利用————引导用户能准确地找到自己想要使用的功能在页面哪个位置。</p>
+<h3 id="结构层">结构层<img src="http://ww3.sinaimg.cn/large/005yyi5Jjw1emwqqxl1w5j3018018jr5.jpg" alt=""></h3><p>结构层与框架层相比就比较抽象了，框架是结构的具体表达方式。框架层确定了在结账页面上交互元素的位置；而结构层则用来设计用户如何到达这个页面，并且在完成一件事情之后又应该到达什么地方。</p>
+<h3 id="范围层">范围层<img src="http://ww2.sinaimg.cn/large/005yyi5Jjw1emwqqyjh97j3017018jr5.jpg" alt=""></h3><p>结构层确定网站各种特性和功能最适合的组合方式。而这些特性和功能就组成了网站的范围层。比如，天猫有购物车这个功能。这个功能是否应该成为网站的功能之一，就属于范围层。</p>
+<h3 id="战略层">战略层<img src="http://ww3.sinaimg.cn/large/005yyi5Jjw1emwqr1c5iwj3017018gld.jpg" alt=""></h3><p>战略层是最大的一个层，不仅包括了经营者想要从网站中的得到什么，还包括用户想从网站上得到什么。</p>
+<h2 id="自上而下地建设">自上而下地建设</h2><p>这五个层面提供了一个基本架构，在这个架构上我们可以方便并且清晰地分析用户体验的一个问题。</p>
+<p>每个层面的问题都会有抽象的和具体的。在最底层，我们完全不用考虑网站、产品、服务的外观————只关心如何满足我们的战略（当然还有用户的需求）。在最顶层，我们只关心产品的具体细节。随着层数的上升，我们的决策应该慢慢变得具体，并且要涉及到越来越多的细节。</p>
+<p><img src="http://ww3.sinaimg.cn/large/005yyi5Jjw1emwqz5u14qj30pf0f4gmw.jpg" alt=""></p>
+<p>每一个层面都是根据它下面的层面来决定的。所以，表现层由框架层决定，框架层则建立在结构层的基础上等等。当我们的项目上下层面没有保持一致的时候，项目常常就会偏离正常的轨道，导致延期完成，而开发团队试图把各个不匹配的要素勉强拼凑在一起的同时，成本也在飞速提升。更坑爹的是，这样的网站上线后也不会得到用户的喜欢，甚至是骂声一片。这种依赖性意味着从战略层开始将会有一种自下而上的”连锁效应”。</p>
+<p><img src="http://ww3.sinaimg.cn/large/005yyi5Jjw1emy35j77fag30cv0ax0sw.gif" alt=""></p>
+<p>但是，并不是说每一个“较低层面“上的决策都必须在“较高层面“之前做出。在“较高层面”中的决定有时候会促成对“较低层面”决策的一次重新评估。每一个层面，我们都应该根据竞争对手所做的事情，业界最佳的实践成果来做出决定，这是一个常识了。所以，这些决策的连锁反应应该是双方向的。</p>
+<p><img src="http://img.educity.cn/img_19/2014052417/11316172358.png" alt=""></p>
+<p>如果你在开始“较高层面”设计之前，要完全确定“较低层面”的话。那么其实你把这个项目扔进了一个危险的境地。相反地，应该计划好你的项目，让任何层面的工作都不能在其下层面的工作<strong><em>完成之前结束</em></strong>。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-12-02T05:20:55.000Z"><a href="/2014/12/02/搜素引擎/">2014-12-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/12/02/搜素引擎/">搜索引擎的盈利模式</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://www.baidu.com/img/bdlogo.png" alt=""></p>
+<p><img src="http://images.enet.com.cn/2010/0506/40/1146540.jpg" alt=""></p>
+<h2 id="介绍">介绍</h2><ul>
+<li>第一阶段（1994——1997年）：将网站免费提交到主要搜索引擎，企业通过META标签优化设计活得比较靠前的排名  </li>
+<li>第二阶段（1998——2000年）：技术型搜索引擎的崛起引发的搜索引擎优化策略。以Google为代表的纯技术型搜索引擎迅速发展，这种营销方式仍以免费为主。</li>
+<li>第三阶段（2001——2003年）：搜索引擎营销从免费向付费模式转变。购买关键词广告出现在这个阶段。</li>
+<li>第四阶段（2003年之后）:从关键词定位到网页内容定位的搜索引擎营销方式。 Google于2003年3月推出按内容定位的广告 。</li>
+</ul>
+<h2 id="盈利模式">盈利模式</h2><h3 id="1-_竞价排名">1. 竞价排名</h3><p>这是搜索引擎早期的主要盈利途径。所谓竞价排名，就是关键词搜索结果的位置拍卖。搜索引擎对某一个关键词进行拍卖,根据某一网站出价的高低排定其在搜索结果中的位置,出价高的网站会出现在搜索结果的前列。这样就极大刺激了想要展示自身、吸引客户的企业,纷纷投标于竞价排名,给搜索引擎带来了滚滚的财源。</p>
+<h3 id="2-_技术授权">2. 技术授权</h3><p>搜索引擎需要的技术要求很高，很多网站都不愿花费大量的人力和财力去研发自身的搜索技术，而是通过付费给某些搜索企业来使用他们的技术，这样就为技术领先的搜索企业带来了盈利渠道，如Google，搜索技术授权为Google带来了其收入的30%。全球访问量最大的四家网站中有三家都使用了Google搜索技术，Google按搜索次数收取使用费。</p>
+<h3 id="3-_AdWords广告">3. AdWords广告</h3><p>这是Google于2003年最先开创的盈利模式，这种广告是针对企业客户而设计的。简单的说,AdWords就是通过用户搜索的关键词来提供相关的广告。这些广告不会像一些门户网站的广告一样铺天盖地,或者弹出窗口，而是出现在搜索结果右侧很小的一块空白处,而且是静态的纯文本广告，不会出现动画甚至声音干扰用户。这种友好的广告界面更易被用户接受，而且是针对用户的关键词而提供的，所以一直享有很高的点击率。</p>
+<h3 id="4-_AdSense广告">4. AdSense广告</h3><p>这是Google于2004年首创的比AdWords更为先进的广告盈利模式，也是Google目前最大最强的盈利法宝。这就是我们经常在一些网站中看到的带有“Google提供的广告”字样的广告，它是针对众多网站发布商而设计的。它可以让具有一定访问量规模的网站发布商在他们的网站展示与网站内容相关的Google广告，并将网站流量以及广告点击量转化为收入。如果一个网站添加了Google提供的广告，即成为Google的内容发布商，作为内容发布商可以在自己网站上显示Google关键词广告，Google根据会员网站上显示的广告被点击的次数支付佣金。</p>
+<h2 id="盈利模式分析">盈利模式分析</h2><h3 id="1-_技术授权的成本收益分析">1. 技术授权的成本收益分析</h3><p>面向其他网络公司的盈利模式就是技术授权，开发核心搜索技术需要很大的成本，这也正是很多搜索网站、门户网站及公司网站选择付费使用搜索技术而不是自己开发的根本原因。但对于技术授权者，如Google，开发技术的成本属于沉没成本，技术一旦研发成功，不但自己的搜索业务可以率先采用，而且通过授权其他网站使用可以带来源源不断的收入，如使用Google技术的雅虎，每个季度就付费给Google几百万美元，但由于互联网行业的竞争激烈，很多门户网站对搜索领域虎视眈眈，着手研发自己的搜索技术，使用Google的授权技术只是一种权宜之计，一旦独立开发自己的技术，Google的这种技术优势就显得不明显了，而对这种搜索技术授权的盈利模式也会产生很大影响。</p>
+<h3 id="2-_竞价排名的成本收益分析">2. 竞价排名的成本收益分析</h3><p>竞价排名按点击次数对企业进行收费，而且广告费用比其他平面广告要低的多，得到了很多企业的青睐，尤其受品牌优势不强的中小企业欢迎。搜索引擎无需花费直接成本，只要按竞价高低安排搜索结果即可，所以竞价排名迅速成为搜索引擎的主流盈利模式。但是，这种盈利模式存在间接成本，那就是对搜索引擎的品牌影响。因为竞价排名有违搜索结果排序的公平性，使很多竞价高但受众面窄的信息排在了前面，而用户不能快速找到自己想要的信息，这样可能导致已有用户的流失。用户的减少直接影响了竞价企业的数量和广告收入，形成恶性循环。所以从长远来看，依靠竞价排名的盈利模式是不利搜索引擎发展的。</p>
+<h3 id="3-_广告的成本收益分析">3. 广告的成本收益分析</h3><p>对于AdWords广告和AdSense广告，其低成本高收益的特点非常明显。尤其是AdSense广告，这种广告形式自创立起便吸引了大量网站加入，它创造了一种多赢的格局。发布Google广告的网站不需投入成本，只需在页面上僻处一小处空间展示广告，通过点击量便可以收取Google的佣金，这一度被认为是最有效的网赚形式；而广告企业通过覆盖面极广的众多网站共同为其做广告，可以获取更多的关注，吸引潜在客户，而且广告费用根据点击量来计算，更利于控制成本；Google作为中介，通过收取广告企业的广告费，扣除支付给发布商的佣金，剩余的便是自己的利润，这个收益比较稳定，不会存在风险。</p>
+<h2 id="未来的盈利模式">未来的盈利模式</h2><h3 id="1-_移动搜索">1. 移动搜索</h3><p>移动搜索是基于移动网络，服务于手机终端的搜索技术。移动搜索最大的优势就是可以打破空间的限制，可以在任何地方通过手机搜索自己需要的信息。随着将来移动技术的发展和越来越多的信息搜索的需求，移动搜索的前景非常广阔，相信可以为搜索企业创造新的利润空间。</p>
+<h3 id="2-_个性化搜索">2. 个性化搜索</h3><p>随着用户搜索的专业化需求，越来越多的用户不再满足于当前搜索的结果体系,他们需要找到自己真正要搜索的专业化信息。针对不同的用户人群推出不同的特色搜索，是搜索引擎将来发展的必经之路。如Google推出的Google Ride Finder,可以用车辆的实时位置查找出租车、轿车或往返班车;为天文爱好者推出的Google Mars，可以欣赏美国航天局的科学家们带来的最详尽的火星图像;推出了Accessible Search,可以为有视力障碍的人们提供搜索。这些特色搜索都可能在将来带来新的利润空间。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-11-29T09:20:55.000Z"><a href="/2014/11/29/大公司如何开发和部署前端代码/">2014-11-29</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/11/29/大公司如何开发和部署前端代码/">大公司如何开发和部署前端代码</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="前端工程">前端工程</h2><p>这是一个非常有趣的 非主流前端领域，这个领域要探索的是如何用工程手段解决前端开发和部署优化的综合问题，入行到现在一直在学习和实践中。</p>
+<p>facebook是这个领域的鼻祖，有兴趣、有梯子的同学可以去看看facebook的页面源代码，体会一下什么叫工程化。</p>
+<p>接下来，从原理展开讲述，多图，较长，希望能有耐心看完。</p>
+<hr>
+<p><img src="http://pic3.zhimg.com/07c2bdef6ccef3ada425d61e3062dd09_b.jpg" alt=""></p>
+<p>让我们返璞归真，从原始的前端开发讲起。上图是一个“可爱”的index.html页面和它的样式文件a.css，用文本编辑器写代码，无需编译，本地预览，确认OK，丢到服务器，等待用户访问。前端就是这么简单，好好玩啊，门槛好低啊，分分钟学会有木有！</p>
+<p><img src="http://pic1.zhimg.com/d53b504bbc9f1887eddf06d90545b870_b.jpg" alt=""></p>
+<p>然后我们访问页面，看到效果，再查看一下网络请求，200！不错，太™完美了！那么，研发完成。。。。了么？</p>
+<p>等等，这还没完呢！对于大公司来说，那些变态的访问量和性能指标，将会让前端一点也不“好玩”。</p>
+<p>看看那个a.css的请求吧，如果每次用户访问页面都要加载，是不是很影响性能，很浪费带宽啊，我们希望最好这样：</p>
+<p><img src="http://pic4.zhimg.com/6a611755a5648ca252211cec85a31ac4_b.jpg" alt=""></p>
+<p>利用304，让浏览器使用本地缓存。但，这样也就够了吗？不成！304叫协商缓存，这玩意还是要和服务器通信一次，我们的优化级别是变态级，所以必须彻底灭掉这个请求，变成这样：</p>
+<p><img src="http://pic4.zhimg.com/fd74ab2bf02d79dd7af1336b4c8f180e_b.jpg" alt=""></p>
+<p>强制浏览器使用本地缓存（cache-control/expires），不要和服务器通信。好了，请求方面的优化已经达到变态级别，那问题来了：你都不让浏览器发资源请求了，这缓存咋更新？</p>
+<p>很好，相信有人想到了办法：通过更新页面中引用的资源路径，让浏览器主动放弃缓存，加载新资源。好像这样：</p>
+<p><img src="http://pic3.zhimg.com/8a8676e933478d1a73777d84a5de55f5_b.jpg" alt=""></p>
+<p>下次上线，把链接地址改成新的版本，就更新资源了不是。OK，问题解决了么？！当然没有！大公司的变态又来了，思考这种情况：</p>
+<p><img src="http://pic2.zhimg.com/4681f7131e777dc885bf66000580ca40_b.jpg" alt=""></p>
+<p>页面引用了3个css，而某次上线只改了其中的a.css，如果所有链接都更新版本，就会导致b.css，c.css的缓存也失效，那岂不是又有浪费了？！</p>
+<p>重新开启变态模式，我们不难发现，要解决这种问题，必须让url的修改与文件内容关联，也就是说，只有文件内容变化，才会导致相应url的变更，从而实现文件级别的精确缓存控制。</p>
+<p>什么东西与文件内容相关呢？我们会很自然的联想到利用<a href="http://baike.baidu.com/view/10961371.htm" target="_blank" rel="external">数据摘要要算法</a>对文件求摘要信息，摘要信息与文件内容一一对应，就有了一种可以精确到单个文件粒度的缓存控制依据了。好了，我们把url改成带摘要信息的：</p>
+<p><img src="http://pic3.zhimg.com/5276595f41d6276e21e5bc1d25741680_b.jpg" alt=""></p>
+<p>这回再有文件修改，就只更新那个文件对应的url了，想到这里貌似很完美了。你觉得这就够了么？大公司告诉你：图样图森破！</p>
+<p>唉~~~~，让我喘口气</p>
+<p>现代互联网企业，为了进一步提升网站性能，会把静态资源和动态网页分集群部署，静态资源会被部署到CDN节点上，网页中引用的资源也会变成对应的部署路径：</p>
+<p><img src="http://pic3.zhimg.com/0866cb58bcf349642d57a06b162e0d91_b.jpg" alt=""></p>
+<p>好了，当我要更新静态资源的时候，同时也会更新html中的引用吧，就好像这样：</p>
+<p><img src="http://pic3.zhimg.com/16d6d6c32e52ef1d1a835fb2ed15f864_b.jpg" alt=""></p>
+<p>这次发布，同时改了页面结构和样式，也更新了静态资源对应的url地址，现在要发布代码上线，亲爱的前端研发同学，你来告诉我，咱们是先上线页面，还是先上线静态资源？</p>
+<ol>
+<li>先部署页面，再部署资源：在二者部署的时间间隔内，如果有用户访问页面，就会在新的页面结构中加载旧的资源，并且把这个旧版本的资源当做新版本缓存起来，其结果就是：用户访问到了一个样式错乱的页面，除非手动刷新，否则在资源缓存过期之前，页面会一直执行错误。</li>
+<li>先部署资源，再部署页面：在部署时间间隔之内，有旧版本资源本地缓存的用户访问网站，由于请求的页面是旧版本的，资源引用没有改变，浏览器将直接使用本地缓存，这种情况下页面展现正常；但没有本地缓存或者缓存过期的用户访问网站，就会出现旧版本页面加载新版本资源的情况，导致页面执行错误，但当页面完成部署，这部分用户再次访问页面又会恢复正常了。</li>
+</ol>
+<p>好的，上面一坨分析想说的就是：先部署谁都不成！都会导致部署过程中发生页面错乱的问题。所以，访问量不大的项目，可以让研发同学苦逼一把，等到半夜偷偷上线，先上静态资源，再部署页面，看起来问题少一些。</p>
+<p>但是，大公司超变态，没有这样的“绝对低峰期”，只有“相对低峰期”。So，为了稳定的服务，还得继续追求极致啊！</p>
+<p>这个奇葩问题，起源于资源的 覆盖式发布，用 待发布资源 覆盖 已发布资源，就有这种问题。解决它也好办，就是实现 非覆盖式发布。</p>
+<p><img src="http://pic2.zhimg.com/9b3a9df114d14a14130a70abf5733837_b.jpg" alt=""></p>
+<p>看上图，用文件的摘要信息来对资源文件进行重命名，把摘要信息放到资源文件发布路径中，这样，内容有修改的资源就变成了一个新的文件发布到线上，不会覆盖已有的资源文件。上线过程中，先全量部署静态资源，再灰度部署页面，整个问题就比较完美的解决了。</p>
+<p>所以，大公司的静态资源优化方案，基本上要实现这么几个东西：</p>
+<ul>
+<li>配置超长时间的本地缓存 —— 节省带宽，提高性能</li>
+<li>采用内容摘要作为缓存更新依据 —— 精确的缓存控制</li>
+<li>静态资源CDN部署 —— 优化网络请求</li>
+<li>更资源发布路径实现非覆盖式发布 —— 平滑升级</li>
+</ul>
+<p>全套做下来，就是相对比较完整的静态资源缓存控制方案了，而且，还要注意的是，静态资源的缓存控制要求在前端所有静态资源加载的位置都要做这样的处理。是的，所有！什么js、css自不必说，还要包括js、css文件中引用的资源路径，由于涉及到摘要信息，引用资源的摘要信息也会引起引用文件本身的内容改变，从而形成级联的摘要变化，大概示意图就是：</p>
+<p><img src="http://pic1.zhimg.com/edf10bb428d39d721e36760a86d2641e_b.jpg" alt=""></p>
+<p>好了，目前我们快速的学习了一下前端工程中关于静态资源缓存要面临的优化和部署问题，新的问题又来了：这™让工程师怎么写码啊！！！</p>
+<p>转自知乎前百度前端工程师@张云龙,链接<a href="http://www.zhihu.com/question/20790576/answer/32602154" target="_blank" rel="external">http://www.zhihu.com/question/20790576/answer/32602154</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-11-04T08:47:33.000Z"><a href="/2014/11/04/cookieless-domain/">2014-11-04</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/11/04/cookieless-domain/">cookieless domain</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="概述">概述</h2><p>什么是cookieless domain?虽然名字中带有cookie,其实完全可以不使用cookie。这只是一种将网页中静态的文本，图片等的域名和主域名相区别开的方法。</p>
+<p>主域名难免会使用到cookie,如果所有的资源(js,css,img等)都是来自于主域名,那么这些资源也会携带主域名的cookie。这样其实增加了很多不必要的流量,要知道性能都是从细节上优化的。cookie相信大家都十分熟悉了，不了解的可以去谷歌，百度一下，这里就不多做讲解了。</p>
+<h2 id="如何启用cookieless_domain?">如何启用cookieless domain?</h2><p>申请一个新的旁路域名,将你的外部资源与主域名分开。然后再将这个旁路域名禁用cookie，这样也就最大程度少节省了字节。</p>
+<h2 id="上图">上图</h2><p>如下是天猫域下的cookie,可以清楚地看到www.tmall.com</p>
+<p><img src="http://ww2.sinaimg.cn/large/005yyi5Jjw1elz3i6lka5j30mu08it9u.jpg" alt=""></p>
+<p>让我们再看这个页面的js,css,img等外部资源</p>
+<p><img src="http://ww4.sinaimg.cn/large/005yyi5Jjw1elz3i5s5mij30pa0d8gns.jpg" alt=""></p>
+<p><img src="http://ww4.sinaimg.cn/large/005yyi5Jjw1elz3i642ctj30o80cemz3.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/005yyi5Jjw1elz3i6t0umj30rk0c040g.jpg" alt=""></p>
+<h3 id="如图，所有的外部资源都不是主域名的。其实这样做的目的并不仅仅是cookieless_domain优化，后续我们再持续探讨。">如图，所有的外部资源都不是主域名的。其实这样做的目的并不仅仅是cookieless domain优化，后续我们再持续探讨。</h3>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-11-03T09:31:40.000Z"><a href="/2014/11/03/meta详解二-视图篇/">2014-11-03</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/11/03/meta详解二-视图篇/">meta详解二(视图篇)</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="概述">概述</h2><p>手机浏览器是把页面放在一个虚拟的“窗口”（viewport）中，通常这个虚拟的“窗口”（viewport）比屏幕宽，这样就不用把每个网页挤到很小的窗口中（这样会破坏没有针对手机浏览器优化的网页的布局），用户可以通过平移和缩放来看网页的不同部分。移动版的 Safari 浏览器最新引进了 viewport 这个 meta tag，让网页开发者来控制 viewport 的大小和缩放，其他手机浏览器也基本支持。</p>
+<h2 id="Viewport_基础">Viewport 基础</h2><p>一个常用的针对移动网页优化过的页面的 viewport meta 标签大致如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">”viewport”</span> <span class="attribute">content</span>=<span class="value">”width=device-width,</span> <span class="attribute">initial-scale</span>=<span class="value">1,</span> <span class="attribute">maximum-scale</span>=<span class="value">1″</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>width：控制 viewport 的大小，可以指定的一个值，如果 600，或者特殊的值，如 device-width 为设备的宽度（单位为缩放为 100% 时的 CSS 的像素）。</li>
+<li>height：和 width 相对应，指定高度。</li>
+<li>initial-scale：初始缩放比例，也即是当页面第一次 load 的时候缩放比例。</li>
+<li>maximum-scale：允许用户缩放到的最大比例。</li>
+<li>minimum-scale：允许用户缩放到的最小比例。</li>
+<li>user-scalable：用户是否可以手动缩放</li>
+</ul>
+<h2 id="苹果移动设备的一些适配">苹果移动设备的一些适配</h2><p>设置了viewport前后的一些对比:</p>
+<p><img src="http://www.iinterest.net/wp-content/uploads/2011/01/toosmall.jpg" alt=""></p>
+<h3 id="1-_apple-mobile-web-app-capable">1. apple-mobile-web-app-capable</h3><p>使webapp以全屏模式运行。</p>
+<p>语法如下:</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"apple-mobile-web-app-capable"</span> <span class="variable">content=</span><span class="string">"yes"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>讨论: 如果content被设置为yes时， Web应用程序就会运行在全屏模式,否则就不是。这个行为是使用Safari浏览器来显示网页内容。您也可以使用window.navigator.standalone只读布尔属性来让你的网页是否显示在全屏模式。</p>
+<p>如图：导航和工具栏已经没有了</p>
+<p><img src="http://www.iinterest.net/wp-content/uploads/2011/01/webapp5.jpg" alt=""></p>
+<h3 id="2-_apple-mobile-web-app-status-bar-style">2. apple-mobile-web-app-status-bar-style</h3><p>系统状态栏是 iOS 顶部显示运营商、WIFI、时间的部分，它无法隐藏，但可以设置灰、黑两种风格，设置代码如下：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"apple-mobile-web-app-status-bar-style"</span> <span class="variable">content=</span><span class="string">"grey"</span> /&gt;</span><br><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"apple-mobile-web-app-status-bar-style"</span> <span class="variable">content=</span><span class="string">"black"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="3-_format-detection">3. format-detection</h3><p>屏蔽iPhone下的拨号链接:<br>iPhone 下会自动将连串数字转换为拨号超链接，如果没特别的需要还是将这个功能屏蔽为好：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"format-detection"</span> <span class="variable">content=</span><span class="string">"telephone=no"</span>/&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="4-_apple-touch-icon">4. apple-touch-icon</h3><p>设置主屏幕(Spring Board)启动图标：<br>Safari 浏览器有一个“添加到主屏幕”的功能，用户可以像保存书签一样把一个网站添加到主屏幕，下次用户直接点击主屏幕上的图标就能进入网站。</p>
+<p><img src="http://www.iinterest.net/wp-content/uploads/2011/01/webapp2.jpg" alt=""></p>
+<p>这个功能不仅方便用户快速访问我们的网站，而且也使我们的 WebApp 更像一个原生应用，设置代码：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link <span class="variable">rel=</span><span class="string">"apple-touch-icon"</span> <span class="variable">href=</span><span class="string">"icon.png"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<p>iOS 系统会自动将图标生成具有高光、圆角和阴影效果：<br><img src="http://www.iinterest.net/wp-content/uploads/2011/01/webapp3.jpg" alt=""></p>
+<p>如果你不想要系统自动生成的效果，可以增加rel=”apple-touch-icon-precomposed”属性：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link <span class="variable">rel=</span><span class="string">"apple-touch-icon-precomposed"</span> <span class="variable">href=</span><span class="string">"icon.png"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<p>因为 iOS 分辨率，所以 icon.png 图片的尺寸也各不相同，我们可以通过sizes属性来分别定义，iOS 系统会自动获取向匹配的图片：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--默认为 57x57 像素--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon"</span> <span class="attribute">href</span>=<span class="value">"touch-icon-iphone.png"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!--iPad 1 72x72 像素--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon"</span> <span class="attribute">sizes</span>=<span class="value">"72x72"</span> <span class="attribute">href</span>=<span class="value">"touch-icon-ipad.png"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!--iPhone 4 114x114 像素--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"apple-touch-icon"</span> <span class="attribute">sizes</span>=<span class="value">"114x114"</span> <span class="attribute">href</span>=<span class="value">"touch-icon-iphone4.png"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="5-_apple-touch-startup-image">5. apple-touch-startup-image</h3><p>启动画面设置：当用户点击主屏图标打开 WebApp 时，系统会展示启动画面，在未设置情况下系统会默认显示该网站的首页截图，当然这个体验不是很好，所以我们需要通过以下代码来自定义启动画面。</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link <span class="variable">rel=</span><span class="string">"apple-touch-startup-image"</span> <span class="variable">href=</span><span class="string">"Startup.png"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<p>与启图标类似，根据 iOS 设备的分辨率，其启动画面的图片尺寸也各不相同：</p>
+<ul>
+<li>iPhone 3GS(及以前机型)：320×460 像素</li>
+<li>iPhone 4、4S：640×920 像素</li>
+<li>iPhone 5：1096×640 像素</li>
+<li>iPhone 6：1334×750 像素</li>
+<li>iPhone 6 plus：1920x1080 像素</li>
+<li>iPad 1,2,mini：1024x768 像素</li>
+<li>iPad 3,4,air,air2,mini2 2048x1536 像素</li>
+<li><a href="http://www.canbike.org/CSSpixels/" target="_blank" rel="external">常用设备分辨率查询</a></li>
+</ul>
+<p style="color:red;font-weight:bloder;">注意:如果图片尺寸不对将无法显示。</p>
+
+<p>如果想让一个 WebApp 在 iPhone 和 iPad 中同时具有启动画面，我们可以借助 Javascript 脚本来完成，通过判断设备navigator.userAgent信息，来更改href的值指向对应的图片路径：</p>
+<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//jQuery</span></span><br><span class="line">var ua = navigator.userAgent.toLowerCase<span class="params">()</span>;</span><br><span class="line"><span class="keyword">if</span> <span class="params">(ua.match<span class="params">(/iPad/i)</span>==<span class="string">"ipad"</span>)</span> &#123;</span><br><span class="line">   $<span class="params">(<span class="string">"link[rel=apple-touch-startup-image]"</span>)</span>.attr<span class="params">(<span class="string">"href"</span>,<span class="string">"images/startup_ipad.png"</span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><em>ps:<a href="https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html" target="_blank" rel="external">苹果官方资料</a></em></strong></p>
+<h2 id="参考资料">参考资料</h2><p>MDN开发者博客上的资料:<a href="https://developer.mozilla.org/zh-CN/docs/Mobile/Viewport_meta_tag" target="_blank" rel="external">viewport使用教程</a></p>
+<p>Apple 开发者站上面有<a href="https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html" target="_blank" rel="external">viewport 详细的描述</a>。</p>
+<p>quirksmode.org 有详细的<a href="http://www.quirksmode.org/mobile/viewports2.html" target="_blank" rel="external">viewport在各个手机浏览器不同之处介绍</a>。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-11-03T06:25:55.000Z"><a href="/2014/11/03/meta详解/">2014-11-03</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/11/03/meta详解/">meta详解一（基础篇）</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="概述">概述</h2><p>META标签是HTML语言HEAD区的一个辅助性标签，它位于HTML文档头部的HEAD标记和TITLE标记之间，它提供用户不可见的信息。meta标签通常用来为搜索引擎robots定义页面主题，或者是定义用户浏览器上的cookie；它可以用于鉴别作者，设定页面格式，标注内容提要和关键字；还可以设置页面使其可以根据你定义的时间间隔刷新自己,以及设置RASC内容等级，等等。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">属性</th>
+<th style="text-align:center">值</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">content(必须)</td>
+<td style="text-align:center">用户自定义</td>
+<td style="text-align:center">定义与 http-equiv 或 name 属性相关的元信息</td>
+</tr>
+<tr>
+<td style="text-align:center">http-equiv</td>
+<td style="text-align:center">content-type<br>expires<br>refresh<br>set-cookie</td>
+<td style="text-align:center">把 content 属性关联到 HTTP 头部。</td>
+</tr>
+<tr>
+<td style="text-align:center">scheme</td>
+<td style="text-align:center">用户自定义</td>
+<td style="text-align:center">定义用于翻译 content 属性值的格式。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="详细介绍">详细介绍</h2><h3 id="HTTP-EQUIV">HTTP-EQUIV</h3><p>HTTP-EQUIV类似于HTTP的头部协议，它回应给浏览器一些有用的信息，以帮助正确和精确地显示网页内容。常用的HTTP-EQUIV类型有：</p>
+<h4 id="1-_Content-Type和Content-Language_(显示字符集的设定)"><strong><em>1. Content-Type和Content-Language (显示字符集的设定)</em></strong></h4><p>说明:设定页面使用的字符集，用以说明主页制作所使用的文字已经语言，浏览器会根据此来调用相应的字符集显示page内容。<br>用法: </p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Meta <span class="variable">http-equiv=</span><span class="string">"Content-Type"</span> <span class="variable">Content=</span><span class="string">"text/html; Charset=gb2312"</span>&gt;</span><br><span class="line">&lt;Meta <span class="variable">http-equiv=</span><span class="string">"Content-Language"</span> <span class="variable">Content=</span><span class="string">"zh-CN"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>　　 　　<br>注意：　该META标签定义了HTML页面所使用的字符集为GB2132，就是国标汉字码。如果将其中的“charset=GB2312”替换成“BIG5”，则该页面所用的字符集就是繁体中文Big5码。当你浏览一些国外的站点时，IE浏览器会提示你要正确显示该页面需要下载xx语支持。这个功能就是通过读取HTML页面META标签的Content-Type属性而得知需要使用哪种字符集显示该页面的。如果系统里没有装相应的字符集，则IE就提示下载。其他的语言也对应不同的charset，比如日文的字符集是“iso-2022-jp ”，韩文的是“ks_c_5601”。<br>　　　　　　<br>　　Content-Type的Content还可以是：text/xml等文档类型;<br>　　<br>　　Charset选项：ISO-8859-1(英文)、BIG5、UTF-8、SHIFT-Jis、Euc、Koi8-2、us-ascii, x-mac-roman, iso-8859-2, x-mac-ce, iso-2022-jp, x-sjis, x-euc-jp,euc-kr, iso-2022-kr, gb2312, gb_2312-80, x-euc-tw, x-cns11643-1,x-cns11643-2等字符集；Content-Language的Content还可以是：EN、FR等语言代码。
+　　
+　　</p>
+<h4 id="2-_Refresh_(刷新)"><strong><em>2. Refresh (刷新)</em></strong></h4><p>说明：让网页多长时间（秒）刷新自己，或在多长时间后让网页自动链接到其它网页。</p>
+<p>用法：<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Meta <span class="variable">http-equiv=</span><span class="string">"Refresh"</span> <span class="variable">Content=</span><span class="string">"30"</span>&gt;</span><br><span class="line">&lt;Meta <span class="variable">http-equiv=</span><span class="string">"Refresh"</span> <span class="variable">Content=</span><span class="string">"5; Url=http://www.baidu.com"</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>注意：其中的5是指停留5秒钟后自动刷新到URL网址。</p>
+<h4 id="3-_Expires_(期限)"><strong><em>3. Expires (期限)</em></strong></h4><p>说明：指定网页在缓存中的过期时间，一旦网页过期，必须到服务器上重新调阅。</p>
+<p>用法：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Meta <span class="variable">http-equiv=</span><span class="string">"Expires"</span> <span class="variable">Content=</span><span class="string">"0"</span>&gt;</span><br><span class="line">&lt;Meta <span class="variable">http-equiv=</span><span class="string">"Expires"</span> <span class="variable">Content=</span><span class="string">"Wed, 26 Feb 1997 08:21:57 GMT"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>注意：必须使用GMT的时间格式，或直接设为0(数字表示多少时间后过期)。
+　</p>
+<h4 id="4-_Pragma_(cach模式)"><strong><em>4. Pragma (cach模式)</em></strong></h4><p>说明：禁止浏览器从本地机的缓存中调阅页面内容。</p>
+<p>用法：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Meta <span class="variable">http-equiv=</span><span class="string">"Pragma"</span> <span class="variable">Content=</span><span class="string">"No-cach"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>注意：网页不保存在缓存中，每次访问都刷新页面。这样设定，访问者将无法脱机浏览</p>
+<h4 id="5-_Set-Cookie_(cookie设定)"><strong><em>5. Set-Cookie (cookie设定)</em></strong></h4><p>说明：浏览器访问某个页面时会将它存在缓存中，下次再次访问时就可从缓存中读取，以提高速度。当你希望访问者每次都刷新你广告的图标，或每次都刷新你的计数器，就要禁用缓存了。通常HTML文件没有必要禁用缓存，对于ASP等页面，就可以使用禁用缓存，因为每次看到的页面都是在服务器动态生成的，缓存就失去意义。如果网页过期，那么存盘的cookie将被删除。</p>
+<p>用法:</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Meta <span class="variable">http-equiv=</span><span class="string">"Set-Cookie"</span> <span class="variable">Content=</span><span class="string">"cookievalue=xxx; expires=Wednesday,21-Oct-98 16:14:21 GMT; path=/"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>注意：必须使用GMT的时间格式。</p>
+<h4 id="6-_Window-target_(显示窗口的设定)"><strong><em>6. Window-target (显示窗口的设定)</em></strong></h4><p>说明：强制页面在当前窗口以独立页面显示。</p>
+<p>用法：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Meta <span class="variable">http-equiv=</span><span class="string">"Window-target"</span> <span class="variable">Content=</span><span class="string">"_top"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>注意：这个属性是用来防止别人在框架里调用你的页面。Content选项：_blank、_top、_self、_parent。</p>
+<h3 id="NAME变量">NAME变量</h3><p>name是描述网页的，对应于Content（网页内容），以便于搜索引擎机器人查找、分类（目前几乎所有的搜索引擎都使用网上机器人自动查找meta值来给网页分类）。</p>
+<p>name的value值（name=””）指定所提供信息的类型。有些值是已经定义好的。例如description(说明)、keyword(关键字)、refresh(刷新)等。还可以指定其他任意值。</p>
+<h4 id="1-Keywords_(关键字)"><strong><em>1.Keywords (关键字)</em></strong></h4><p>说明：为搜索引擎提供的关键字列表</p>
+<p>用法：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Meta <span class="variable">name=</span><span class="string">"Keywords"</span> <span class="variable">Content=</span><span class="string">"关键词1,关键词2，关键词3,关键词4,..."</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>注意：各关键词间用英文逗号“,”隔开。META的通常用处是指定搜索引擎用来提高搜索质量的关键词。当数个META元素提供文档语言从属信息时，搜索引擎会使用lang特性来过滤并通过用户的语言优先参照来显示搜索结果。例如：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Meta <span class="variable">name=</span><span class="string">"Kyewords"</span> <span class="variable">Lang=</span><span class="string">"EN"</span> <span class="variable">Content=</span><span class="string">"vacation,greece,sunshine"</span>&gt;</span><br><span class="line">&lt;Meta <span class="variable">name=</span><span class="string">"Kyewords"</span> <span class="variable">Lang=</span><span class="string">"FR"</span> <span class="variable">Content=</span><span class="string">"vacances,grè:ce,soleil"</span>&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="2-_Description_(简介)"><strong><em>2. Description (简介)</em></strong></h4><p>说明：Description用来告诉搜索引擎你的网站主要内容。</p>
+<p>用法：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Meta <span class="variable">name=</span><span class="string">"Description"</span> <span class="variable">Content=</span><span class="string">"你网页的简述"</span>&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="3-_Robots_(机器人向导)"><strong><em>3. Robots (机器人向导)</em></strong></h4><p>说明：Robots用来告诉搜索机器人哪些页面需要索引，哪些页面不需要索引。Content的参数有all、none、index、noindex、follow、nofollow。默认是all。</p>
+<p>用法：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Meta <span class="variable">name=</span><span class="string">"Robots"</span> <span class="variable">Content=</span><span class="string">"All|None|Index|Noindex|Follow|Nofollow"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>注意：许多搜索引擎都通过放出robot/spider搜索来登录网站，这些robot/spider就要用到meta元素的一些特性来决定怎样登录。</p>
+<ul>
+<li>all：文件将被检索，且页面上的链接可以被查询；</li>
+<li>none：文件将不被检索，且页面上的链接不可以被查询；(和 “noindex, no follow” 起相同作用)</li>
+<li>index：文件将被检索；（让robot/spider登录）</li>
+<li>follow：页面上的链接可以被查询；</li>
+<li>noindex：文件将不被检索，但页面上的链接可以被查询；(不让robot/spider登录)</li>
+<li>nofollow：文件将不被检索，页面上的链接可以被查询。(不让robot/spider顺着此页的连接往下探找)</li>
+</ul>
+<h4 id="4-_Author_(作者),Copyright_(版权)等">4. Author (作者),Copyright (版权)等</h4><p>这个用法就不详细探讨了。。。。</p>
+<h3 id="Head中的其它一些用法">Head中的其它一些用法</h3><h4 id="1-scheme_(方案)">1.scheme (方案)</h4><p>说明：解析name的方案(一直未使用过，详细用法不明。。)</p>
+<p>用法：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">scheme=</span><span class="string">"ISBN"</span> <span class="variable">name=</span><span class="string">"identifier"</span> <span class="variable">content=</span><span class="string">"0-14-043205-1"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="2-_Link_(链接)">2. Link (链接)</h4><p>说明：链接到文件</p>
+<p>用法：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Link <span class="variable">href=</span><span class="string">"haoge.ico"</span> <span class="variable">rel=</span><span class="string">"SIcon"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>注意：很多网站如果你把它保存在收件夹中后，会发现它连带着一个小图标，如果再次点击进入之后还会发现地址栏中也有个小图标。现在只要在你的页头加上这段话，就能轻松实现这一功能。LINK 用来将目前文件与其它 URL 作连结，但不会有连结按钮，用於 HEAD 标记间。</p>
+<h4 id="3-_Base_(基链接)">3. Base (基链接)</h4><p>说明：插入网页基链接属性</p>
+<p>用法：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Base <span class="variable">href=</span><span class="string">"http://www.baidu.com/"</span> <span class="variable">target=</span><span class="string">"_blank"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>注意：你网页上的所有相对路径在链接时都将在前面加上 <strong><em><a href="http://www.baidu.com/" target="_blank" rel="external">http://www.baidu.com/</a></em></strong> 其中target=”_blank”是链接文件在新的窗口中打开，你可以做其他设置。将“_blank”改为“_parent”是链接文件将在当前窗口的父级窗口中打开；改为“_self”链接文件在当前窗口（帧）中打开；改为“_top”链接文件全屏显示。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-10-28T16:03:29.000Z"><a href="/2014/10/29/图像格式详解/">2014-10-29</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/10/29/图像格式详解/">web常用图像格式详解</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="前言">前言</h2><p>在介绍常用的图片格式之前我们先来了解一下图像的一些基本知识,我们眼睛所能识别的图像到底有啥高深的东西在里面呢？</p>
+<p><img src="http://img.web07.cn/uploads/Png/c110110/1294622042D0-163D.png" alt=""></p>
+<h2 id="基础知识简介">基础知识简介</h2><p><strong><em>色深</em></strong>（Color Depth）亦可称为色位深度，是用 bit 数来表示数码影像色彩数目的单位。bit 是计算机计算的二进制单位（或位），即计算机中可以处理的最基本数据或讯息。色深用 2 的幂指数来表示，bit 数愈高，色深值便愈高，影像所能表现的色彩也愈多。</p>
+<p>1 bit 的影像即 2 的 1 次方 (= 2) ，只能表现黑与白两种颜色。2 bit 的影像，则是 2 的平方 (= 4)，可以表现 4 种颜色，所以除了黑白之外，还可以表现它们之间的两种灰调。而 3 bit 的影像，就是 2 的 3 次方 (= 8)，表示在一幅黑白或灰阶的照片中，可以表现出包括黑白在内的 8 种色彩。</p>
+<p>根据以上计算方法， 24 bit 的影像即可显示 16,777,216 种色彩，十分接近肉眼所能分辨的颜色，所以被称为真色彩 (True color)。而且，24 bit 色深已成为现时彩色扫描仪的最基本要求，最高的更已达至 36 bit 或 48 bit 。</p>
+<p><strong><em>位图图像（bitmap）</em></strong>, 亦称为点阵图像或绘制图像，是由称作像素（图片元素）的单个点组成的。这些点可以进行不同的排列和染色以构成图样。当放大位图时，可以看见赖以构成整个图像的无数单个方块。扩大位图尺寸的效果是增大单个像素，从而使线条和形状显得参差不齐。然而，如果从稍远的位置观看它，位图图像的颜色和形状又显得是连续的。常用的位图处理软件是Photoshop。</p>
+<p><strong><em>灰度图像</em></strong>：一幅完整的图像，是由红色、绿色、蓝色三个通道组成的。红色、绿色、蓝色三个通道的缩览图都是以灰度显示的。用不同的灰度色阶来表示“ 红，绿，蓝”在图像中的比重。通道中的纯白，代表了该色光在此处为最高亮度，亮度级别是255。<br>通道是整个Photoshop显示图像的基础。色彩的变动，实际上就是间接在对通道灰度图进行调整。通道是Photoshop处理图像的核心部分，所有的色彩调整工具都是围绕在这个核心周围使用的。<br>在计算机领域中，这类图像通常显示为从最暗黑色到最亮的白色的灰度，尽管理论上这个采样可以任何颜色的不同深浅，甚至可以是不同亮度上的不同颜色。灰度图像与黑白图像不同，在计算机图像领域中黑白图像只有黑色与白色两种颜色；灰度图像在黑色与白色之间还有许多级的颜色深度。但是，在数字图像领域之外，“黑白图像”也表示“灰度图像”，例如灰度的照片通常叫做“黑白照片”。在一些关于数字图像的文章中单色图像等同于灰度图像，在另外一些文章中又等同于黑白图像。</p>
+<p><strong><em>α通道(Alpha Channel)</em></strong>在电脑图形中，每个象素都包含三个色彩信息通道—红、绿、蓝，在24位的图形中，每个通道又包含了8位色彩深度。如果图形卡具有32位总线，附加的8位信号就被用来保存不可见的透明度信号以方便处理用，这就是Alpha通道。白色的alpha象素用于定义不透明的彩色象素，而黑色的alpha象素用于定义透明象素，黑白之间的灰阶用来定义半透明象素。 (在24位真彩色的基础上，增加了8位的Alpha数值来描述物体的透明程度)　</p>
+<p>因此，Alpha通道,除RGB或CMYK以外的8位的通道,使用Alpha通道可使图像由不透明渐变到透明。</p>
+<h2 id="web常用格式">web常用格式</h2><h3 id="Jpg/Jpeg">Jpg/Jpeg</h3><p><strong><em>Jpg/Jpeg(Joint Photographic Expert Group)</em></strong> 是一种有损压缩图像格式，是24位的图像文件格式。通过损失极少的分辨率，可以将图像所需存储量减少至原大小的10%。由于其高效的压缩效率和标准化要求，目前已广泛用于彩色传真、静止图像、电话会议、印刷及新闻图片的传送上。但那些被删除的资料无法在解压时还原，所以<em> .jpg/</em>.jpeg文件并不适合放大观看，输出成印刷品时品质也会受到影响。不过，普通用户不必担心，因为<em>.jpg/</em>.jpeg的压缩算法十分先进，它对图形图像的损失影响不是很大，一幅16M（24位）的<em>.jpg/</em>.jpeg图像看上去与照片没有多大差别，非专业人士甚至无法分辨。同样一幅画面，用<em>.jpg/</em>.jpeg格式储存的文件是其他类型图形文件的1/10～1/20。一般情况下，<em>.jpg/</em>.jpeg文件只有几十KB，而色彩数最高可达到24位，所以它被广泛运用在Internet上，以节约宝贵的网络传输资源。同样，为了在一张光盘上储存更多的图形图像，CD出版商也乐意采用jpg/jpeg格式。</p>
+<p><img src="http://wenwen.soso.com/p/20110214/20110214210327-1089809260.jpg" alt=""></p>
+<p>如同上面这张色彩鲜艳的图片其实才21.8 KB大。</p>
+<p><strong><em>注意：jpg/Jpeg不支持任何形式的透明度，而且压缩损失掉的清晰度无法还原。</em></strong></p>
+<h3 id="GIF">GIF</h3><p><strong><em>GIF(Graphics Interchange Format)</em></strong>它采用无损压缩技术，只要图像不多于256色，则可既减少文件的大小，又保持成像的质量。然而，256色的限制大大局限了GIF文件的应用范围，如彩色相机等。另一方面，在高彩图片上有着不俗表现的JPG格式却在简单的折线上效果难以差强人意。因此GIF格式普遍适用于图表，按钮等等只需少量颜色的图像（如黑白照片）。</p>
+<p><img src="http://bq.caihong.com/meinv_new/7FC3FB3B116DAE84CBE894B937249A62.GIF" alt=""></p>
+<p>gif可以支持动态图，如同上面那位美眉在干嘛我其实一直不清楚。。。</p>
+<p><strong><em>注意: gif图像只支持1位的透明度，即要么完全透明，要么完全不透明。并且可以支持动态图片</em></strong></p>
+<h3 id="png">png</h3><p><strong><em>PNG(Portable Network Graphic Format，PNG)</em></strong>，是一种位图文件(bitmap file)存储格式，读成“ping”。PNG用来存储灰度图像时，灰度图像的深度可多到16位，存储彩色图像时，彩色图像的深度可多到48位，并且还可存储多到16位的α通道数据。PNG使用从LZ77派生的无损数据压缩算法，一般应用于JAVA程序中，或网页或S60程序中是因为它压缩比高，生成文件容量小。特性有：无损压缩，<strong><em>索引彩色模式</em></strong>,更优化的网络传输显示,支持透明效果。</p>
+<p>PNG格式有8位、24位、32位三种形式，其中8位PNG支持两种不同的透明形式（索引透明和alpha透明），24位PNG不支持透明，32位PNG在24位基础上增加了8位透明通道，因此可展现256级透明程度。</p>
+<p><img src="http://www.kutx.cn/xiaotupian/icons/png/200712/20071206230031404.png" alt=""></p>
+<p>上面这张图其实是一个矩形的图，其他部分都是透明的。</p>
+<h3 id="WEBP">WEBP</h3><p><strong><em>WebP</em></strong>格式，谷歌（google）开发的一种旨在加快图片加载速度的图片格式。图片压缩体积大约只有JPEG的2/3，并能节省大量的服务器带宽资源和数据空间。Facebook Ebay等知名网站已经开始测试并使用WebP格式。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-10-28T07:38:55.000Z"><a href="/2014/10/28/css中after和before的奇妙用法/">2014-10-28</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/10/28/css中after和before的奇妙用法/">css中after和before的奇妙用法</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="概述">概述</h2><p>css有两个不太常用的伪类 :before 和 :after，它们的功能可不是我们所想象地那么简单。如果利用好这两个属性，一样可以写出非常酷炫的效果，这样不仅仅只是利用了这两种伪类，也提升了页面性能(这样可以减少图片请求)。</p>
+<p>酷炫demo:</p>
+<p><img src="http://img1.cheny.org/dimblog/2013/10/6cc221614774e78add77d4e7a1171f591.gif" alt=""></p>
+<h2 id="基本语法">基本语法</h2><p>在了解进阶的应用之前，先来了解一下语法规则－<a href="http://www.w3school.com.cn/css/css_pseudo_elements.asp" target="_blank" rel="external">w3c链接</a>。平常仅仅需要将这两个伪元素用于添加一些自定义字符时，只需使用伪类使用的单冒号写法，以保证浏览器的兼容性：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">h1</span><span class="pseudo">:before</span> <span class="rules">&#123;   &#125;</span></span><br></pre></td></tr></table></figure>
+<p>不过，在 CSS3 中为了区别伪元素和伪类为伪元素使用了双冒号，因此如果使用了 display 或者 width 等属性时使得显示脱离了原本元素后，建议按照标准双写。过于老的浏览器可能会存在支持问题，不过伪元素大多是配合 CSS3 使用，就无所谓向下兼容了：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">p</span><span class="pseudo">::after</span> &#123; &#125;</span><br></pre></td></tr></table></figure>
+<p>这两个伪类下特有的属性 content ，用于在 CSS 渲染中向元素逻辑上的头部或尾部添加内容。注意这些添加不会改变文档内容，不会出现在 DOM 中，不可复制，仅仅是在 CSS 渲染层加入。比较有用的是以下几个值：</p>
+<ul>
+<li><strong><em>[String]</em></strong> - 使用引号包括一段字符串，将会向元素内容中添加字符串。示例：</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">a</span><span class="pseudo">:after</span> &#123; <span class="attribute">content</span>: <span class="string">"↗"</span>; &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong><em>attr()</em></strong> – 调用当前元素的属性，可以方便的比如将图片的 Alt 提示文字或者链接的 Href 地址显示出来。示例：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="rule"><span class="attribute">a</span>:<span class="value">after &#123; content:<span class="string">"("</span> <span class="function">attr</span>(href) <span class="string">")"</span></span></span>; &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong><em>url() / uri()</em></strong> – 用于引用媒体文件。示例：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">h1</span><span class="pseudo">::before</span> <span class="rules">&#123; <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="function">url</span>(logo.png)</span></span>; &#125;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong><em>counter()</em></strong> –  调用计数器，可以不使用列表元素实现序号功能。具体请参见 counter-increment 和 counter-reset 属性的用法。示例：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">h2</span><span class="pseudo">:before</span> <span class="rules">&#123; <span class="rule"><span class="attribute">counter-increment</span>:<span class="value"> chapter</span></span>; <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">"Chapter "</span> <span class="function">counter</span>(chapter) <span class="string">". "</span> &#125;</span></span></span></span><br></pre></td></tr></table></figure>
+<h2 id="进阶技巧">进阶技巧</h2><p>清除浮动是一个时常会遇到的问题，不少人的解决办法是添加一个空的 div 应用 clear:both; 属性。现在，无需增加没有意义的元素，仅需要以下样式即可在元素尾部自动清除浮动：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.clear-fix</span> &#123; *<span class="attribute">overflow</span>: hidden; *<span class="attribute">zoom</span>: <span class="number">1</span>; &#125;  </span><br><span class="line"><span class="class">.clear-fix</span><span class="pseudo">:after</span> &#123; <span class="attribute">display</span>: table; <span class="attribute">content</span>: <span class="string">""</span>; <span class="attribute">width</span>: <span class="number">0</span>; <span class="attribute">clear</span>: both; &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用示例">使用示例</h2><p>首先可以看一下这个<a href="http://tympanus.net/Development/CreativeLinkEffects/" target="_blank" rel="external">网站</a>上所有的酷炫特效都用到了:after与:before。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-10-25T16:45:26.000Z"><a href="/2014/10/26/float与absolute的比较/">2014-10-26</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/10/26/float与absolute的比较/">float与absolute的比较</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="概述">概述</h2><ol>
+<li><p><strong><em>position:absolute</em></strong></p>
+<p> 生成绝对定位的元素，脱离了文本流（即在文档中已经不占据位置），相对于 static 定位以外的第一个父元素进行定位。元素的位置通过 “left”, “top”, “right” 以及 “bottom” 属性进行规定。</p>
+<ul>
+<li>若父元素不是定位元素:<br>  <img src="http://files.jb51.net/file_images/article/201212/2012121517093058.jpg" alt=""></li>
+<li>若父元素设置了定位:<br>  <img src="http://files.jb51.net/file_images/article/201212/2012121517093059.jpg" alt=""></li>
+</ul>
+</li>
+<li><p><strong><em>float: left或者right</em></strong></p>
+<p> 浮动的框可以向左或向右移动，直到它的外边缘碰到包含框或另一个浮动框的边框为止。由于浮动框不在文档的普通流中，所以文档的普通流中的块框表现得就像浮动框不存在一样。</p>
+<p> 请看下图，当把框 1 向右浮动时，它脱离文档流并且向右移动，直到它的右边缘碰到包含框的右边缘：<br> <img src="http://www.w3school.com.cn/i/ct_css_positioning_floating_right_example.gif" alt=""></p>
+<p> 再请看下图，当框 1 向左浮动时，它脱离文档流并且向左移动，直到它的左边缘碰到包含框的左边缘。因为它不再处于文档流中，所以它不占据空间，实际上覆盖住了框 2，使框 2 从视图中消失。<br>如果把所有三个框都向左移动，那么框 1 向左浮动直到碰到包含框，另外两个框向左浮动直到碰到前一个浮动框。<br> <img src="http://www.w3school.com.cn/i/ct_css_positioning_floating_left_example.gif" alt=""></p>
+<p> 如下图所示，如果包含框太窄，无法容纳水平排列的三个浮动元素，那么其它浮动块向下移动，直到有足够的空间。如果浮动元素的高度不同，那么当它们向下移动时可能被其它浮动元素“卡住”：<br> <img src="http://www.w3school.com.cn/i/ct_css_positioning_floating_left_example_2.gif" alt=""></p>
+</li>
+</ol>
+<h2 id="比较">比较</h2><ol>
+<li><p>如果重合了谁在上面？</p>
+ <figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* style */</span></span><br><span class="line"><span class="keyword">div</span> &#123;</span><br><span class="line">	width: <span class="number">100</span>px;</span><br><span class="line">      	height: <span class="number">100</span>px;</span><br><span class="line">   &#125;</span><br><span class="line"><span class="comment">/* style */</span></span><br><span class="line">&lt;<span class="keyword">div</span> style=<span class="string">"background: red;float:left;"</span>&gt;&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;<span class="keyword">div</span> style=<span class="string">"background: blue;position: absolute;"</span>&gt;&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>运行上述代码后，蓝色div在最外层，float层被覆盖了，难道是因为顺序问题？替换两个div的位置之后，依然是蓝色div在上面，所以absolute流明显高于float层。</p>
+<p><strong><em>注意:float元素没法通过设置z-index指来使元素高于absolute。因为z-index只对position值为relative,absolute,fixed的元素生效。</em></strong></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-10-23T06:50:50.000Z"><a href="/2014/10/23/视区相关单位用法/">2014-10-23</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/10/23/视区相关单位用法/">视区相关单位vh,vm,vmin,vmax用法</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="概述">概述</h3><p>相对于视口的高度和宽度。视口被均分为100单位的vh或者vm。</p>
+<h3 id="先来看看这几种单位的简介">先来看看这几种单位的简介</h3><ul>
+<li>1vm: 占视口宽度的1%。</li>
+<li>1vh: 占视口高度的1%。</li>
+<li>1vmin: 1vm或者1vh,取决与哪个更小。</li>
+<li>1vmax: 1vm或者1vh,取决于哪个更大。</li>
+</ul>
+<h3 id="兼容性">兼容性</h3><p><img src="http://img2.tuchuang.org/uploads/2014/10/Snip20141023_1.png" alt=""></p>
+<h3 id="视口到底是个什么概念？">视口到底是个什么概念？</h3><p>是浏览器内部宽度大小(window.innerWidth)吗？是整个浏览器的宽度大小(window.outerWidth)吗？还是显示器的宽度大小(screen.width)吗？</p>
+<ul>
+<li>让我们看一个<a href="http://codepen.io/backToNature/pen/sGwjJ" target="_blank" rel="external">demo</a></li>
+</ul>
+<p>显然，不是浏览器外部的宽度，计算值也是不匹配的。那么到底是什么意思呢？</p>
+<p>经过反复论证，视口是指<strong>浏览器可视区域大小</strong>，不包括浏览器的工具栏部分等。</p>
+<h3 id="使用场景">使用场景</h3><p>1.当作占位空间 </p>
+<ul>
+<li>目前使用到这个单位的场景不多，但是不久前遇到了一个问题就是通过这单位实现的。<ul>
+<li>图示: <img src="http://img3.picbed.org/uploads/2014/10/Snip20141023_3.png" alt=""></li>
+<li>用户在点击上面的类目的时候，肯定不希望页面有太大的抖动，但事实上，点击“宝宝衣服”后，出现下图场景:</li>
+<li>图示: <img src="http://img3.tuchuang.org/uploads/2014/10/Snip20141023_6.png" alt=""></li>
+</ul>
+</li>
+<li>解决方法: 对商品容器设置min-height: 100vh(试过设置min-height: 100%不行)之后，由于容器有了占位符，就不会因为在商品渲染之前容器高度太小而返回顶部了。</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-10-22T09:44:02.000Z"><a href="/2014/10/22/Storage/">2014-10-22</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/10/22/Storage/">Storage</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="概述">概述</h2><p>DOM存储是一套在Web Applications 1.0 规范中首次引入的与存储相关的特性的总称, 现在已经分离出来,单独发展成为独立的W3C Web存储规范. DOM存储被设计为用来提供一个更大存储量,更安全,更便捷的存储方法,从而可以代替掉将一些不需要让服务器知道的信息存储到cookies里的这种传统方法.该特性在Firefox 2 和 Safari 4中首次引入。</p>
+<h2 id="参考">参考</h2><p>以下所提到的对象都是全局对象，作为 window 对象 的属性存在。这意味着可以以 sessionStorage 或者 window.sessionStorage 的形式访问这些对象。(这点很重要，因为可以使用iframe来存储、访问除了直接包含在页面的数据之外的附加数据。)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意：需要时刻注意的一点是，所有数据在被保存到下面将要介绍的任何一个存储器之前，都将通过它的 .toString 方法被转换成字符串。所以一个普通对象将会被存储为 <span class="string">"[object Object]"</span>，而不是对象本身或者它的 <span class="built_in">JSON</span> 形式。使用浏览器自身提供的 <span class="built_in">JSON</span> 解析和序列化方法来存取对象是比较好的，也是比较常见的方法。</span><br></pre></td></tr></table></figure>
+<h2 id="sessionStorage">sessionStorage</h2><p>sessionStorage 是个全局对象，它维护着在页面会话(page session)期间有效的存储空间。只要浏览器开着，页面会话周期就会一直持续。当页面重新载入(reload)或者被恢复(restores)时，页面会话也是一直存在的。每在新标签或者新窗口中打开一个新页面，都会初始化一个新的会话。</p>
+<h3 id="例子">例子</h3><p>自动保存一个文本域中的内容，如果浏览器被意外刷新，则恢复该文本域中的内容，所以不会丢失任何输入的数据。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 获取到我们要循环保存的文本域</span><br><span class="line"> var field = document.getElementById(<span class="string">"field"</span>);</span><br><span class="line"> // 查看是否有一个自动保存的值</span><br><span class="line"> // (只在浏览器被意外刷新时)</span><br><span class="line"> <span class="keyword">if</span> ( sessionStorage.getItem(<span class="string">"autosave"</span>)) &#123;</span><br><span class="line">    // 恢复文本域中的内容</span><br><span class="line">    field.value = sessionStorage.getItem(<span class="string">"autosave"</span>);</span><br><span class="line"> &#125;</span><br><span class="line"> // 每隔一秒检查文本域中的内容</span><br><span class="line"> <span class="built_in">set</span>Interval(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    // 并将文本域的值保存到session storage对象中</span><br><span class="line">    sessionStorage.setItem(<span class="string">"autosave"</span>, field.value);</span><br><span class="line"> &#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+<p>具体可见demo<br><a href="https://github.com/backToNature/Storage" target="_blank" rel="external">源码仓库</a></p>
+<h2 id="localStorage">localStorage</h2><p>localStorage 方法存储的数据没有时间限制。第二天、第二周或下一年之后，数据依然可用。</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意：当浏览器进入私人模式(<span class="keyword">private</span> browsing mode，Google Chrome 上对应的应该是叫隐身模式)的时候，会创建一个新的、临时的、空的数据库，用以存储本地数据(<span class="built_in">local</span> storage <span class="built_in">data</span>)。当浏览器关闭时，里面的所有数据都将被丢弃。</span><br></pre></td></tr></table></figure>
+<h3 id="兼容性">兼容性</h3><p><img src="http://img5.tuchuang.org/uploads/2014/10/Snip20141022_2.png" alt=""><br>如果要兼容不支持它的浏览器得话，可以在你编写的 JavaScript 代码的首部插入下面这段代码。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!window.localStorage) &#123;</span><br><span class="line">  Object.defineProperty(window, <span class="string">"localStorage"</span>, new (<span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">    var aKeys = [], oStorage = &#123;&#125;;</span><br><span class="line">    Object.defineProperty(oStorage, <span class="string">"getItem"</span>, &#123;</span><br><span class="line">      value: <span class="keyword">function</span> (sKey) &#123; <span class="built_in">return</span> sKey ? this[sKey] : null; &#125;,</span><br><span class="line">      writable: <span class="literal">false</span>,</span><br><span class="line">      configurable: <span class="literal">false</span>,</span><br><span class="line">      enumerable: <span class="literal">false</span></span><br><span class="line">    &#125;);</span><br><span class="line">    Object.defineProperty(oStorage, <span class="string">"key"</span>, &#123;</span><br><span class="line">      value: <span class="keyword">function</span> (nKeyId) &#123; <span class="built_in">return</span> aKeys[nKeyId]; &#125;,</span><br><span class="line">      writable: <span class="literal">false</span>,</span><br><span class="line">      configurable: <span class="literal">false</span>,</span><br><span class="line">      enumerable: <span class="literal">false</span></span><br><span class="line">    &#125;);</span><br><span class="line">    Object.defineProperty(oStorage, <span class="string">"setItem"</span>, &#123;</span><br><span class="line">      value: <span class="keyword">function</span> (sKey, sValue) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!sKey) &#123; <span class="built_in">return</span>; &#125;</span><br><span class="line">        document.cookie = escape(sKey) + <span class="string">"="</span> + escape(sValue) + <span class="string">"; path=/"</span>;</span><br><span class="line">      &#125;,</span><br><span class="line">      writable: <span class="literal">false</span>,</span><br><span class="line">      configurable: <span class="literal">false</span>,</span><br><span class="line">      enumerable: <span class="literal">false</span></span><br><span class="line">    &#125;);</span><br><span class="line">    Object.defineProperty(oStorage, <span class="string">"length"</span>, &#123;</span><br><span class="line">      get: <span class="function"><span class="title">function</span></span> () &#123; <span class="built_in">return</span> aKeys.length; &#125;,</span><br><span class="line">      configurable: <span class="literal">false</span>,</span><br><span class="line">      enumerable: <span class="literal">false</span></span><br><span class="line">    &#125;);</span><br><span class="line">    Object.defineProperty(oStorage, <span class="string">"removeItem"</span>, &#123;</span><br><span class="line">      value: <span class="keyword">function</span> (sKey) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!sKey) &#123; <span class="built_in">return</span>; &#125;</span><br><span class="line">        var sExpDate = new Date();</span><br><span class="line">        sExpDate.setDate(sExpDate.getDate() - <span class="number">1</span>);</span><br><span class="line">        document.cookie = escape(sKey) + <span class="string">"=; expires="</span> + sExpDate.toGMTString() + <span class="string">"; path=/"</span>;</span><br><span class="line">      &#125;,</span><br><span class="line">      writable: <span class="literal">false</span>,</span><br><span class="line">      configurable: <span class="literal">false</span>,</span><br><span class="line">      enumerable: <span class="literal">false</span></span><br><span class="line">    &#125;);</span><br><span class="line">    this.get = <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">      var iThisIndx;</span><br><span class="line">      <span class="keyword">for</span> (var sKey <span class="keyword">in</span> oStorage) &#123;</span><br><span class="line">        iThisIndx = aKeys.indexOf(sKey);</span><br><span class="line">        <span class="keyword">if</span> (iThisIndx === -<span class="number">1</span>) &#123; oStorage.setItem(sKey, oStorage[sKey]); &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123; aKeys.splice(iThisIndx, <span class="number">1</span>); &#125;</span><br><span class="line">        delete oStorage[sKey];</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">for</span> (aKeys; aKeys.length &gt; <span class="number">0</span>; aKeys.splice(<span class="number">0</span>, <span class="number">1</span>)) &#123; oStorage.removeItem(aKeys[<span class="number">0</span>]); &#125;</span><br><span class="line">      <span class="keyword">for</span> (var iCouple, iKey, iCouplId = <span class="number">0</span>, aCouples = document.cookie.split(/\s*;\s*/); iCouplId &lt; aCouples.length; iCouplId++) &#123;</span><br><span class="line">        iCouple = aCouples[iCouplId].split(/\s*=\s*/);</span><br><span class="line">        <span class="keyword">if</span> (iCouple.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">          oStorage[iKey = unescape(iCouple[<span class="number">0</span>])] = unescape(iCouple[<span class="number">1</span>]);</span><br><span class="line">          aKeys.push(iKey);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">return</span> oStorage;</span><br><span class="line">    &#125;;</span><br><span class="line">    this.configurable = <span class="literal">false</span>;</span><br><span class="line">    this.enumerable = <span class="literal">true</span>;</span><br><span class="line">  &#125;)());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>兼容思想是使用的cookie，虽然cookie有大小限制，但是大多数场景下不会使用cookie存储太多数据，所以还是可以使用以上方法。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-10-20T16:48:39.000Z"><a href="/2014/10/21/前端零基础入门/">2014-10-21</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/10/21/前端零基础入门/">前端零基础入门</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="前言">前言</h2><p>首先，任何技术实际都是从零基础开始的，不管是直接学习还是通过相近经历转行。所以不需要因零基础担心。</p>
+<p>其次，一定要做好准备：一项技术的学习，意味着你各方面资源不同程度的消耗——时间、工具、资金，甚至融入相关交流圈子的准备。在这个准备过程中，最好是带有一个强硬的规划：“我要在一个月内达到能够实现XXX的水平”或者“我一定要在2周内把XXX项目完成”。如果没有这个规划，一般人都会越来越懒惰。</p>
+<p>然后，选准一个或多个老师。这个老师，可以是一个页面，一本书，也可以是一个真实的人。</p>
+<h2 id="学习内容">学习内容</h2><p>主要有<strong>html,css,js</strong>入门得话推荐先到<a href="http://www.w3school.com.cn/" target="_blank" rel="external">w3school</a>学习上面的教程，上面的教程大多都有demo示例，通过这种方式也可以增加兴趣。新手进入后可以从下图红色的入口去先学习:<br><img src="http://img2.picbed.org/uploads/2014/10/Snip20141024_1.png" alt=""></p>
+<h2 id="推荐书籍">推荐书籍</h2><ol>
+<li>入门<ul>
+<li>html就通过<a href="http://www.w3school.com.cn/html/index.asp" target="_blank" rel="external">w3school-HTML教程</a>来学习</li>
+<li><a href="http://yanhaijing.com/basejs/" target="_blank" rel="external">js简易教程</a></li>
+<li><a href="http://baike.baidu.com/view/2506513.htm?fr=aladdin" target="_blank" rel="external">《css权威指南》</a></li>
+<li><a href="http://baike.baidu.com/view/5688263.htm?fr=aladdin" target="_blank" rel="external">《JavaScript DOM编程艺术》</a></li>
+</ul>
+</li>
+<li>进阶<ul>
+<li><a href="http://baike.baidu.com/view/1935786.htm?fr=aladdin" target="_blank" rel="external">《Javascript权威指南》(简称犀牛书)</a>或者<a href="http://www.amazon.cn/mn/detailApp?asin=B00CBBJS5Y&amp;tag=baiduiclickcn-23&amp;ref=pz_ic_db_j_5bkindle202" target="_blank" rel="external">《JavaScript高级程序设计》(简称红书)</a></li>
+<li><a href="http://baike.baidu.com/view/4720389.htm?fr=aladdin" target="_blank" rel="external">《高性能JavaScript》</a></li>
+<li><a href="http://baike.baidu.com/view/11262652.htm?fr=aladdin" target="_blank" rel="external">《编写可维护的JavaScript》</a></li>
+<li><a href="http://baike.baidu.com/view/3782729.htm?fr=aladdin" target="_blank" rel="external">《JavaScript语言精粹》</a></li>
+<li><a href="http://baike.baidu.com/view/2533650.htm?fr=aladdin" target="_blank" rel="external">《JavaScript设计模式》</a></li>
+</ul>
+</li>
+<li>html5/css3<ul>
+<li><a href="http://www.w3school.com.cn/html5/index.asp" target="_blank" rel="external">w3c</a></li>
+<li><a href="http://html5demos.com/" target="_blank" rel="external">HTML 5 Demos and Examples</a></li>
+<li><a href="https://simpl.info/" target="_blank" rel="external">h5-example</a></li>
+<li><a href="http://slides.html5rocks.com/" target="_blank" rel="external">酷炫学习h5网站</a></li>
+</ul>
+</li>
+<li>es6<ul>
+<li><a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">ECMAScript 6入门</a></li>
+</ul>
+</li>
+<li>github<ul>
+<li><a href="http://rogerdudler.github.io/git-guide/index.zh.html" target="_blank" rel="external">git - 简明指南</a></li>
+<li><a href="http://pcottle.github.io/learnGitBranching/" target="_blank" rel="external">玩游戏闯关学习git</a></li>
+<li><a href="http://item.jd.com/10697183.html" target="_blank" rel="external">书籍-git权威指南</a></li>
+</ul>
+</li>
+<li><a href="http://www.cnblogs.com/pigtail/p/3336317.html" target="_blank" rel="external">详细书单</a></li>
+</ol>
+<h2 id="推荐编辑软件">推荐编辑软件</h2><ol>
+<li>Dreamweaver<ul>
+<li>Adobe Dreamweaver，简称“DW”，中文名称”梦想编织者”，是美国MACROMEDIA公司开发的集网页制作和管理网站于一身的所见即所得网页编辑器，DW是第一套针对专业网页设计师特别发展的视觉化网页开发工具，利用它可以轻而易举地制作出跨越平台限制和跨越浏览器限制的充满动感的网页。</li>
+</ul>
+</li>
+<li>Notepad++<ul>
+<li>Notepad++是一套非常有特色的自由软件的纯文字编辑器(许可证:GPL)，有完整的中文化接口及支持多国语言编写的功能(UTF8 技术)。它的功能比 Windows 中的 Notepad(记事本)强大，除了可以用来制作一般的纯文字说明文件，也十分适合当作编写电脑程序的编辑器。Notepad++ 不仅有语法高亮度显示，也有语法折叠功能，并且支持宏以及扩充基本功能的外挂模组。</li>
+</ul>
+</li>
+<li>Sublime<ul>
+<li>Sublime Text具有漂亮的用户界面和强大的功能，例如代码缩略图，Python的插件，代码段等。还可自定义键绑定，菜单和工具栏。Sublime Text 的主要功能包括：拼写检查，书签，完整的 Python API ， Goto 功能，即时项目切换，多选择，多窗口等等。[1] Sublime Text 是一个跨平台的编辑器，同时支持Windows、Linux、Mac OS X等操作系统</li>
+</ul>
+</li>
+</ol>
+<h2 id="强烈推荐">强烈推荐</h2><p>git作为最近炙手可热的版本管理工具，作为前端工程师，这玩意儿不会用是不行的，强烈推荐学习git，并通过github记录自己的学习代码和历程。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-10-08T09:55:24.000Z"><a href="/2014/10/08/mac_s linux comands/">2014-10-08</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/10/08/mac_s linux comands/">Mac下常用linux命令解析</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="linux命令格式">linux命令格式</h3><p>linux命令列通常由好⼏几个字符串组成, 中间⽤用空格键分<br>开。如下所⽰: </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">command</span> options arguments(或parameters)</span><br></pre></td></tr></table></figure>
+<p>命令 选项 参数<br>例如:<br>rm -rf /home/ols3</p>
+<h3 id="通配符基础">通配符基础</h3><p>通配符 又称多义符。在描述⽂文件时,有时在⽂文件名部分⽤用到 ⼀一些通配符,以加强命令的功能。在Linux系统中有以下基本 的通配符:</p>
+<pre><code>?:表⽰示该位置可以是⼀一个任意的单个字符。
+*:表⽰示该位置可以是若⼲干个任意字符。
+方括号[charset]:可替代charset集中的任何单个字符 
+下⾯对方括号通配符进行一些说明。例如:
+[<span class="link_reference">cChH</span>]:<span class="link_url">表⽰在⽂件的该位置中可出现任意单个的c或h字符的⼤小写形式。</span>
+</code></pre><p>另外,通配符集还能描述介于字符对之间的所有字符。如“[a- z]”就可以代 替任意⼩小写字母,⽽而[a-zA-Z]则可替代任意字母。 注意可替代的字符包括a到z和A到Z字符对之间的所有字符。</p>
+<h3 id="Mac常用linux命令介绍">Mac常用linux命令介绍</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ls</td>
+<td style="text-align:center">显示指定工作目录下的内容</td>
+</tr>
+<tr>
+<td>cd</td>
+<td style="text-align:center">变幻工作目录</td>
+</tr>
+<tr>
+<td>pwd</td>
+<td style="text-align:center">显示当前活动目录的绝对路径</td>
+</tr>
+<tr>
+<td>clear</td>
+<td style="text-align:center">清屏命令</td>
+</tr>
+<tr>
+<td>mkdir</td>
+<td style="text-align:center">创建新目录</td>
+</tr>
+<tr>
+<td>redir</td>
+<td style="text-align:center">删除空目录</td>
+</tr>
+<tr>
+<td>rm</td>
+<td style="text-align:center">删除文档和目录</td>
+</tr>
+<tr>
+<td>touch</td>
+<td style="text-align:center">创建一个空白文件</td>
+</tr>
+<tr>
+<td>cp</td>
+<td style="text-align:center">复制文件或者目录</td>
+</tr>
+<tr>
+<td>mv</td>
+<td style="text-align:center">移动目录或给文件改名</td>
+</tr>
+<tr>
+<td>chmod</td>
+<td style="text-align:center">修改文件或目录的权限</td>
+</tr>
+<tr>
+<td>chown</td>
+<td style="text-align:center">修改文件或者目录所属的用户</td>
+</tr>
+<tr>
+<td>chgrp</td>
+<td style="text-align:center">修改文件或目录所属的工作组</td>
+</tr>
+<tr>
+<td>find</td>
+<td style="text-align:center">在指定的路径下搜索指定的文件</td>
+</tr>
+<tr>
+<td>grep</td>
+<td style="text-align:center">过滤，查找文件中的内容</td>
+</tr>
+<tr>
+<td>kill</td>
+<td style="text-align:center">杀死指定进程</td>
+</tr>
+<tr>
+<td>killall</td>
+<td style="text-align:center">杀死所有进程</td>
+</tr>
+<tr>
+<td>tar</td>
+<td style="text-align:center">用于打包和解包某个目录和文件</td>
+</tr>
+<tr>
+<td>gzip</td>
+<td style="text-align:center">用于压缩某个文件和目录,gunzip解压缩</td>
+</tr>
+<tr>
+<td>bzip2</td>
+<td style="text-align:center">用于压缩某个文件和目录,bunzip2解压缩</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ls命令常用参数">ls命令常用参数</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-a</td>
+<td style="text-align:center">列出目录下的所有文件，包括以 . 开头的隐含文件</td>
+</tr>
+<tr>
+<td>-l</td>
+<td style="text-align:center">除了文件名之外，还将文件的权限、所有者、文件大小等信息详细列出来。</td>
+</tr>
+<tr>
+<td>-h</td>
+<td style="text-align:center">以容易理解的格式列出文件大小 (例如 1K 234M 2G)</td>
+</tr>
+<tr>
+<td>-t</td>
+<td style="text-align:center">以文件修改时间排序</td>
+</tr>
+<tr>
+<td>-u</td>
+<td style="text-align:center">配合 -lt:显示访问时间而且依访问时间排序配合 -l:显示访问时间但根据名称排序。否则：根据访问时间排序</td>
+</tr>
+</tbody>
+</table>
+<h3 id="一些使用方法：">一些使用方法：</h3><h4 id="1-_列出/home/peidachang文件夹下的所有文件和目录的详细资料">1. 列出/home/peidachang文件夹下的所有文件和目录的详细资料</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ls <span class="operator">-l</span> -R /home/peidachang</span><br></pre></td></tr></table></figure>
+<p>若当前目录已经在home下，同样的作用这样也可以实现，如下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ls <span class="operator">-l</span> -R peidachang</span><br></pre></td></tr></table></figure>
+<h4 id="2-_列出当前目录中所有以“t”开头的目录的详细内容，可以使用如下命令：">2. 列出当前目录中所有以“t”开头的目录的详细内容，可以使用如下命令：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ls <span class="operator">-l</span> t*</span><br></pre></td></tr></table></figure>
+<h4 id="3-_只列出文件下的子目录">3. 只列出文件下的子目录</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ls -F /opt/soft |grep /$</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-09-29T07:55:24.000Z"><a href="/2014/09/29/css/">2014-09-29</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/09/29/css/">Mac OSX 10.9搭建nginx+mysql+php-fpm环境</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="安装homebrew">安装homebrew</h3><p>homebrew是mac下非常好用的包管理器，会自动安装相关的依赖包，将你从繁琐的软件依赖安装中解放出来。<br>安装homebrew也非常简单，只要在终端中输入11:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ruby <span class="operator">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)</span>"</span></span><br></pre></td></tr></table></figure>
+<p>homebrew的常用命令:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ brew update <span class="comment">#更新可安装包的最新信息，建议每次安装前都运行下</span></span><br><span class="line">$ brew search pkg_name <span class="comment">#搜索相关的包信息</span></span><br><span class="line">$ brew install pkg_name <span class="comment">#安装包</span></span><br></pre></td></tr></table></figure>
+<p>想了解更多地信息，请参看<a href="http://brew.sh/" target="_blank" rel="external">homebrew</a></p>
+<h3 id="安装nginx">安装nginx</h3><p>安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ brew search nginx</span><br><span class="line">$ brew install nginx</span><br></pre></td></tr></table></figure>
+<p>配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/etc/nginx/</span><br><span class="line">$ mkdir conf.d</span><br><span class="line">$ vim nginx.conf</span><br><span class="line">$ vim ./conf.d/default.conf</span><br></pre></td></tr></table></figure>
+<p>nginx.conf内容,</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">worker_processes</span>  <span class="number">1</span>;  </span><br><span class="line"> </span><br><span class="line"><span class="title">error_log</span>       /usr/local/var/log/nginx/error.log <span class="built_in">warn</span>;</span><br><span class="line"> </span><br><span class="line"><span class="title">pid</span>        /usr/local/var/run/nginx.pid;</span><br><span class="line"> </span><br><span class="line"><span class="title">events</span> &#123;</span><br><span class="line">    <span class="title">worker_connections</span>  <span class="number">256</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="title">http</span> &#123;</span><br><span class="line">    <span class="title">include</span>       mime.types;</span><br><span class="line">    <span class="title">default_type</span>  application/octet-stream;</span><br><span class="line"> </span><br><span class="line">    <span class="title">log_format</span>  main  <span class="string">'<span class="variable">$remote_addr</span> - <span class="variable">$remote_user</span> [<span class="variable">$time_local</span>] "<span class="variable">$request</span>" '</span></span><br><span class="line">                      <span class="string">'<span class="variable">$status</span> <span class="variable">$body_bytes_sent</span> "<span class="variable">$http_referer</span>" '</span></span><br><span class="line">                      <span class="string">'"<span class="variable">$http_user_agent</span>" "<span class="variable">$http_x_forwarded_for</span>"'</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="title">access_log</span>      /usr/local/var/log/nginx/access.log main;</span><br><span class="line">    <span class="title">port_in_redirect</span> <span class="built_in">off</span>;</span><br><span class="line">    <span class="title">sendfile</span>        <span class="built_in">on</span>; </span><br><span class="line">    <span class="title">keepalive_timeout</span>  <span class="number">65</span>; </span><br><span class="line"> </span><br><span class="line">    <span class="title">include</span> /usr/local/etc/nginx/conf.d/<span class="regexp">*.conf</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>default.conf文件内容,</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">server</span> &#123;</span><br><span class="line">    <span class="title">listen</span>       <span class="number">8080</span>;</span><br><span class="line">    <span class="title">server_name</span>  localhost;</span><br><span class="line"> </span><br><span class="line">    <span class="title">root</span> /Users/user_name/nginx_sites/; <span class="comment"># 该项要修改为你准备存放相关网页的路径</span></span><br><span class="line"> </span><br><span class="line">    <span class="title">location</span> / &#123; </span><br><span class="line">        <span class="title">index</span> index.php;</span><br><span class="line">        <span class="title">autoindex</span> <span class="built_in">on</span>; </span><br><span class="line">    &#125;   </span><br><span class="line"> </span><br><span class="line">    <span class="comment">#proxy the php scripts to php-fpm  </span></span><br><span class="line">    <span class="title">location</span> <span class="regexp">~ \.php$</span> &#123;</span><br><span class="line">        <span class="title">include</span> /usr/local/etc/nginx/fastcgi.conf;</span><br><span class="line">        <span class="title">fastcgi_intercept_errors</span> <span class="built_in">on</span>; </span><br><span class="line">        <span class="title">fastcgi_pass</span>   <span class="number">127.0.0.1:9000</span>; </span><br><span class="line">    &#125;   </span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="安装php-fpm">安装php-fpm</h3><p>Mac OSX 10.9的系统自带了PHP、php-fpm，省去了安装php-fpm的麻烦。<br><br>这里需要简单地修改下php-fpm的配置，否则运行php-fpm会报错。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cp /private/etc/php-fpm.conf.default /private/etc/php-fpm.conf</span><br><span class="line">$ vim /private/etc/php-fpm.conf</span><br></pre></td></tr></table></figure>
+<p>修改php-fpm.conf文件中的<code>error_log</code>项，默认该项被注释掉，这里需要去注释并且修改为<code>error_log = /usr/local/var/log/php-fpm.log</code>。如果不修改该值，运行php-fpm的时候会提示log文件输出路径不存在的错误。</p>
+<h3 id="安装mysql">安装mysql</h3><p>安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install mysql</span><br></pre></td></tr></table></figure>
+<p>常用命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mysql.server start <span class="comment">#启动mysql服务</span></span><br><span class="line">$ mysql.server stop <span class="comment">#关闭mysql服务</span></span><br></pre></td></tr></table></figure></p>
+<p>配置<br>在终端运行<code>mysql_secure_installation</code>脚本，该脚本会一步步提示你设置一系列安全性相关的参数，包括：<code>设置root密码</code>，<code>关闭匿名访问</code>，<code>不允许root用户远程访问</code>，<code>移除test数据库</code>。当然运行该脚本前记得先启动mysql服务。</p>
+<h3 id="测试nginx服务">测试nginx服务</h3><p>在之前nginx配置文件default.conf中设置的root项对应的文件夹下创建测试文件index.php:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- ~/nginx_sites/index.php --&gt;</span></span><br><span class="line"><span class="php"><span class="preprocessor">&lt;?php</span> phpinfo(); <span class="preprocessor">?&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>启动nginx服务，sudo nginx；<br><br>修改配置文件，重启nginx服务，sudo nginx -s reload <br><br>启动php服务，sudo php-fpm； <br><br>在浏览器地址栏中输入localhost:8080，如果配置正确地话，应该能看到PHP相关信息的页面。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
 
 <nav id="pagination">
   
-  
-    <a href="/page/2/" class="alignright next">下一页</a>
   
   <div class="clearfix"></div>
 </nav></div></div>
