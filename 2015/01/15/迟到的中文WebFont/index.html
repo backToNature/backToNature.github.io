@@ -26,7 +26,7 @@
 <link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
 
 
-    <meta name="description" content="简~~叶's blog | javascript | html | css | IT" />
+    <meta name="description" content="年轻不多装装逼就老了" />
 
 
 
@@ -36,7 +36,7 @@
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.icon?v=0.4.5.1" />
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
 <meta name="description" content="概述三年前，有一个设计师面试一位 Web 前端工程师，其中有一段这样的对话：
@@ -65,7 +65,7 @@
 <script type="text/javascript" id="hexo.configuration">
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: 'post'
+    sidebar: 'always'
   };
 </script>
 
@@ -137,6 +137,14 @@
           <a href="/tags" rel="section">
             <i class="menu-item-icon icon-next-tags"></i> <br />
             标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
           </a>
         </li>
       
@@ -301,14 +309,19 @@
   </div>
 
  </div>
+        <div id="SOHUCS"></div>
+        <script type="text/javascript">
+        (function(){
+        var appid = 'cyrwYj23r';
+        var conf = 'f69e3549c48240bddaae2eb53f5ace72';
+        if (window.screen.width < 960) {
+        window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+        } else {
+        var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("http://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+        }
+        })();
+        </script>
 
-        
-
-        
-          <div class="comments" id="comments">
-            
-          </div>
-        
       </div>
 
       
@@ -337,10 +350,10 @@
 
       <section class="site-overview">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/images/default_avatar.jpg" alt="简~~叶" itemprop="image"/>
+          <img class="site-author-image" src="/images/haoge_avatar.gif" alt="简~~叶" itemprop="image"/>
           <p class="site-author-name" itemprop="name">简~~叶</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">简~~叶's blog | javascript | html | css | IT</p>
+        <p class="site-description motion-element" itemprop="description">年轻不多装装逼就老了</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -369,12 +382,37 @@
 
         <div class="links-of-author motion-element">
           
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/backToNature" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3174961462/profile?rightmod=1&wvr=6&mod=personinfo" target="_blank">Weibo</a>
+              </span>
+            
+          
         </div>
 
         
         
 
         <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+              <a href="http://hexo.io/" target="_blank">Hexo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://www.dearhaoge.com/" target="_blank">It's me</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://changyan.kuaizhan.com/" target="_blank">畅言</a>
+              </span>
+            
           
         </div>
 
@@ -402,7 +440,7 @@
     <footer id="footer" class="footer">
       <div class="footer-inner"> <div class="copyright" >
   
-  &copy; &nbsp; 
+  &copy; &nbsp;  2014 - 
   <span itemprop="copyrightYear">2015</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
@@ -632,9 +670,33 @@
   </script>
 
   
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script type="text/javascript" src="http://cdn.bootcss.com/mathjax/2.5.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 
   
   
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"3","bdPos":"left","bdTop":"250"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
 
   
   <script type="text/javascript" src="/js/lazyload.js"></script>

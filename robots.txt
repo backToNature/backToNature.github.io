@@ -1,0 +1,7 @@
+# robots.txt
+User-agent: Baiduspider
+Disallow: /
+User-agent: Googlebot
+Disallow:
+User-agent: Swiftbot
+Disallow: /
