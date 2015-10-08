@@ -1,77 +1,210 @@
-<!DOCTYPE HTML>
-<html>
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
 <head>
-  <meta charset="utf-8">
-  
-  <title>Storage | 简~~叶</title>
-  <meta name="author" content="简~~叶">
-  
-  <meta name="description" content="简~~叶&#39;s blog | javascript | html | css | IT">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-  <meta property="og:title" content="Storage"/>
-  <meta property="og:site_name" content="简~~叶"/>
-
-  
-    <meta property="og:image" content="undefined"/>
   
 
-  <link href="/favicon.png" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="简~~叶" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-  <script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?b305585698a65577c37a1c283348d929";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="简~~叶's blog | javascript | html | css | IT" />
+
+
+
+  <meta name="keywords" content="Hexo,next" />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.icon?v=0.4.5.1" />
+
+
+<meta name="description" content="概述DOM存储是一套在Web Applications 1.0 规范中首次引入的与存储相关的特性的总称, 现在已经分离出来,单独发展成为独立的W3C Web存储规范. DOM存储被设计为用来提供一个更大存储量,更安全,更便捷的存储方法,从而可以代替掉将一些不需要让服务器知道的信息存储到cookies里的这种传统方法.该特性在Firefox 2 和 Safari 4中首次引入。
+参考以下所提到的对象">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Storage">
+<meta property="og:url" content="http://www.dearhaoge.com/2014/10/22/Storage/index.html">
+<meta property="og:site_name" content="简~~叶">
+<meta property="og:description" content="概述DOM存储是一套在Web Applications 1.0 规范中首次引入的与存储相关的特性的总称, 现在已经分离出来,单独发展成为独立的W3C Web存储规范. DOM存储被设计为用来提供一个更大存储量,更安全,更便捷的存储方法,从而可以代替掉将一些不需要让服务器知道的信息存储到cookies里的这种传统方法.该特性在Firefox 2 和 Safari 4中首次引入。
+参考以下所提到的对象">
+<meta property="og:image" content="http://img5.tuchuang.org/uploads/2014/10/Snip20141022_2.png">
+<meta property="og:updated_time" content="2014-10-22T15:25:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Storage">
+<meta name="twitter:description" content="概述DOM存储是一套在Web Applications 1.0 规范中首次引入的与存储相关的特性的总称, 现在已经分离出来,单独发展成为独立的W3C Web存储规范. DOM存储被设计为用来提供一个更大存储量,更安全,更便捷的存储方法,从而可以代替掉将一些不需要让服务器知道的信息存储到cookies里的这种传统方法.该特性在Firefox 2 和 Safari 4中首次引入。
+参考以下所提到的对象">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
 </script>
 
+  <title> Storage | 简~~叶 </title>
 </head>
 
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-<body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">简~~叶</a></h1>
-  <h2><a href="/">程序,生活,就是这么简单</a></h2>
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">简~~叶</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
 </div>
-<nav id="main-nav" class="alignright">
-  <ul>
-    
-      <li><a href="/archives">首页</a></li>
-    
-      <li><a href="/about">关于</a></li>
-    
-    <li> <a href="/atom.xml">RSS</a> </li>
-  </ul>
-  <div class="clearfix"></div>
-</nav>
-<div class="clearfix"></div></header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2014-10-22T09:44:02.000Z"><a href="/2014/10/22/Storage/">2014-10-22</a></time>
-      
-      
-  
-    <h1 class="title">Storage</h1>
+
+<nav class="site-nav">
   
 
-    </header>
-    <div class="entry">
+  
+    <ul id="menu" class="menu ">
       
-        <h2 id="概述">概述</h2><p>DOM存储是一套在Web Applications 1.0 规范中首次引入的与存储相关的特性的总称, 现在已经分离出来,单独发展成为独立的W3C Web存储规范. DOM存储被设计为用来提供一个更大存储量,更安全,更便捷的存储方法,从而可以代替掉将一些不需要让服务器知道的信息存储到cookies里的这种传统方法.该特性在Firefox 2 和 Safari 4中首次引入。</p>
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              Storage
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2014-10-22T17:44:02+08:00" content="2014-10-22">
+            2014-10-22
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/web前端/" itemprop="url" rel="index">
+                  <span itemprop="name">web前端</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="概述">概述</h2><p>DOM存储是一套在Web Applications 1.0 规范中首次引入的与存储相关的特性的总称, 现在已经分离出来,单独发展成为独立的W3C Web存储规范. DOM存储被设计为用来提供一个更大存储量,更安全,更便捷的存储方法,从而可以代替掉将一些不需要让服务器知道的信息存储到cookies里的这种传统方法.该特性在Firefox 2 和 Safari 4中首次引入。</p>
 <h2 id="参考">参考</h2><p>以下所提到的对象都是全局对象，作为 window 对象 的属性存在。这意味着可以以 sessionStorage 或者 window.sessionStorage 的形式访问这些对象。(这点很重要，因为可以使用iframe来存储、访问除了直接包含在页面的数据之外的附加数据。)</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意：需要时刻注意的一点是，所有数据在被保存到下面将要介绍的任何一个存储器之前，都将通过它的 .toString 方法被转换成字符串。所以一个普通对象将会被存储为 <span class="string">"[object Object]"</span>，而不是对象本身或者它的 <span class="built_in">JSON</span> 形式。使用浏览器自身提供的 <span class="built_in">JSON</span> 解析和序列化方法来存取对象是比较好的，也是比较常见的方法。</span><br></pre></td></tr></table></figure>
 <h2 id="sessionStorage">sessionStorage</h2><p>sessionStorage 是个全局对象，它维护着在页面会话(page session)期间有效的存储空间。只要浏览器开着，页面会话周期就会一直持续。当页面重新载入(reload)或者被恢复(restores)时，页面会话也是一直存在的。每在新标签或者新窗口中打开一个新页面，都会初始化一个新的会话。</p>
@@ -83,115 +216,386 @@ var _hmt = _hmt || [];
 <h3 id="兼容性">兼容性</h3><p><img src="http://img5.tuchuang.org/uploads/2014/10/Snip20141022_2.png" alt=""><br>如果要兼容不支持它的浏览器得话，可以在你编写的 JavaScript 代码的首部插入下面这段代码。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!window.localStorage) &#123;</span><br><span class="line">  Object.defineProperty(window, <span class="string">"localStorage"</span>, new (<span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">    var aKeys = [], oStorage = &#123;&#125;;</span><br><span class="line">    Object.defineProperty(oStorage, <span class="string">"getItem"</span>, &#123;</span><br><span class="line">      value: <span class="keyword">function</span> (sKey) &#123; <span class="built_in">return</span> sKey ? this[sKey] : null; &#125;,</span><br><span class="line">      writable: <span class="literal">false</span>,</span><br><span class="line">      configurable: <span class="literal">false</span>,</span><br><span class="line">      enumerable: <span class="literal">false</span></span><br><span class="line">    &#125;);</span><br><span class="line">    Object.defineProperty(oStorage, <span class="string">"key"</span>, &#123;</span><br><span class="line">      value: <span class="keyword">function</span> (nKeyId) &#123; <span class="built_in">return</span> aKeys[nKeyId]; &#125;,</span><br><span class="line">      writable: <span class="literal">false</span>,</span><br><span class="line">      configurable: <span class="literal">false</span>,</span><br><span class="line">      enumerable: <span class="literal">false</span></span><br><span class="line">    &#125;);</span><br><span class="line">    Object.defineProperty(oStorage, <span class="string">"setItem"</span>, &#123;</span><br><span class="line">      value: <span class="keyword">function</span> (sKey, sValue) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!sKey) &#123; <span class="built_in">return</span>; &#125;</span><br><span class="line">        document.cookie = escape(sKey) + <span class="string">"="</span> + escape(sValue) + <span class="string">"; path=/"</span>;</span><br><span class="line">      &#125;,</span><br><span class="line">      writable: <span class="literal">false</span>,</span><br><span class="line">      configurable: <span class="literal">false</span>,</span><br><span class="line">      enumerable: <span class="literal">false</span></span><br><span class="line">    &#125;);</span><br><span class="line">    Object.defineProperty(oStorage, <span class="string">"length"</span>, &#123;</span><br><span class="line">      get: <span class="function"><span class="title">function</span></span> () &#123; <span class="built_in">return</span> aKeys.length; &#125;,</span><br><span class="line">      configurable: <span class="literal">false</span>,</span><br><span class="line">      enumerable: <span class="literal">false</span></span><br><span class="line">    &#125;);</span><br><span class="line">    Object.defineProperty(oStorage, <span class="string">"removeItem"</span>, &#123;</span><br><span class="line">      value: <span class="keyword">function</span> (sKey) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!sKey) &#123; <span class="built_in">return</span>; &#125;</span><br><span class="line">        var sExpDate = new Date();</span><br><span class="line">        sExpDate.setDate(sExpDate.getDate() - <span class="number">1</span>);</span><br><span class="line">        document.cookie = escape(sKey) + <span class="string">"=; expires="</span> + sExpDate.toGMTString() + <span class="string">"; path=/"</span>;</span><br><span class="line">      &#125;,</span><br><span class="line">      writable: <span class="literal">false</span>,</span><br><span class="line">      configurable: <span class="literal">false</span>,</span><br><span class="line">      enumerable: <span class="literal">false</span></span><br><span class="line">    &#125;);</span><br><span class="line">    this.get = <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">      var iThisIndx;</span><br><span class="line">      <span class="keyword">for</span> (var sKey <span class="keyword">in</span> oStorage) &#123;</span><br><span class="line">        iThisIndx = aKeys.indexOf(sKey);</span><br><span class="line">        <span class="keyword">if</span> (iThisIndx === -<span class="number">1</span>) &#123; oStorage.setItem(sKey, oStorage[sKey]); &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123; aKeys.splice(iThisIndx, <span class="number">1</span>); &#125;</span><br><span class="line">        delete oStorage[sKey];</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">for</span> (aKeys; aKeys.length &gt; <span class="number">0</span>; aKeys.splice(<span class="number">0</span>, <span class="number">1</span>)) &#123; oStorage.removeItem(aKeys[<span class="number">0</span>]); &#125;</span><br><span class="line">      <span class="keyword">for</span> (var iCouple, iKey, iCouplId = <span class="number">0</span>, aCouples = document.cookie.split(/\s*;\s*/); iCouplId &lt; aCouples.length; iCouplId++) &#123;</span><br><span class="line">        iCouple = aCouples[iCouplId].split(/\s*=\s*/);</span><br><span class="line">        <span class="keyword">if</span> (iCouple.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">          oStorage[iKey = unescape(iCouple[<span class="number">0</span>])] = unescape(iCouple[<span class="number">1</span>]);</span><br><span class="line">          aKeys.push(iKey);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">return</span> oStorage;</span><br><span class="line">    &#125;;</span><br><span class="line">    this.configurable = <span class="literal">false</span>;</span><br><span class="line">    this.enumerable = <span class="literal">true</span>;</span><br><span class="line">  &#125;)());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>兼容思想是使用的cookie，虽然cookie有大小限制，但是大多数场景下不会使用cookie存储太多数据，所以还是可以使用以上方法。</p>
-
+</span>
       
     </div>
-    <footer>
-      
-        
-  
-  <div class="categories">
-    <a href="/categories/web前端/">web前端</a>
-  </div>
 
-        
-        <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
-        <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+    <footer class="post-footer">
       
-      <div class="clearfix"></div>
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/10/23/视区相关单位用法/" rel="prev">视区相关单位vh,vm,vmin,vmax用法</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/10/21/前端零基础入门/" rel="next">前端零基础入门</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
     </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
-</article>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="简~~叶" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">简~~叶</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">简~~叶's blog | javascript | html | css | IT</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sessionStorage"><span class="nav-number">3.</span> <span class="nav-text">sessionStorage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">3.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#localStorage"><span class="nav-number">4.</span> <span class="nav-text">localStorage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#兼容性"><span class="nav-number">4.1.</span> <span class="nav-text">兼容性</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
 
 
-<nav id="pagination" >
-    
-    <a href="/2014/10/23/视区相关单位用法/" class="alignleft prev" >上一页</a>
-    
-    
-    <a href="/2014/10/21/前端零基础入门/" class="alignright next" >下一页</a>
-    
-    <div class="clearfix"></div>
-</nav>
-<section id="comment">
+    </main>
 
-<!--兼容版，可保证页面完全兼容-->
-<div id="SOHUCS"></div>
-<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
-<script type="text/javascript">
-    window._config = { showScore: true };
-    window.changyan.api.config({
-        appid: 'cyrwYj23r',
-        conf: 'prod_5ee226efc33ddcf56e81b59a7cca10e6'
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">简~~叶</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
     });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
 </script>
 
 
-  <h1 class="title">留言</h1>
 
-  
-</section>
-
-</div></div>
-    <aside id="sidebar" class="alignright">
-  
-<div class="widget tag">
-  <h3 class="title">分类</h3>
-  <ul class="entry">
-  
-    <li><a href="/categories/git/">git</a><small>1</small></li>
-  
-    <li><a href="/categories/linux/">linux</a><small>1</small></li>
-  
-    <li><a href="/categories/node/">node</a><small>1</small></li>
-  
-    <li><a href="/categories/web前端/">web前端</a><small>12</small></li>
-  
-    <li><a href="/categories/图形图像/">图形图像</a><small>1</small></li>
-  
-    <li><a href="/categories/搜索引擎/">搜索引擎</a><small>1</small></li>
-  
-    <li><a href="/categories/用户体验/">用户体验</a><small>1</small></li>
-  
-    <li><a href="/categories/系统搭建/">系统搭建</a><small>1</small></li>
-  
-    <li><a href="/categories/网络协议与dns/">网络协议与dns</a><small>1</small></li>
-  
-  </ul>
-</div>
-
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
 
   
 
-  <div class="widget tag">
-<h3 class="title">友情链接</h3>
-<ul class="entry">
-<li><a href="http://backtonature.github.io/" title="问水的博客">问水</a></li>
-</ul>
-</div>
-</aside>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div class="alignleft">
   
-  &copy; 2015 简~~叶
   
-</div>
-<div class="clearfix"></div></footer>
-  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
 
-
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
-
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
 </body>
 </html>

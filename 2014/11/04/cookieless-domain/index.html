@@ -1,77 +1,213 @@
-<!DOCTYPE HTML>
-<html>
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
 <head>
-  <meta charset="utf-8">
-  
-  <title>cookieless domain | 简~~叶</title>
-  <meta name="author" content="简~~叶">
-  
-  <meta name="description" content="简~~叶&#39;s blog | javascript | html | css | IT">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-  <meta property="og:title" content="cookieless domain"/>
-  <meta property="og:site_name" content="简~~叶"/>
-
-  
-    <meta property="og:image" content="undefined"/>
   
 
-  <link href="/favicon.png" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="简~~叶" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-  <script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?b305585698a65577c37a1c283348d929";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="简~~叶's blog | javascript | html | css | IT" />
+
+
+
+  <meta name="keywords" content="Hexo,next" />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.icon?v=0.4.5.1" />
+
+
+<meta name="description" content="概述什么是cookieless domain?虽然名字中带有cookie,其实完全可以不使用cookie。这只是一种将网页中静态的文本，图片等的域名和主域名相区别开的方法。
+主域名难免会使用到cookie,如果所有的资源(js,css,img等)都是来自于主域名,那么这些资源也会携带主域名的cookie。这样其实增加了很多不必要的流量,要知道性能都是从细节上优化的。cookie相信大家都十分熟悉了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cookieless domain">
+<meta property="og:url" content="http://www.dearhaoge.com/2014/11/04/cookieless-domain/index.html">
+<meta property="og:site_name" content="简~~叶">
+<meta property="og:description" content="概述什么是cookieless domain?虽然名字中带有cookie,其实完全可以不使用cookie。这只是一种将网页中静态的文本，图片等的域名和主域名相区别开的方法。
+主域名难免会使用到cookie,如果所有的资源(js,css,img等)都是来自于主域名,那么这些资源也会携带主域名的cookie。这样其实增加了很多不必要的流量,要知道性能都是从细节上优化的。cookie相信大家都十分熟悉了">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/005yyi5Jjw1elz3i6lka5j30mu08it9u.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/005yyi5Jjw1elz3i5s5mij30pa0d8gns.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/005yyi5Jjw1elz3i642ctj30o80cemz3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005yyi5Jjw1elz3i6t0umj30rk0c040g.jpg">
+<meta property="og:updated_time" content="2014-11-04T09:35:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cookieless domain">
+<meta name="twitter:description" content="概述什么是cookieless domain?虽然名字中带有cookie,其实完全可以不使用cookie。这只是一种将网页中静态的文本，图片等的域名和主域名相区别开的方法。
+主域名难免会使用到cookie,如果所有的资源(js,css,img等)都是来自于主域名,那么这些资源也会携带主域名的cookie。这样其实增加了很多不必要的流量,要知道性能都是从细节上优化的。cookie相信大家都十分熟悉了">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
 </script>
 
+  <title> cookieless domain | 简~~叶 </title>
 </head>
 
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-<body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">简~~叶</a></h1>
-  <h2><a href="/">程序,生活,就是这么简单</a></h2>
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">简~~叶</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
 </div>
-<nav id="main-nav" class="alignright">
-  <ul>
-    
-      <li><a href="/archives">首页</a></li>
-    
-      <li><a href="/about">关于</a></li>
-    
-    <li> <a href="/atom.xml">RSS</a> </li>
-  </ul>
-  <div class="clearfix"></div>
-</nav>
-<div class="clearfix"></div></header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2014-11-04T08:47:33.000Z"><a href="/2014/11/04/cookieless-domain/">2014-11-04</a></time>
-      
-      
-  
-    <h1 class="title">cookieless domain</h1>
+
+<nav class="site-nav">
   
 
-    </header>
-    <div class="entry">
+  
+    <ul id="menu" class="menu ">
       
-        <h2 id="概述">概述</h2><p>什么是cookieless domain?虽然名字中带有cookie,其实完全可以不使用cookie。这只是一种将网页中静态的文本，图片等的域名和主域名相区别开的方法。</p>
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              cookieless domain
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2014-11-04T16:47:33+08:00" content="2014-11-04">
+            2014-11-04
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/网络协议与dns/" itemprop="url" rel="index">
+                  <span itemprop="name">网络协议与dns</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="概述">概述</h2><p>什么是cookieless domain?虽然名字中带有cookie,其实完全可以不使用cookie。这只是一种将网页中静态的文本，图片等的域名和主域名相区别开的方法。</p>
 <p>主域名难免会使用到cookie,如果所有的资源(js,css,img等)都是来自于主域名,那么这些资源也会携带主域名的cookie。这样其实增加了很多不必要的流量,要知道性能都是从细节上优化的。cookie相信大家都十分熟悉了，不了解的可以去谷歌，百度一下，这里就不多做讲解了。</p>
 <h2 id="如何启用cookieless_domain?">如何启用cookieless domain?</h2><p>申请一个新的旁路域名,将你的外部资源与主域名分开。然后再将这个旁路域名禁用cookie，这样也就最大程度少节省了字节。</p>
 <h2 id="上图">上图</h2><p>如下是天猫域下的cookie,可以清楚地看到www.tmall.com</p>
@@ -80,115 +216,386 @@ var _hmt = _hmt || [];
 <p><img src="http://ww4.sinaimg.cn/large/005yyi5Jjw1elz3i5s5mij30pa0d8gns.jpg" alt=""></p>
 <p><img src="http://ww4.sinaimg.cn/large/005yyi5Jjw1elz3i642ctj30o80cemz3.jpg" alt=""></p>
 <p><img src="http://ww1.sinaimg.cn/large/005yyi5Jjw1elz3i6t0umj30rk0c040g.jpg" alt=""></p>
-<h3 id="如图，所有的外部资源都不是主域名的。其实这样做的目的并不仅仅是cookieless_domain优化，后续我们再持续探讨。">如图，所有的外部资源都不是主域名的。其实这样做的目的并不仅仅是cookieless domain优化，后续我们再持续探讨。</h3>
+<h3 id="如图，所有的外部资源都不是主域名的。其实这样做的目的并不仅仅是cookieless_domain优化，后续我们再持续探讨。">如图，所有的外部资源都不是主域名的。其实这样做的目的并不仅仅是cookieless domain优化，后续我们再持续探讨。</h3></span>
       
     </div>
-    <footer>
-      
-        
-  
-  <div class="categories">
-    <a href="/categories/网络协议与dns/">网络协议与dns</a>
-  </div>
 
-        
-        <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
-        <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+    <footer class="post-footer">
       
-      <div class="clearfix"></div>
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/12/02/搜素引擎/" rel="prev">搜索引擎的盈利模式</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/11/03/meta详解二-视图篇/" rel="next">meta详解二(视图篇)</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
     </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
-</article>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="简~~叶" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">简~~叶</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">简~~叶's blog | javascript | html | css | IT</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何启用cookieless_domain?"><span class="nav-number">2.</span> <span class="nav-text">如何启用cookieless domain?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上图"><span class="nav-number">3.</span> <span class="nav-text">上图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如图，所有的外部资源都不是主域名的。其实这样做的目的并不仅仅是cookieless_domain优化，后续我们再持续探讨。"><span class="nav-number">3.1.</span> <span class="nav-text">如图，所有的外部资源都不是主域名的。其实这样做的目的并不仅仅是cookieless domain优化，后续我们再持续探讨。</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
 
 
-<nav id="pagination" >
-    
-    <a href="/2014/12/02/搜素引擎/" class="alignleft prev" >上一页</a>
-    
-    
-    <a href="/2014/11/03/meta详解二-视图篇/" class="alignright next" >下一页</a>
-    
-    <div class="clearfix"></div>
-</nav>
-<section id="comment">
+    </main>
 
-<!--兼容版，可保证页面完全兼容-->
-<div id="SOHUCS"></div>
-<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
-<script type="text/javascript">
-    window._config = { showScore: true };
-    window.changyan.api.config({
-        appid: 'cyrwYj23r',
-        conf: 'prod_5ee226efc33ddcf56e81b59a7cca10e6'
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">简~~叶</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
     });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
 </script>
 
 
-  <h1 class="title">留言</h1>
 
-  
-</section>
-
-</div></div>
-    <aside id="sidebar" class="alignright">
-  
-<div class="widget tag">
-  <h3 class="title">分类</h3>
-  <ul class="entry">
-  
-    <li><a href="/categories/git/">git</a><small>1</small></li>
-  
-    <li><a href="/categories/linux/">linux</a><small>1</small></li>
-  
-    <li><a href="/categories/node/">node</a><small>1</small></li>
-  
-    <li><a href="/categories/web前端/">web前端</a><small>12</small></li>
-  
-    <li><a href="/categories/图形图像/">图形图像</a><small>1</small></li>
-  
-    <li><a href="/categories/搜索引擎/">搜索引擎</a><small>1</small></li>
-  
-    <li><a href="/categories/用户体验/">用户体验</a><small>1</small></li>
-  
-    <li><a href="/categories/系统搭建/">系统搭建</a><small>1</small></li>
-  
-    <li><a href="/categories/网络协议与dns/">网络协议与dns</a><small>1</small></li>
-  
-  </ul>
-</div>
-
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
 
   
 
-  <div class="widget tag">
-<h3 class="title">友情链接</h3>
-<ul class="entry">
-<li><a href="http://backtonature.github.io/" title="问水的博客">问水</a></li>
-</ul>
-</div>
-</aside>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div class="alignleft">
   
-  &copy; 2015 简~~叶
   
-</div>
-<div class="clearfix"></div></footer>
-  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
 
-
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
-
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
 </body>
 </html>
