@@ -30,7 +30,7 @@
 
 
 
-  <meta name="keywords" content="Hexo,next" />
+  <meta name="keywords" content="javascript,设计模式,项目构建," />
 
 
 
@@ -39,27 +39,32 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="概述JavaScript出于安全方面的考虑，不允许跨域调用其他页面的对象。但在安全限制的同时也给注入iframe或是ajax应用上带来了不少麻烦。这里把涉及到跨域的一些问题简单地整理一下：
-首先什么是跨域，简单地理解就是因为JavaScript同源策略的限制，a.com 域名下的js无法操作b.com或是c.a.com域名下的对象。更详细的说明可以看下表：
+<meta name="description" content="本文论述如何搭建一个前端项目，当中会涉及设计模式与一些前言框架的应用，当然最重要的还是讨论如何快速搭建一个项目。我们从一个最简单的例子出发: 
 
-对于主域相同子域不同的通信方法这里不一">
+表格问题如何搭建一个简易的架子来开发这个页面呢？
+如何让这个架子更容易维护与扩展呢？
+下面我们便围绕这两个问题来解决这个前端程序员几乎写到吐的场景。
+MV*这里用MV*(MVC、MVP、MVVM)的模式来做这件事情,关于这些模式这里就不多做讨论了(不了解">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iframe跨域通信方案">
-<meta property="og:url" content="http://www.dearhaoge.com/2015/01/05/iframe跨域通信/index.html">
+<meta property="og:title" content="如何快速搭建一个适应团队的项目(一)">
+<meta property="og:url" content="http://www.dearhaoge.com/2015/10/15/如何快速搭建一个适应团队的项目(一)/index.html">
 <meta property="og:site_name" content="简~~叶">
-<meta property="og:description" content="概述JavaScript出于安全方面的考虑，不允许跨域调用其他页面的对象。但在安全限制的同时也给注入iframe或是ajax应用上带来了不少麻烦。这里把涉及到跨域的一些问题简单地整理一下：
-首先什么是跨域，简单地理解就是因为JavaScript同源策略的限制，a.com 域名下的js无法操作b.com或是c.a.com域名下的对象。更详细的说明可以看下表：
+<meta property="og:description" content="本文论述如何搭建一个前端项目，当中会涉及设计模式与一些前言框架的应用，当然最重要的还是讨论如何快速搭建一个项目。我们从一个最简单的例子出发: 
 
-对于主域相同子域不同的通信方法这里不一">
-<meta property="og:image" content="http://targetkiller.net/wp-content/uploads/2014/02/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7-2014-02-23-%E4%B8%8A%E5%8D%885.03.37-1024x577.png">
-<meta property="og:image" content="http://ww2.sinaimg.cn/large/005yyi5Jjw1enyem8ddw7j30my0pcdkb.jpg">
-<meta property="og:updated_time" content="2015-01-14T08:14:45.000Z">
+表格问题如何搭建一个简易的架子来开发这个页面呢？
+如何让这个架子更容易维护与扩展呢？
+下面我们便围绕这两个问题来解决这个前端程序员几乎写到吐的场景。
+MV*这里用MV*(MVC、MVP、MVVM)的模式来做这件事情,关于这些模式这里就不多做讨论了(不了解">
+<meta property="og:image" content="http://comment.bjcnc.img.sohucs.com/a_auto/pr9cjwj_jpg">
+<meta property="og:updated_time" content="2015-10-15T14:47:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iframe跨域通信方案">
-<meta name="twitter:description" content="概述JavaScript出于安全方面的考虑，不允许跨域调用其他页面的对象。但在安全限制的同时也给注入iframe或是ajax应用上带来了不少麻烦。这里把涉及到跨域的一些问题简单地整理一下：
-首先什么是跨域，简单地理解就是因为JavaScript同源策略的限制，a.com 域名下的js无法操作b.com或是c.a.com域名下的对象。更详细的说明可以看下表：
+<meta name="twitter:title" content="如何快速搭建一个适应团队的项目(一)">
+<meta name="twitter:description" content="本文论述如何搭建一个前端项目，当中会涉及设计模式与一些前言框架的应用，当然最重要的还是讨论如何快速搭建一个项目。我们从一个最简单的例子出发: 
 
-对于主域相同子域不同的通信方法这里不一">
+表格问题如何搭建一个简易的架子来开发这个页面呢？
+如何让这个架子更容易维护与扩展呢？
+下面我们便围绕这两个问题来解决这个前端程序员几乎写到吐的场景。
+MV*这里用MV*(MVC、MVP、MVVM)的模式来做这件事情,关于这些模式这里就不多做讨论了(不了解">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -69,7 +74,7 @@
   };
 </script>
 
-  <title> iframe跨域通信方案 | 简~~叶 </title>
+  <title> 如何快速搭建一个适应团队的项目(一) | 简~~叶 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -197,7 +202,7 @@
           
           
             
-              iframe跨域通信方案
+              如何快速搭建一个适应团队的项目(一)
             
           
         </h1>
@@ -206,8 +211,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-01-05T09:45:26+08:00" content="2015-01-05">
-            2015-01-05
+          <time itemprop="dateCreated" datetime="2015-10-15T20:56:29+08:00" content="2015-10-15">
+            2015-10-15
           </time>
         </span>
 
@@ -240,61 +245,137 @@
       
 
       
-        <span itemprop="articleBody"><h2 id="概述">概述</h2><p>JavaScript出于安全方面的考虑，不允许跨域调用其他页面的对象。但在安全限制的同时也给注入iframe或是ajax应用上带来了不少麻烦。这里把涉及到跨域的一些问题简单地整理一下：</p>
-<p>首先什么是跨域，简单地理解就是因为JavaScript同源策略的限制，a.com 域名下的js无法操作b.com或是c.a.com域名下的对象。更详细的说明可以看下表：</p>
-<p><img src="http://targetkiller.net/wp-content/uploads/2014/02/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7-2014-02-23-%E4%B8%8A%E5%8D%885.03.37-1024x577.png" alt=""></p>
-<p>对于主域相同子域不同的通信方法这里不一一列举了，这里主要讲解一下跨主域的通信问题。</p>
-<h2 id="postMessage方法">postMessage方法</h2><p>window.postMessage 是一个用于安全的使用跨源通信的方法。通常，不同页面上的脚本只在这种情况下被允许互相访问，当且仅当执行它们的页面所处的位置使用相同的协议（通常都是 http）、相同的端口（http默认使用80端口）和相同的主机（两个页面的 document.domain 的值相同）。 在正确使用的情况下，window.postMessage 提供了一个受控的机制来安全地绕过这一限制。</p>
-<h3 id="兼容性">兼容性</h3><p><a href="http://caniuse.com/#search=postMessage" target="_blank" rel="external">http://caniuse.com/#search=postMessage</a></p>
-<h3 id="具体用法">具体用法</h3><ul>
-<li>发送消息：destination.postMessage(message, targetOrigin);<ul>
-<li>destination: 目标窗口</li>
-<li>message:发送的消息</li>
-<li>targetOrigin: 定义发送消息的范围</li>
-</ul>
-</li>
-<li>监听接受消息：window.addEventListener(‘message’,callback,false);</li>
-</ul>
-<h3 id="已知问题">已知问题</h3><ol>
-<li>部分版本IE8/9浏览器只支持iframe通信，不支持tabs之间通信。</li>
-<li>IE8/9不能传输对象，只能传输string。</li>
-</ol>
-<h3 id="参考资料">参考资料</h3><ul>
-<li>mozlia官方文档：<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window.postMessage" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/API/Window.postMessage</a></li>
-<li>IE官方文档:<a href="https://status.modern.ie/postmessage" target="_blank" rel="external">https://status.modern.ie/postmessage</a></li>
-<li>webplatform文档:<a href="https://docs.webplatform.org/wiki/apis/web-messaging/MessagePort/postMessage" target="_blank" rel="external">https://docs.webplatform.org/wiki/apis/web-messaging/MessagePort/postMessage</a></li>
-<li>HTML5官方文档:<a href="https://html.spec.whatwg.org/multipage/comms.html#web-messaging" target="_blank" rel="external">https://html.spec.whatwg.org/multipage/comms.html#web-messaging</a></li>
-</ul>
-<h2 id="window-navigator(适用于ie6/7)">window.navigator(适用于ie6/7)</h2><p>ie6/7有个漏洞,父窗口与所有的iframe共享window.navigator对象，可以利用这个漏洞，由于ie6/7不支持postMessage,所以可以利用这个漏洞对ie6/7做兼容跨域通信支持。</p>
-<h3 id="具体用法-1">具体用法</h3><p><img src="http://ww2.sinaimg.cn/large/005yyi5Jjw1enyem8ddw7j30my0pcdkb.jpg" alt=""></p>
-<p>途中A过程和B过程都是初始化监听事件，类似于onmessage事件。只不过实现方法不一样而已。</p>
-<p>按执行顺序来描述的话，如下：</p>
-<ul>
-<li>B: 父窗口向window.navigator添加一个监听函数，并打上父窗口的戳。</li>
-<li>A: 子窗口向window.navigator添加一个监听函数，并打上子窗口的戳。</li>
-</ul>
-<ul>
-<li>C: 父窗口执行post的时候，调用原先子窗口添加在navigator里的监听函数，并将要传输的数据作为函数参数传入。</li>
-<li>D: 子窗口执行post的时候，调用原先父窗口添加在navigator里的监听函数，并将要传输的数据作为函数参数传入。</li>
-</ul>
-<h3 id="注意：子窗口和父窗口要找到对方的监听函数必须得事先知道对方在添加监听函数的时候打上的戳"><strong><em>注意：子窗口和父窗口要找到对方的监听函数必须得事先知道对方在添加监听函数的时候打上的戳</em></strong></h3></span>
+        <span itemprop="articleBody"><p>本文论述如何搭建一个前端项目，当中会涉及设计模式与一些前言框架的应用，当然最重要的还是讨论如何快速搭建一个项目。我们从一个最简单的例子出发: </p>
+<p><img src="http://comment.bjcnc.img.sohucs.com/a_auto/pr9cjwj_jpg" alt=""></p>
+<h2 id="表格问题">表格问题</h2><p>如何搭建一个简易的架子来开发这个页面呢？</p>
+<p>如何让这个架子更容易维护与扩展呢？</p>
+<p>下面我们便围绕这两个问题来解决这个前端程序员几乎写到吐的场景。</p>
+<h2 id="MV*">MV*</h2><p>这里用MV*(MVC、MVP、MVVM)的模式来做这件事情,关于这些模式这里就不多做讨论了(不了解这些模式的可以仔细阅读一下这个话题——<a href="http://www.zhihu.com/question/20148405" target="_blank" rel="external">你对MVC、MVP、MVVM 三种组合模式分别有什么样的理解？</a>)。这种模式目前流行的前端框架有很多，例如:<a href="http://backbonejs.org/" target="_blank" rel="external">backbone.js</a>,<a href="http://riotjs.com/" target="_blank" rel="external">riot.js</a>,<a href="http://docs.angularjs.cn/" target="_blank" rel="external">angularjs</a>，这里用backbone来举例。</p>
+<h3 id="方案一">方案一</h3><p>建立一个Model,model.js代码如下:</p>
+<pre><code><span class="keyword">var</span> Model = Backbone.Model.extend({
+    defaults: {
+        <span class="comment">// Model中的初始数据</span>
+        list: [
+            <span class="comment">/*
+            {
+                id: 502,
+                time: '1992-12-24',
+                name: '小豪豪'
+            }...
+            */</span>
+        ]
+    },
+    <span class="comment">// Model初始化会执行initialize函数</span>
+    initialize: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{
+        <span class="keyword">var</span> _this = <span class="keyword">this</span>;
+        <span class="comment">// code here</span>
+    },
+    search: <span class="function"><span class="keyword">function</span> <span class="params">(id, time)</span> </span>{
+        <span class="keyword">var</span> _this = <span class="keyword">this</span>;
+        $.ajax({
+            url: <span class="string">'searchUrl'</span>,
+            data: {
+                time: time,
+                id: id
+            },
+            type: <span class="string">'post'</span>,
+            dataType:<span class="string">'json'</span>,
+            success: <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> </span>{
+                <span class="keyword">if</span> (data.status === <span class="string">'success'</span>) {
+                    <span class="comment">// 这里的set操作是重点</span>
+                    _this.<span class="keyword">set</span>(<span class="string">'list'</span>, data);
+                }
+            }
+        });
+    },
+    add: <span class="function"><span class="keyword">function</span> <span class="params">(time, name)</span> </span>{...},
+    del: <span class="function"><span class="keyword">function</span> <span class="params">(id)</span> </span>{...}
+});
+</code></pre><p>Model中的list存储了业务数据,而页面上的所有交互都是围绕业务数据进行的。这里我们可以使用observer模式，对Model中的数据进行观察，如果Model数据发生了变化，就重新渲染表格。presenter.js代码如下:</p>
+<pre><code><span class="comment">// 如果Model数据发生改变，就重新渲染表格</span>
+Model.on(<span class="string">'change'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{
+
+    <span class="keyword">var</span> _this = this,
+        data = this.get(<span class="string">'list'</span>);
+
+    <span class="comment">// 根据模板tpl渲染数据</span>
+    <span class="variable">$table</span>.render(tpl, data);
+});
+
+<span class="comment">// 交互逻辑</span>
+
+<span class="variable">$searchButton</span>.on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> </span>{
+
+    <span class="keyword">var</span> id = <span class="variable">$idInput</span>.val(),
+        time = <span class="variable">$timeInput</span>.val();
+    Model.search(id, time);
+});
+
+<span class="variable">$addButton</span>.on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> </span>{
+    ...
+    Model.add(name, time);
+});
+
+<span class="variable">$delButton</span>.on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> </span>{...});
+</code></pre><p>到这里，其实主要的逻辑已经完成了。这样，我们就不用关心在这个页面中有多少和表格相关的交互操作了，只需要操作Model的数据就行了。</p>
+<p><strong><em>5分钟思考一下: 如果现在要求做出查询数据操作后给出操作状态提示，怎么来更新代码?如果又要求添加数据操作后给出操作状态提示，怎么来更新代码？</em></strong></p>
+<h3 id="方案二">方案二</h3><p>我们要想给出操作状态提示就得在ajax回调里拿到后端返回的操作状态，但ajax写在Model里，严格来说的话，一般是不允许在Model里直接操作view的。所以如果遇到这种需求，我们可以采用observer模式的变种Pub/Sub(发布者/订阅者)模式，我们修改Model中的search方法，代码如下:</p>
+<pre><code>search: <span class="function"><span class="keyword">function</span> <span class="params">(id, time)</span> </span>{
+    <span class="keyword">var</span> _this = <span class="keyword">this</span>;
+    $.ajax({
+        url: <span class="string">'searchUrl'</span>,
+        data: {
+            time: time,
+            id: id
+        },
+        type: <span class="string">'post'</span>,
+        dataType:<span class="string">'json'</span>,
+        success: <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> </span>{
+            Backbone.Events.trigger(<span class="string">'SEARCH_CALLBACK'</span>, data);
+            <span class="keyword">if</span> (data.status === <span class="string">'success'</span>) {
+                <span class="comment">// 添加一个事件发布者</span>
+                _this.<span class="keyword">set</span>(<span class="string">'list'</span>, data);
+
+            }
+        }
+    });
+},
+</code></pre><p>然后我们就可以在presenter.js加上如下代码:</p>
+<pre><code><span class="comment">// 监听SEARCH_CALLBACK事件</span>
+Backbone.Events.on(<span class="string">'SEARCH_CALLBACK'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> </span>{
+    <span class="keyword">if</span> (data.status === <span class="string">'success'</span>) {
+        <span class="comment">// 给出操作成功提示</span>
+    } <span class="keyword">else</span> {
+        <span class="comment">// 给出操作失败提示</span>
+    }
+});
+</code></pre><p>这样的话，既避免了view侵入model，又可以更方便地做更多的交互。</p>
+</span>
       
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+            <a href="/tags/设计模式/" rel="tag">#设计模式</a>
+          
+            <a href="/tags/项目构建/" rel="tag">#项目构建</a>
+          
+        </div>
       
 
       
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/01/15/迟到的中文WebFont/" rel="prev">迟到的中文WebFont</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/01/04/git暂存区/" rel="next">git暂存区</a>
+              <a href="/2015/07/18/linux下安装nvm＋node＋mongodb/" rel="next">linux下安装nvm＋node＋mongodb</a>
             
           </div>
         </div>
@@ -432,7 +513,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#postMessage方法"><span class="nav-number">2.</span> <span class="nav-text">postMessage方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#兼容性"><span class="nav-number">2.1.</span> <span class="nav-text">兼容性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体用法"><span class="nav-number">2.2.</span> <span class="nav-text">具体用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#已知问题"><span class="nav-number">2.3.</span> <span class="nav-text">已知问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">2.4.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#window-navigator(适用于ie6/7)"><span class="nav-number">3.</span> <span class="nav-text">window.navigator(适用于ie6/7)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#具体用法-1"><span class="nav-number">3.1.</span> <span class="nav-text">具体用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意：子窗口和父窗口要找到对方的监听函数必须得事先知道对方在添加监听函数的时候打上的戳"><span class="nav-number">3.2.</span> <span class="nav-text">注意：子窗口和父窗口要找到对方的监听函数必须得事先知道对方在添加监听函数的时候打上的戳</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#表格问题"><span class="nav-number">1.</span> <span class="nav-text">表格问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MV*"><span class="nav-number">2.</span> <span class="nav-text">MV*</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方案一"><span class="nav-number">2.1.</span> <span class="nav-text">方案一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案二"><span class="nav-number">2.2.</span> <span class="nav-text">方案二</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

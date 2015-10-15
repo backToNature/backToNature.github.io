@@ -48,7 +48,7 @@
 <meta property="og:description" content="概述百度地图JavaScript API是一套由JavaScript语言编写的应用程序接口，它能够帮助您在网站中构建功能丰富、交互性强的地图应用，包含了构建地图基本功能的各种接口，提供了诸如本地搜索、路线规划等数据服务。
 毕业设计内容是一个基于百度地图api开发的一个地理位置信息系统，也许以后开发地图类系统的机会不多，所以想把这次宝贵的经验纪录下来，我们从地图的一些基本功能来说明，不得不说百度地图">
 <meta property="og:image" content="http://i1.tietuku.com/75d64acd30b29efd.png">
-<meta property="og:updated_time" content="2015-04-21T03:02:58.000Z">
+<meta property="og:updated_time" content="2015-10-15T14:57:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="百度地图开发笔记(一)">
 <meta name="twitter:description" content="概述百度地图JavaScript API是一套由JavaScript语言编写的应用程序接口，它能够帮助您在网站中构建功能丰富、交互性强的地图应用，包含了构建地图基本功能的各种接口，提供了诸如本地搜索、路线规划等数据服务。
@@ -58,7 +58,7 @@
 <script type="text/javascript" id="hexo.configuration">
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: 'post'
+    sidebar: 'always'
   };
 </script>
 
@@ -253,12 +253,12 @@
 </ul>
 <h2 id="开发之前需要做些什么">开发之前需要做些什么</h2><p>百度为了统一平台服务的配额管理，JavaScript API在新版本引入ak机制。JavaScript API v1.4及以前版本无须申请密钥（ak），自v1.5版本开始需要先申请密钥（ak），才可使用，超出ak配额部分，可以发送邮件进行申请。</p>
 <figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://api.<span class="built_in">map</span>.baidu.com/api?<span class="variable">v=</span><span class="number">1.4</span> //参数v表示您加载API的版本，使用JavaScript APIv1.<span class="number">4</span>及以前版本可使用此方式引用。</span><br><span class="line">http://api.<span class="built_in">map</span>.baidu.com/api?<span class="variable">v=</span><span class="number">1.5</span>&amp;<span class="variable">ak=</span>您的密钥  //使用JavaScript APIv1.<span class="number">5</span>请先申请密钥ak，按此方式引用</span><br></pre></td></tr></table></figure>
-<h4 id="兼容性">兼容性</h4><ul>
+<h3 id="兼容性">兼容性</h3><ul>
 <li>浏览器：IE 6.0+、Firefox 3.6+、Opera 9.0+、Safari 3.0+、Chrome</li>
 <li>操作系统：Windows、Mac、Linux</li>
 <li>移动平台：iPhone、Android</li>
 </ul>
-<h2 id="hello_world(开始我们的第一个地图页面)">hello world(开始我们的第一个地图页面)</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"Content-Type"</span> <span class="attribute">content</span>=<span class="value">"text/html; charset=utf-8"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"viewport"</span> <span class="attribute">content</span>=<span class="value">"initial-scale=1.0, user-scalable=no"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">style</span> <span class="attribute">type</span>=<span class="value">"text/css"</span>&gt;</span><span class="css"></span><br><span class="line">	<span class="tag">body</span>, <span class="tag">html</span>,<span class="id">#allmap</span> <span class="rules">&#123;<span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">100%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">100%</span></span></span>;<span class="rule"><span class="attribute">overflow</span>:<span class="value"> hidden</span></span>;<span class="rule"><span class="attribute">margin</span>:<span class="value"><span class="number">0</span></span></span>;<span class="rule"><span class="attribute">font-family</span>:<span class="value"><span class="string">"微软雅黑"</span></span></span>;&#125;</span></span><br><span class="line">	</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"http://api.map.baidu.com/api?v=2.0&amp;ak=您的密钥"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">title</span>&gt;</span>地图展示<span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"allmap"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="lasso"></span><br><span class="line">	<span class="comment">// 百度地图API功能</span></span><br><span class="line">	<span class="built_in">var</span> <span class="built_in">map</span> <span class="subst">=</span> <span class="literal">new</span> BMap<span class="built_in">.</span><span class="built_in">Map</span>(<span class="string">"allmap"</span>);    <span class="comment">// 创建Map实例</span></span><br><span class="line">	<span class="built_in">map</span><span class="built_in">.</span>centerAndZoom(<span class="literal">new</span> BMap<span class="built_in">.</span>Point(<span class="number">116.404</span>, <span class="number">39.915</span>), <span class="number">11</span>);  <span class="comment">// 初始化地图,设置中心点坐标和地图级别</span></span><br><span class="line">	<span class="built_in">map</span><span class="built_in">.</span>addControl(<span class="literal">new</span> BMap<span class="built_in">.</span>MapTypeControl());   <span class="comment">//添加地图类型控件</span></span><br><span class="line">	<span class="built_in">map</span><span class="built_in">.</span>setCurrentCity(<span class="string">"北京"</span>);          <span class="comment">// 设置地图显示的城市 此项是必须设置的</span></span><br><span class="line">	<span class="built_in">map</span><span class="built_in">.</span>enableScrollWheelZoom(<span class="literal">true</span>);     <span class="comment">//开启鼠标滚轮缩放</span></span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="开始我们的第一个地图页面">开始我们的第一个地图页面</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"Content-Type"</span> <span class="attribute">content</span>=<span class="value">"text/html; charset=utf-8"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"viewport"</span> <span class="attribute">content</span>=<span class="value">"initial-scale=1.0, user-scalable=no"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">style</span> <span class="attribute">type</span>=<span class="value">"text/css"</span>&gt;</span><span class="css"></span><br><span class="line">	<span class="tag">body</span>, <span class="tag">html</span>,<span class="id">#allmap</span> <span class="rules">&#123;<span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">100%</span></span></span>;<span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">100%</span></span></span>;<span class="rule"><span class="attribute">overflow</span>:<span class="value"> hidden</span></span>;<span class="rule"><span class="attribute">margin</span>:<span class="value"><span class="number">0</span></span></span>;<span class="rule"><span class="attribute">font-family</span>:<span class="value"><span class="string">"微软雅黑"</span></span></span>;&#125;</span></span><br><span class="line">	</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"http://api.map.baidu.com/api?v=2.0&amp;ak=您的密钥"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">title</span>&gt;</span>地图展示<span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"allmap"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="lasso"></span><br><span class="line">	<span class="comment">// 百度地图API功能</span></span><br><span class="line">	<span class="built_in">var</span> <span class="built_in">map</span> <span class="subst">=</span> <span class="literal">new</span> BMap<span class="built_in">.</span><span class="built_in">Map</span>(<span class="string">"allmap"</span>);    <span class="comment">// 创建Map实例</span></span><br><span class="line">	<span class="built_in">map</span><span class="built_in">.</span>centerAndZoom(<span class="literal">new</span> BMap<span class="built_in">.</span>Point(<span class="number">116.404</span>, <span class="number">39.915</span>), <span class="number">11</span>);  <span class="comment">// 初始化地图,设置中心点坐标和地图级别</span></span><br><span class="line">	<span class="built_in">map</span><span class="built_in">.</span>addControl(<span class="literal">new</span> BMap<span class="built_in">.</span>MapTypeControl());   <span class="comment">//添加地图类型控件</span></span><br><span class="line">	<span class="built_in">map</span><span class="built_in">.</span>setCurrentCity(<span class="string">"北京"</span>);          <span class="comment">// 设置地图显示的城市 此项是必须设置的</span></span><br><span class="line">	<span class="built_in">map</span><span class="built_in">.</span>enableScrollWheelZoom(<span class="literal">true</span>);     <span class="comment">//开启鼠标滚轮缩放</span></span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </span>
       
     </div>
@@ -295,18 +295,22 @@
   </div>
 
  </div>
-        <div id="SOHUCS"></div>
-        <script type="text/javascript">
-        (function(){
-        var appid = 'cyrwYj23r';
-        var conf = 'f69e3549c48240bddaae2eb53f5ace72';
-        if (window.screen.width < 960) {
-        window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
-        } else {
-        var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("http://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
-        }
-        })();
-        </script>
+        
+            <div id="SOHUCS"></div>
+            <script type="text/javascript">
+            (function(){
+            var appid = 'cyrwYj23r';
+            var conf = 'f69e3549c48240bddaae2eb53f5ace72';
+            var width = window.innerWidth || window.document.documentElement.clientWidth;
+            if (window.screen.width < width) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+            } else {
+            var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("http://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+            }
+            })();
+            </script>
+        
+
 
       </div>
 
@@ -343,7 +347,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-count">21</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -357,7 +361,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -410,7 +414,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript_API功能介绍"><span class="nav-number">2.</span> <span class="nav-text">JavaScript API功能介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发之前需要做些什么"><span class="nav-number">3.</span> <span class="nav-text">开发之前需要做些什么</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#兼容性"><span class="nav-number">3.0.1.</span> <span class="nav-text">兼容性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hello_world(开始我们的第一个地图页面)"><span class="nav-number">4.</span> <span class="nav-text">hello world(开始我们的第一个地图页面)</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript_API功能介绍"><span class="nav-number">2.</span> <span class="nav-text">JavaScript API功能介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发之前需要做些什么"><span class="nav-number">3.</span> <span class="nav-text">开发之前需要做些什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#兼容性"><span class="nav-number">3.1.</span> <span class="nav-text">兼容性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始我们的第一个地图页面"><span class="nav-number">4.</span> <span class="nav-text">开始我们的第一个地图页面</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
