@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>m-share</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <link rel="stylesheet" href="css/normalize.css">
+    <meta name="description" content="h5页面分享组件、支持分享到微信、朋友圈、QQ、QQ空间、QQ好友。">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/cayman.css">
+    <script src="./dist/m-share.js"></script>
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">m-share</h1>
+      <h2 class="project-tagline">h5页面分享组件、支持分享到微信、朋友圈、QQ、QQ空间、QQ好友。</h2>
+      <a href="https://github.com/backToNature/m-share" class="btn">View on GitHub</a>
+      <a href="https://codeload.github.com/backToNature/m-share/zip/master" class="btn">Download .zip</a>
+    </section>
+
+    <section class="main-content">
+            <h1><a href="http://backtonature.github.io/project/m-share/index.html">m-share</a></h1>
+            
+<p>h5页面分享组件、支持分享到微信、朋友圈、qq、QQ空间、QQ好友。</p>
+
+<div class="m-share"></div>
+
+<div><button onclick="Mshare.popup();" style="margin: 10px 0 0 0;color: #56b6e7; background: #fff;border-color: #56b6e7;">点击弹出分享拉窗</button></div>
+
+<p>点击查看<a href="http://backtonature.github.io/project/m-share/demo/demo.html">demo</a></p>
+
+<p>下图为：1. 分享拉窗 2. 右上角提示(微信或手q客户端) 3. 弹层提示(其他浏览器)</p>
+
+<p><img src="./demo5.jpg" alt="" /></p>
+
+<h2>执行逻辑</h2>
+
+<table>
+<thead>
+<tr>
+<th>- </th>
+<th>微信客户端 </th>
+<th> 手q </th>
+<th> qq浏览器 </th>
+<th> uc浏览器 </th>
+<th> 其他浏览器</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分享到微信 </td>
+<td> 提示点击右上角分享 </td>
+<td> 提示点击右上角分享 </td>
+<td> native分享 </td>
+<td> native分享 </td>
+<td> 弹层提示</td>
+</tr>
+<tr>
+<td>分享到朋友圈 </td>
+<td> 提示点击右上角分享 </td>
+<td> 提示点击右上角分享 </td>
+<td> native分享 </td>
+<td> native分享 </td>
+<td> 弹层提示</td>
+</tr>
+<tr>
+<td>分享到qq </td>
+<td> 提示点击右上角分享 </td>
+<td> 提示点击右上角分享 </td>
+<td> native分享 </td>
+<td> - </td>
+<td> 弹层提示</td>
+</tr>
+<tr>
+<td>分享到qq空间 </td>
+<td> 提示点击右上角分享 </td>
+<td> 提示点击右上角分享 </td>
+<td> native分享 </td>
+<td> web分享 </td>
+<td> web分享</td>
+</tr>
+<tr>
+<td>分享到新浪微博 </td>
+<td> web分享 </td>
+<td> web分享 </td>
+<td> web分享 </td>
+<td> web分享 </td>
+<td> web分享</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>安装</h2>
+
+<p>有两种安装方式</p>
+
+<ol>
+<li><p>npm安装</p>
+
+<pre><code> npm install m-share
+</code></pre></li>
+<li><p>script引入</p>
+
+<pre><code> &lt;script src="m-share.js"&gt;&lt;/script&gt;
+</code></pre></li>
+</ol>
+
+
+<h2>快速开始</h2>
+
+<pre><code>&lt;div class="m-share"&gt;&lt;/div&gt;
+&lt;script&gt;
+    const config = {...}; // config配置参考下面“基本使用-配置项”
+    Mshare.init(config);
+&lt;/script&gt;
+</code></pre>
+
+<h2>配置项</h2>
+
+<pre><code>const config = {
+  link:  'http://www.qq.com', // 网址，默认使用window.location.href
+  title: '标题',  // 标题，默认读取document.title 
+  desc:  '分享描述', // 描述, 默认读取&lt;meta name="description" content="desc" /&gt;
+  imgUrl: 'http://backtonature.github.io/project/m-share/demo1.png' // 图片, 默认取网页中第一个img标签
+  types: ['wx', 'wxline', 'qq', 'qzone', 'sina'], // 启用的社交分享,默认为全部启用
+  infoMap: { // 针对不同平台设定不同分享内容
+    wx: {
+      link: '分享到微信的链接', // 覆盖分享到微信的链接
+      title: '分享到微信的标题', // 覆盖分享到微信的标题
+      desc: '分享到微信的描述', // 覆盖分享到微信的标题
+      imgUrl: '分享到微信的图片链接' // 覆盖分享到微信的图片链接
+    }
+  },
+  fnDoShare(type) {
+    // 执行分享的回调，type为'wx', 'wxline', 'qq', 'qzone', 'sina'
+  }
+};
+</code></pre>
+
+<p><strong><em>注意：</em></strong></p>
+
+<ol>
+<li>所有的配置参数都不是必填项</li>
+<li><code>其他浏览器</code>并没有开放native分享的api，所以对分享到<code>微信</code>、<code>朋友圈</code>、<code>QQ好友</code>设置的<code>infoMap</code>参数，在<code>其他浏览器</code>和<code>手机qq客户端</code>下不会生效.</li>
+</ol>
+
+
+<h2>方法</h2>
+
+<h3>init(config) - <a href="http://backtonature.github.io/project/m-share/demo/basic.html">demo</a></h3>
+
+<p>初始化化页面所有class为<code>m-share</code>的元素。</p>
+
+<h3>popup(config) - <a href="http://backtonature.github.io/project/m-share/demo/popup.html">demo</a></h3>
+
+<p>弹出分享弹窗</p>
+
+<h3>wxConfig(config)</h3>
+
+<p>若当前页面为公众号页面，具备访问微信api的能力，可通过此方法配置微信分享。</p>
+
+<pre><code>Mshare.wxConfig({
+  title: '',
+  link: '',
+  desc: '',
+  imgUrl: '',
+  wx: {
+    appId: '', // 必填，公众号的唯一标识
+    timestamp: , // 必填，生成签名的时间戳
+    nonceStr: '', // 必填，生成签名的随机串
+    signature: '' // 必填，签名
+  },
+  infoMap: ...
+});
+</code></pre>
+
+<h3>render(el, config) - <a href="http://backtonature.github.io/project/m-share/demo/el.html">demo</a></h3>
+
+<p>对指定元素渲染分享icon，<code>el</code>为指定元素或者指定元素的选择器String。</p>
+
+<pre><code>&lt;div id="myDom"&gt;&lt;/div&gt;
+&lt;script&gt;
+  Mshare.render('#myDom', config);
+  // or Mshare.render(document.querySelector('#myDom', config));
+&lt;/script&gt;
+</code></pre>
+
+<h3>to(type, config) - <a href="http://backtonature.github.io/project/m-share/demo/js-to.html">demo</a></h3>
+
+<p>js直接调用分享</p>
+
+<pre><code>&lt;button id="qq"&gt;&lt;/button&gt;
+&lt;script&gt;
+  document.querySelector('#qq').addEventListener('click', () =&gt; {
+    Mshare.to('qq', config);
+  });
+&lt;/script&gt;
+</code></pre>
+    </section>
+    <script>
+        Mshare.init();
+    </script>
+  </body>
+</html>
