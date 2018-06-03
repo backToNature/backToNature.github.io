@@ -26,7 +26,7 @@
 
 <div class="m-share"></div>
 
-<div><button onclick="Mshare.popup();" style="margin: 10px 0 0 0;color: #56b6e7; background: #fff;border-color: #56b6e7;">点击弹出分享拉窗</button></div>
+<div><button onclick="window.popup();" style="margin: 10px 0 0 0;color: #56b6e7; background: #fff;border-color: #56b6e7;">点击弹出分享拉窗</button></div>
 
 <p>点击查看<a href="http://backtonature.github.io/project/m-share/demo/demo.html">demo</a></p>
 
@@ -200,7 +200,14 @@
 </code></pre>
     </section>
     <script>
-        Mshare.init();
+        window.popup = function () {
+          Mshare.popup({
+            imgUrl: 'http://backtonature.github.io/project/m-share/shareIcon.jpg'
+          });
+        };
+        Mshare.init({
+          imgUrl: 'http://backtonature.github.io/project/m-share/shareIcon.jpg'
+        });
     </script>
   </body>
 </html>
